@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Price Intelligence - Scraper Hub Intelligence{% endblock %}
+
+{% block content %}
+<div class="row mb-5 align-items-center">
+    <div class="col-md-8">
+        <h1 class="display-5 mb-1">Price <span class="text-gradient">Intelligence</span></h1>
+        <p class="text-muted">Analyzing historical pricing data and detecting market anomalies.</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6">
+        <div class="glass-card p-4 h-100 border-start border-4 border-success">
+            <h6 class="text-success fw-bold mb-3"><i class="fas fa-tags me-2"></i>Active Promotions</h6>
+            <div class="h3 mb-1 fw-bold">{{ deals|length }}</div>
+            <p class="text-muted small">Discounted products and services currently active.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="glass-card p-4 h-100 border-start border-4 border-info">
+            <h6 class="text-info fw-bold mb-3"><i class="fas fa-history me-2"></i>Recent Changes</h6>
+            <div class="h3 mb-1 fw-bold">{{ recent_changes|length }}</div>
+            <p class="text-muted small">Price movements detected in the last 24 hours.</p>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card overflow-hidden">
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">Entity</th>
+                    <th>Product / Service</th>
+                    <th class="text-end">Current Price</th>
+                    <th class="text-center pe-4">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in recent_changes %}
+                <tr>
+                    <td class="ps-4">
+                        <div class="fw-bold">
+                            {% if p.product and p.product.organization %}
+                                {{ p.product.organization.name }}
+                            {% elif p.service and p.service.organization %}
+                                {{ p.service.organization.name }}
+                            {% elif p.organization %}
+                                {{ p.organization.name }}
+                            {% else %}
+                                <span class="text-muted italic small">General Source</span>
+                            {% endif %}
+                        </div>
+                        <div class="smallest text-muted">
+                            <i class="far fa-clock me-1"></i> {{ p.captured_at.strftime('%H:%M %d %b') if p.captured_at else 'N/A' }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="fw-semibold text-main">
+                            {% if p.product %}
+                                <i class="fas fa-box text-muted me-2 small"></i>{{ p.product.name }}
+                            {% elif p.service %}
+                                <i class="fas fa-concierge-bell text-muted me-2 small"></i>{{ p.service.name }}
+                            {% else %}
+                                Unknown Item
+                            {% endif %}
+                        </div>
+                        <div class="text-muted small">
+                            {% if p.product %}
+                                {{ p.product.category }} {% if p.product.subcategory %}<span class="mx-1">/</span> <span class="text-info">{{ p.product.subcategory }}</span>{% endif %}
+                            {% elif p.service %}
+                                {{ p.service.category }} {% if p.service.subcategory %}<span class="mx-1">/</span> <span class="text-info">{{ p.service.subcategory }}</span>{% endif %}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td class="text-end">
+                        <div class="h5 mb-0 fw-bold text-gradient">
+                            {{ p.currency }} {{ "{:,.2f}".format(p.price_value) }}
+                        </div>
+                        {% if p.normalized_value %}
+                        <div class="smallest text-info">
+                            {{ p.currency }} {{ "{:,.2f}".format(p.normalized_value) }} / {{ p.normalized_unit }}
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td class="text-center pe-4">
+                        {% if p.is_promotion %}
+                        <span class="badge bg-success-subtle border border-success border-opacity-25 text-success">PROMO</span>
+                        {% else %}
+                        <span class="badge bg-info-subtle border border-info border-opacity-25 text-info">STABLE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .smallest { font-size: 0.7rem; }
+</style>
+{% endblock %}
+

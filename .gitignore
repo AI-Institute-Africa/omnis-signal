@@ -1,0 +1,42 @@
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+.env
+.env.prod
+.venv-1/
+venv_new/
+
+# Database / SQLite
+*.db
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Large Installer Files
+/OllamaSetup.exe
+*.exe
+
+# IDE configs
+.vscode/
+.idea/
+
+# Local logs
+*.log
+/server_log.txt
+/dashboard_debug_log.txt
+
+# Root-only data files
+/*.xlsx
+/*.csv
+/*.json
+/*.html
+/*.pdf

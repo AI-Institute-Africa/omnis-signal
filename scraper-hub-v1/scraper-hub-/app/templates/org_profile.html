@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}{{ org.name }} - Institutional Intelligence{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/organizations" class="text-info">Market Directory</a></li>
+    <li class="breadcrumb-item active text-muted">{{ org.name }}</li>
+  </ol>
+</nav>
+
+<!-- Header Section -->
+<div class="glass-card p-5 mb-5 border-start border-4 border-info">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <div class="bg-dark p-3 rounded-4 shadow-sm border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                {% if org.logo_url %}
+                <img src="{{ org.logo_url }}" alt="" style="width:100%; height:100%; object-fit:contain;">
+                {% else %}
+                <span class="h1 mb-0 opacity-50">🏢</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col">
+            <h1 class="display-5 fw-bold mb-1 text-gradient">{{ org.name }}</h1>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-info-subtle text-info text-uppercase tracking-wider">{{ org.category }}</span>
+                {% if org.website %}
+                <a href="{{ org.website }}" target="_blank" class="text-muted small text-decoration-none hover-info">
+                    <i class="fas fa-external-link-alt me-1"></i> Official Website
+                </a>
+                {% endif %}
+                <span class="text-muted small border-start ps-3 border-secondary border-opacity-25">
+                    <i class="fas fa-map-marker-alt me-1"></i> Zimbabwe Market
+                </span>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="triggerScrape('{{ org.slug }}')">
+                <i class="fas fa-sync-alt me-2"></i>Analyze Now
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Main Content -->
+    <div class="col-lg-8">
+        <!-- AI Intelligence Summary -->
+        <div class="glass-card p-4 mb-4">
+            <h5 class="fw-bold mb-3"><i class="fas fa-brain text-info me-2"></i>Market Intelligence Summary</h5>
+            <div class="p-3 bg-dark bg-opacity-50 rounded-3 border border-secondary border-opacity-10">
+                <p class="text-main mb-0 leading-relaxed">{{ org.ai_summary or 'The intelligence engine is currently synthesizing market data for this organization. Check back shortly for a comprehensive sector analysis.' }}</p>
+            </div>
+        </div>
+
+        <!-- Products & Services -->
+        <div class="glass-card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold mb-0"><i class="fas fa-box-open text-info me-2"></i>Portfolio & Pricing</h5>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-hover border-top border-secondary border-opacity-10 mt-3">
+                    <thead>
+                        <tr class="small text-muted">
+                            <th>TYPE</th>
+                            <th>NAME / DESCRIPTION</th>
+                            <th class="text-end">LATEST VALUATION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Products -->
+                        {% for p in org.products_list %}
+                        <tr>
+                            <td class="align-middle"><span class="badge bg-info-subtle border border-info border-opacity-10 text-info smallest">PRODUCT</span></td>
+                            <td class="align-middle">
+                                <div class="fw-semibold text-main">{{ p.name }}</div>
+                                <div class="smallest text-muted">{{ p.category }}</div>
+                            </td>
+                            <td class="text-end align-middle">
+                                <div class="fw-bold text-gradient">
+                                    {% if p.price_history %}
+                                    {{ p.price_history[0].currency }} {{ "{:,.2f}".format(p.price_history[0].price_value) }}
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        <!-- Services -->
+                        {% for s in org.services_list %}
+                        <tr>
+                            <td class="align-middle"><span class="badge bg-info-subtle border border-info border-opacity-10 text-info smallest">SERVICE</span></td>
+                            <td class="align-middle">
+                                <div class="fw-semibold text-main">{{ s.name }}</div>
+                                <div class="smallest text-muted">{{ s.category }}</div>
+                            </td>
+                            <td class="text-end align-middle">
+                                <div class="fw-bold text-gradient">
+                                    {% if s.price_history %}
+                                    {{ s.price_history[0].currency }} {{ "{:,.2f}".format(s.price_history[0].price_value) }}
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        {% if not org.products_list and not org.services_list %}
+                        <tr>
+                            <td colspan="3" class="text-center py-5 text-muted opacity-50">
+                                <i class="fas fa-search-dollar d-block h1 mb-3"></i>
+                                No structured product or service data found yet.
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Change History -->
+        <div class="glass-card p-4">
+            <h5 class="fw-bold mb-4"><i class="fas fa-history text-info me-2"></i>Institutional Change Log</h5>
+            <div class="timeline ps-4 border-start border-secondary border-opacity-25">
+                {% for event in changes %}
+                <div class="timeline-item mb-4 position-relative">
+                    <div class="position-absolute start-0 translate-middle rounded-circle bg-info" style="width: 10px; height: 10px; left: -25px !important;"></div>
+                    <div class="small text-muted mb-1">{{ event.detected_at.strftime('%d %B %Y') }}</div>
+                    <div class="fw-bold text-main">{{ event.change_summary }}</div>
+                    {% if event.old_value and event.new_value %}
+                    <div class="smallest text-muted mt-1">
+                        <span class="text-danger-subtle">{{ event.old_value }}</span> 
+                        <i class="fas fa-arrow-right mx-2"></i> 
+                        <span class="text-success-subtle">{{ event.new_value }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="text-muted small">No significant changes detected in the current monitoring period.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Market Metrics -->
+        <div class="glass-card p-4 mb-4">
+            <h6 class="text-muted fw-bold mb-4 text-uppercase smallest tracking-wider">Market Competitiveness</h6>
+            {% set scores = [
+                ('Market Influence', org.market_influence_score, 'info'),
+                ('Brand Reputation', org.reputation_score, 'success'),
+                ('Innovation Score', org.innovation_score, 'warning'),
+                ('Operational Risk', org.risk_score, 'danger')
+            ] %}
+            {% for label, score, color in scores %}
+            <div class="mb-4">
+                <div class="d-flex justify-content-between small mb-2">
+                    <span class="text-main fw-medium">{{ label }}</span>
+                    <span class="fw-bold text-{{ color }}">{{ "%.0f"|format(score or 0) }}%</span>
+                </div>
+                <div class="progress rounded-pill overflow-hidden" style="height:6px; background: rgba(255,255,255,0.05);">
+                    <div class="progress-bar bg-{{ color }} rounded-pill" style="width:{{ score or 0 }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Sector Links -->
+        <div class="glass-card p-4">
+            <h6 class="text-muted fw-bold mb-4 text-uppercase smallest tracking-wider">Similar Organizations</h6>
+            <div class="d-flex flex-column gap-3">
+                {% for s_org in similar %}
+                <a href="/organizations/{{ s_org.slug }}" class="d-flex align-items-center text-decoration-none group p-2 rounded-3 hover-glass transition-all">
+                    <div class="bg-dark p-1 rounded border border-secondary border-opacity-10 me-3" style="width: 40px; height: 40px;">
+                        {% if s_org.logo_url %}
+                        <img src="{{ s_org.logo_url }}" alt="" style="width:100%; height:100%; object-fit:contain;">
+                        {% else %}
+                        <span class="small opacity-50 d-flex h-100 align-items-center justify-content-center">🏢</span>
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="small fw-bold text-main group-hover-info">{{ s_org.name }}</div>
+                        <div class="smallest text-muted">{{ s_org.category }}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .smallest { font-size: 0.7rem; }
+    .leading-relaxed { line-height: 1.6; }
+    .tracking-wider { letter-spacing: 0.05em; }
+    .hover-info:hover { color: var(--accent-info) !important; }
+    .group-hover-info { transition: color 0.2s; }
+    .group:hover .group-hover-info { color: var(--accent-info); }
+    .hover-glass:hover { background: rgba(255,255,255,0.03); }
+</style>
+
+<script>
+async function triggerScrape(slug) {
+    const btn = event.currentTarget;
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+    try {
+        const r = await fetch(`/api/v1/organizations/${slug}/trigger-scrape`, { method: 'POST' });
+        if (r.ok) {
+            btn.innerHTML = '<i class="fas fa-check me-2"></i>Success';
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            throw new Error();
+        }
+    } catch (e) { 
+        btn.disabled = false; 
+        btn.innerHTML = originalText;
+    }
+}
+</script>
+{% endblock %}
+

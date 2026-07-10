@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Scraper Hub Analytics{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="mb-1">Dashboard</h1>
+        <p class="text-muted mb-0">Real-time market analytics and extraction telemetry</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="/manual-scrape" class="btn btn-primary d-flex align-items-center">
+            <i class="fas fa-play me-2"></i> Trigger Extraction
+        </a>
+        <a href="/data-quality" class="btn btn-outline-info d-flex align-items-center">
+            <i class="fas fa-shield-alt me-2"></i> Data Quality Audit
+        </a>
+    </div>
+</div>
+
+<!-- Real Market Data Tickers -->
+<div class="row mb-4 g-3">
+    {% for currency, rate in live_rates.items() %}
+    <div class="col-md-2 col-sm-4 col-6">
+        <div class="card bg-light shadow-sm">
+            <div class="card-body p-3 text-center">
+                <span class="text-uppercase small text-muted mb-1">{{ currency }}</span>
+                <h4 class="mb-0 fw-bold">{{ "%.2f"|format(rate) }}</h4>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Main Stats Row -->
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-primary">
+            <div class="card-body d-flex align-items-center p-4">
+                <div class="me-4 text-primary">
+                    <i class="fas fa-database fa-3x"></i>
+                </div>
+                <div>
+                    <h2 class="h1 mb-0 fw-bold">{{ sources_count }}</h2>
+                    <div class="text-muted small text-uppercase">Active Intelligence Sources</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-info">
+            <div class="card-body d-flex align-items-center p-4">
+                <div class="me-4 text-info">
+                    <i class="fas fa-chart-line fa-3x"></i>
+                </div>
+                <div>
+                    <h2 class="h1 mb-0 fw-bold">{{ records_count }}</h2>
+                    <div class="text-muted small text-uppercase">Market Data Points</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-success">
+            <div class="card-body d-flex align-items-center p-4">
+                <div class="me-4 text-success">
+                    <i class="fas fa-check-circle fa-3x"></i>
+                </div>
+                <div>
+                    <h2 class="h1 mb-0 fw-bold">100%</h2>
+                    <div class="text-muted small text-uppercase">Engine Operational</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- Market Intelligence Matrix -->
+    <div class="col-xl-8">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-white pt-4 px-4 border-0">
+                <h4 class="mb-0">Intelligence Matrix</h4>
+                <p class="text-muted small mb-0">Coverage across critical market sectors</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            {% for cat, count in chart_categories.items() %}
+                            <div class="col">
+                                <a href="/records?category={{ cat }}" class="text-decoration-none">
+                                    <div class="d-flex align-items-center p-3 border rounded bg-light hover-shadow">
+                                        <div class="flex-grow-1">
+                                            <div class="text-dark fw-bold text-uppercase small">{{ cat }}</div>
+                                            <div class="text-muted small">{{ count }} active data points</div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-muted small"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-5 d-none d-md-block">
+                        <div style="height: 200px;">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Market Distribution -->
+    <div class="col-xl-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-white pt-4 px-4 border-0">
+                <h4 class="mb-0">Market Distribution</h4>
+                <p class="text-muted small mb-0">Local (Zimbabwe) vs Global Market scope</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="d-flex flex-column gap-4">
+                    {% for market, count in chart_markets.items() %}
+                    <div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-capitalize fw-bold">{{ market }} Market</span>
+                            <span class="text-muted">{{ count }} data points</span>
+                        </div>
+                        {% set width_pct = (count / records_count * 100) if records_count > 0 else 0 %}
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar {% if market == 'local' %}bg-success{% else %}bg-warning{% endif %}" 
+                                 role="progressbar" 
+                                 style="width: {{ width_pct }}%;" 
+                                 aria-valuenow="{{ count }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="{{ records_count }}"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="mt-5 pt-4 border-top">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="p-2 rounded bg-success me-3" style="width: 10px; height: 10px;"></div>
+                        <span class="small text-muted">Local: Specific Zimbabwean Entities</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="p-2 rounded bg-warning me-3" style="width: 10px; height: 10px;"></div>
+                        <span class="small text-muted">Global: International Benchmarks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Price Volatility Row -->
+<div class="row g-4">
+    <div class="col-12">
+        <div class="card shadow-sm p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="mb-0">Real-Time Price Volatility (USD)</h4>
+                    <p class="text-muted small mb-0">Recent value fluctuations across sectors</p>
+                </div>
+                <div class="badge bg-success text-white d-flex align-items-center px-3">
+                    LIVE DATA
+                </div>
+            </div>
+            <div style="height: 300px;">
+                <canvas id="priceTrendChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="cat-data" type="application/json">{{ chart_categories | tojson | safe }}</script>
+<script id="trend-data" type="application/json">{{ price_trends | tojson | safe }}</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const catCanvas = document.getElementById('categoryChart');
+        if (catCanvas) {
+            const ctxCat = catCanvas.getContext('2d');
+            const catData = JSON.parse(document.getElementById('cat-data').textContent);
+            new Chart(ctxCat, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(catData),
+                    datasets: [{
+                        data: Object.values(catData),
+                        backgroundColor: ['#0d6efd', '#6610f2', '#ffc107', '#d63384', '#198754', '#0dcaf0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        const trendCanvas = document.getElementById('priceTrendChart');
+        if (trendCanvas) {
+            const ctxTrend = trendCanvas.getContext('2d');
+            const trendData = JSON.parse(document.getElementById('trend-data').textContent);
+            
+            new Chart(ctxTrend, {
+                type: 'line',
+                data: {
+                    labels: trendData.map(d => d.label),
+                    datasets: [{
+                        label: 'Price (USD)',
+                        data: trendData.map(d => d.price),
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

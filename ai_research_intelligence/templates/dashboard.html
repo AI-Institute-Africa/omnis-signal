@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Research Intelligence Platform</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    /* ============================================================================
+       AI RESEARCH INTELLIGENCE — Premium Dark Theme
+       ============================================================================ */
+    :root {
+      --accent:        #6366f1;
+      --accent-glow:   #818cf8;
+      --accent-dark:   #4338ca;
+      --accent2:       #06b6d4;
+      --accent2-glow:  #22d3ee;
+      --success:       #10b981;
+      --warning:       #f59e0b;
+      --danger:        #ef4444;
+      --bg-root:       #0b0f1a;
+      --bg-surface:    #111827;
+      --bg-card:       #161d2e;
+      --bg-hover:      #1e2740;
+      --border:        rgba(255, 255, 255, 0.07);
+      --border-accent: rgba(99, 102, 241, 0.35);
+      --text-primary:  #f1f5f9;
+      --text-muted:    #94a3b8;
+      --font-sans:     'Inter', sans-serif;
+      --font-display:  'Outfit', sans-serif;
+      --ease:          cubic-bezier(0.4, 0, 0.2, 1);
+      --dur:           180ms;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background-color: var(--bg-root);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 10% -10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 110%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header & Nav */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 15, 26, 0.8) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent-glow) 0%, var(--accent2-glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-tab:hover,
+    .nav-tab.active {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-tab.active {
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeInUp 0.35s var(--ease) both;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Grid & Cards */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .glass-card {
+      background: rgba(22, 29, 46, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all var(--dur) var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.11);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Metrics */
+    .metric-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .metric-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .metric-icon.indigo { background: rgba(99, 102, 241, 0.15); color: var(--accent-glow); }
+    .metric-icon.cyan   { background: rgba(6, 182, 212, 0.12); color: var(--accent2-glow); }
+    .metric-icon.green  { background: rgba(16, 185, 129, 0.12); color: #34d399; }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Split layout */
+    .layout-split {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout-split { grid-template-columns: 1fr; }
+    }
+
+    /* Headings */
+    h1.title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Lists & Items */
+    .list-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feed-item {
+      padding: 1.25rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      transition: all var(--dur) var(--ease);
+    }
+
+    .feed-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 1rem;
+    }
+
+    .item-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .item-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .item-title a:hover {
+      color: var(--accent-glow);
+    }
+
+    .item-meta {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .item-abstract {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Badges */
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .bg-info-subtle { background: rgba(6, 182, 212, 0.12); color: var(--accent2-glow); }
+    .bg-primary-subtle { background: rgba(99, 102, 241, 0.12); color: var(--accent-glow); }
+    .bg-success-subtle { background: rgba(16, 185, 129, 0.12); color: #34d399; }
+    .bg-danger-subtle { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Chat Terminal */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      scroll-behavior: smooth;
+    }
+
+    .chat-box-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      opacity: 0.4;
+      text-align: center;
+    }
+
+    .chat-msg {
+      max-width: 80%;
+      padding: 0.85rem 1.15rem;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-msg.agent {
+      align-self: flex-start;
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-bottom-left-radius: 2px;
+      border: 1px solid var(--border);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-input {
+      flex-grow: 1;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, var(--accent-glow) 0%, var(--accent2-glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--success);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <span>AI Research Intelligence</span>
+      </div>
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('dashboard')">
+          <i class="fas fa-chart-pie"></i> Dashboard
+        </button>
+        <button class="nav-tab" onclick="switchTab('feed')">
+          <i class="fas fa-newspaper"></i> Research Feed
+        </button>
+        <button class="nav-tab" onclick="switchTab('sources')">
+          <i class="fas fa-database"></i> Sources
+        </button>
+        <button class="nav-tab" onclick="switchTab('analyst')">
+          <i class="fas fa-robot"></i> RAG Analyst
+        </button>
+        <button class="nav-tab" onclick="switchTab('apis')">
+          <i class="fas fa-code"></i> APIs
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= TAB: DASHBOARD ================= -->
+    <div id="tab-dashboard" class="tab-content active">
+      <h1 class="title">Research <span class="text-gradient">Intelligence</span></h1>
+      <p class="subtitle">Real-time tracking, semantic analysis, and prediction engines for frontier AI research.</p>
+      
+      <div class="grid-3">
+        <div class="glass-card metric-card">
+          <div class="metric-icon indigo">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div>
+            <div class="metric-value" id="metrics-items">{{ items_count }}</div>
+            <div class="metric-label">Research Items</div>
+          </div>
+        </div>
+        
+        <div class="glass-card metric-card">
+          <div class="metric-icon cyan">
+            <i class="fas fa-globe"></i>
+          </div>
+          <div>
+            <div class="metric-value" id="metrics-sources">{{ sources_count }}</div>
+            <div class="metric-label">Active Sources</div>
+          </div>
+        </div>
+
+        <div class="glass-card metric-card">
+          <div class="metric-icon green">
+            <i class="fas fa-fire"></i>
+          </div>
+          <div>
+            <div class="metric-value" id="metrics-trends">{{ trends_count }}</div>
+            <div class="metric-label">Emerging Trends</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layout-split">
+        <!-- Left: Top High Priority Items -->
+        <div class="glass-card">
+          <h2 class="section-title">
+            <i class="fas fa-award text-gradient"></i> High Priority Findings
+          </h2>
+          <div class="list-stack">
+            {% for item in top_items %}
+            <div class="feed-item">
+              <div class="item-header">
+                <div class="item-title">
+                  <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+                </div>
+                {% if item.enrichment %}
+                <span class="badge bg-success-subtle">
+                  <i class="fas fa-star"></i> {{ (item.enrichment.importance_score) | round(0) | int }}
+                </span>
+                {% endif %}
+              </div>
+              <div class="item-meta">
+                <span><i class="fas fa-user-friends"></i> {{ item.authors | join(', ') | truncate(40) }}</span>
+                <span><i class="fas fa-tag"></i> {{ item.primary_category or 'General' }}</span>
+                {% if item.source_name %}
+                <span><i class="fas fa-building"></i> {{ item.source_name }}</span>
+                {% endif %}
+              </div>
+              <p class="item-abstract">{{ item.abstract }}</p>
+            </div>
+            {% endfor %}
+            {% if not top_items %}
+            <p class="text-muted text-center py-5">No high-priority research records found.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Right: Emerging Trends & System Status -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div class="glass-card">
+            <h2 class="section-title"><i class="fas fa-signal text-gradient"></i> Emerging Trends</h2>
+            <div class="list-stack" style="gap: 0.75rem;">
+              {% for trend in trends %}
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <div>
+                  <div style="font-weight: 600; font-size: 0.95rem;">{{ trend.name }}</div>
+                  <span class="badge bg-info-subtle" style="font-size: 0.65rem;">{{ trend.category }}</span>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-weight: bold; color: var(--accent2-glow);">+{{ trend.growth_rate }}%</div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);">{{ trend.mention_count }} mentions</div>
+                </div>
+              </div>
+              {% endfor %}
+              {% if not trends %}
+              <p class="text-muted text-center py-4">No emerging trends detected yet.</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h2 class="section-title"><i class="fas fa-server text-gradient"></i> Operational State</h2>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">Agent Telemetry</span>
+                <span class="live-indicator"><span class="live-dot"></span> Active</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">Database Engine</span>
+                <span class="badge bg-success-subtle">Online</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">RAG Vector Store</span>
+                <span class="badge bg-success-subtle">Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB: FEED ================= -->
+    <div id="tab-feed" class="tab-content">
+      <h1 class="title">Research <span class="text-gradient">Feed</span></h1>
+      <p class="subtitle">Latest papers, regulatory updates, and benchmark indexes.</p>
+      
+      <div class="glass-card">
+        <div class="list-stack">
+          {% for item in all_items %}
+          <div class="feed-item">
+            <div class="item-header">
+              <div class="item-title" style="font-size: 1.15rem;">
+                <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+              </div>
+              {% if item.enrichment %}
+              <span class="badge bg-primary-subtle">
+                Score: {{ (item.enrichment.importance_score) | round(0) | int }}
+              </span>
+              {% endif %}
+            </div>
+            <div class="item-meta">
+              <span><i class="fas fa-user-friends"></i> {{ item.authors | join(', ') }}</span>
+              <span><i class="fas fa-tag"></i> {{ item.primary_category or 'General' }}</span>
+              <span><i class="fas fa-building"></i> {{ item.source_name }}</span>
+              {% if item.published_date %}
+              <span><i class="far fa-calendar-alt"></i> {{ item.published_date.strftime('%Y-%m-%d') }}</span>
+              {% endif %}
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">{{ item.abstract }}</p>
+            {% if item.enrichment and item.enrichment.key_insights %}
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(0,0,0,0.15); border-radius: 8px; border-left: 3px solid var(--accent);">
+              <div style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: var(--accent-glow); margin-bottom: 0.25rem;">Key Insight</div>
+              <div style="font-size: 0.85rem; color: var(--text-primary);">{{ item.enrichment.key_insights[0] }}</div>
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+          {% if not all_items %}
+          <p class="text-muted text-center py-5">No research feed items found in the database.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB: SOURCES ================= -->
+    <div id="tab-sources" class="tab-content">
+      <h1 class="title">Monitored <span class="text-gradient">Sources</span></h1>
+      <p class="subtitle">A list of all monitored data providers, crawling configuration, and trust scores.</p>
+      
+      <div class="glass-card" style="padding: 0; overflow: hidden;">
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Source Name</th>
+                <th>Type</th>
+                <th>Url</th>
+                <th>Authority</th>
+                <th>Scraper Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for source in sources %}
+              <tr>
+                <td style="font-weight: 600;">{{ source.name }}</td>
+                <td><span class="badge bg-info-subtle">{{ source.source_type }}</span></td>
+                <td><a href="{{ source.url }}" target="_blank" style="color: var(--accent2-glow);">{{ source.url }}</a></td>
+                <td style="font-weight: bold;">{{ source.authority_score }}</td>
+                <td>
+                  {% if source.is_active %}
+                  <span class="badge bg-success-subtle"><i class="fas fa-check-circle"></i> Active</span>
+                  {% else %}
+                  <span class="badge bg-danger-subtle"><i class="fas fa-times-circle"></i> Disabled</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB: ANALYST ================= -->
+    <div id="tab-analyst" class="tab-content">
+      <h1 class="title">AI Research <span class="text-gradient">Analyst</span></h1>
+      <p class="subtitle">Ask natural-language questions to the RAG Agent powered by the local research database.</p>
+      
+      <div class="glass-card chat-container">
+        <div class="chat-box" id="chat-box">
+          <div class="chat-msg agent">
+            Hello! I am the AI Research Intelligence Analyst. I can answer complex questions using details from all the research items, papers, and market updates currently indexed in the platform. How can I help you today?
+          </div>
+        </div>
+        <form onsubmit="submitQuery(event)" class="chat-input-row">
+          <input type="text" id="query-input" class="chat-input" placeholder="e.g., What are the latest breakthroughs in LLM reasoning?" required>
+          <button type="submit" class="btn" id="query-btn">
+            <span>Send</span> <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= TAB: APIs ================= -->
+    <div id="tab-apis" class="tab-content">
+      <h1 class="title">API <span class="text-gradient">Reference</span></h1>
+      <p class="subtitle">Complete developer reference for machine-to-machine integrations and external agents.</p>
+      
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <a href="/docs" target="_blank" class="btn" style="background: linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);">
+          <i class="fas fa-book-open"></i> Swagger Interactive UI Docs
+        </a>
+        <a href="/redoc" target="_blank" class="btn" style="background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border); box-shadow: none;">
+          <i class="fas fa-code-branch"></i> ReDoc Clean API Schema
+        </a>
+        <a href="/export/api-docs" class="btn" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);">
+          <i class="fas fa-download"></i> Download AI & Agent Guide (.md)
+        </a>
+        <div style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;" class="text-muted">
+          <span>Base URL:</span>
+          <code style="background: rgba(0,0,0,0.3); padding: 0.25rem 0.50rem; border-radius: 4px; color: var(--accent2-glow); font-weight: bold; border: 1px solid var(--border);">http://localhost:8002</code>
+        </div>
+      </div>
+
+      <div class="list-stack">
+        <!-- API 1: Capabilities -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="badge bg-info-subtle" style="font-size: 0.8rem; font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 6px;">GET</span>
+              <span style="font-family: monospace; font-size: 1.1rem; font-weight: 600;">/api/v1/agent/capabilities</span>
+            </div>
+            <span class="text-muted" style="font-size: 0.85rem;">Platform Capabilities Discovery</span>
+          </div>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">Returns a machine-readable manifest of active categories, ingestion content types, and dynamic routes. Run on agent startup to configure bindings.</p>
+          <pre style="background: rgba(0,0,0,0.35); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.8rem; color: #a5b4fc; overflow-x: auto;">curl http://localhost:8002/api/v1/agent/capabilities</pre>
+        </div>
+
+        <!-- API 2: Ingest Single -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="badge bg-success-subtle" style="font-size: 0.8rem; font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 6px; background: rgba(16,185,129,0.15) !important;">POST</span>
+              <span style="font-family: monospace; font-size: 1.1rem; font-weight: 600;">/api/v1/agent/ingest</span>
+            </div>
+            <span class="text-muted" style="font-size: 0.85rem;">Ingest Research Item</span>
+          </div>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">Push scraped intelligence data, PDF summaries, or news article metadata directly into the system. Requires matched source_name.</p>
+          <pre style="background: rgba(0,0,0,0.35); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.8rem; color: #a5b4fc; overflow-x: auto; margin-bottom: 0.5rem;">curl -X POST http://localhost:8002/api/v1/agent/ingest \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Scaling LLM Reasoning with Monte Carlo Tree Search",
+    "url": "https://arxiv.org/abs/2407.01234",
+    "abstract": "We propose a novel approach to...",
+    "source_name": "arXiv",
+    "categories": ["llm", "agents"]
+  }'</pre>
+        </div>
+
+        <!-- API 3: Query Analyst -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="badge bg-success-subtle" style="font-size: 0.8rem; font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 6px; background: rgba(16,185,129,0.15) !important;">POST</span>
+              <span style="font-family: monospace; font-size: 1.1rem; font-weight: 600;">/api/v1/agent/query</span>
+            </div>
+            <span class="text-muted" style="font-size: 0.85rem;">Query RAG Analyst Agent</span>
+          </div>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">Ask natural language questions to prompt the vector-augmented intelligence analyst and get structured source-cited responses.</p>
+          <pre style="background: rgba(0,0,0,0.35); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.8rem; color: #a5b4fc; overflow-x: auto;">curl -X POST http://localhost:8002/api/v1/agent/query \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Summarize today\u0027s LLM reasoning breakthroughs", "context_hours": 24}'</pre>
+        </div>
+
+        <!-- API 4: Active Sources -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="badge bg-info-subtle" style="font-size: 0.8rem; font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 6px;">GET</span>
+              <span style="font-family: monospace; font-size: 1.1rem; font-weight: 600;">/api/v1/agent/sources/active</span>
+            </div>
+            <span class="text-muted" style="font-size: 0.85rem;">Lightweight Active Source Feed</span>
+          </div>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">Returns a lean configuration list of only active sources to crawl, including target domains and rate-limits. Recommended for scraper services.</p>
+          <pre style="background: rgba(0,0,0,0.35); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.8rem; color: #a5b4fc; overflow-x: auto;">curl http://localhost:8002/api/v1/agent/sources/active</pre>
+        </div>
+
+        <!-- API 5: Sources CRUD -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="badge bg-info-subtle" style="font-size: 0.8rem; font-weight: 700; padding: 0.4rem 0.8rem; border-radius: 6px;">GET</span>
+              <span style="font-family: monospace; font-size: 1.1rem; font-weight: 600;">/api/v1/sources</span>
+            </div>
+            <span class="text-muted" style="font-size: 0.85rem;">List and Filter Registered Sources</span>
+          </div>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">List, create (`POST`), toggle (`PATCH`), or delete (`DELETE`) research sources. Supports type/status query parameter filtering.</p>
+          <pre style="background: rgba(0,0,0,0.35); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.8rem; color: #a5b4fc; overflow-x: auto;">curl "http://localhost:8002/api/v1/sources?source_type=arxiv&is_active=true"</pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Switching tab sections
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      // Select the button that clicked
+      const targetBtn = Array.from(document.querySelectorAll('.nav-tab')).find(btn => btn.getAttribute('onclick').includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+      
+      const targetContent = document.getElementById(`tab-${tabId}`);
+      if (targetContent) targetContent.classList.add('active');
+    }
+
+    // Agent query function
+    async function submitQuery(event) {
+      event.preventDefault();
+      const input = document.getElementById('query-input');
+      const box = document.getElementById('chat-box');
+      const btn = document.getElementById('query-btn');
+      
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Add user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-msg user';
+      userMsg.textContent = text;
+      box.appendChild(userMsg);
+      box.scrollTop = box.scrollHeight;
+      
+      input.value = '';
+      input.disabled = true;
+      btn.disabled = true;
+
+      // Loading placeholder
+      const loadMsg = document.createElement('div');
+      loadMsg.className = 'chat-msg agent';
+      loadMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Synthesizing answer...';
+      box.appendChild(loadMsg);
+      box.scrollTop = box.scrollHeight;
+
+      try {
+        const response = await fetch('/api/v1/agent/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ question: text, context_hours: 168 })
+        });
+        
+        const data = await response.json();
+        box.removeChild(loadMsg);
+
+        const agentMsg = document.createElement('div');
+        agentMsg.className = 'chat-msg agent';
+        
+        if (response.ok) {
+          agentMsg.innerHTML = data.answer.replace(/\n/g, '<br>');
+          if (data.sources_used && data.sources_used.length > 0) {
+            let sourcesHTML = '<div style="margin-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">';
+            sourcesHTML += '<strong>Citations:</strong><ul style="list-style-type: none; padding-left: 0; margin-top: 0.25rem;">';
+            data.sources_used.forEach(s => {
+              sourcesHTML += `<li><i class="fas fa-link" style="font-size: 0.65rem;"></i> <a href="${s}" target="_blank" style="color: var(--accent2-glow); text-decoration: none;">${s}</a></li>`;
+            });
+            sourcesHTML += '</ul></div>';
+            agentMsg.innerHTML += sourcesHTML;
+          }
+        } else {
+          agentMsg.textContent = 'Sorry, there was an error processing your query. Please try again.';
+        }
+        
+        box.appendChild(agentMsg);
+      } catch (err) {
+        box.removeChild(loadMsg);
+        const errMsg = document.createElement('div');
+        errMsg.className = 'chat-msg agent';
+        errMsg.textContent = 'Failed to connect to the analyst agent. Make sure the server is healthy.';
+        box.appendChild(errMsg);
+      } finally {
+        input.disabled = false;
+        btn.disabled = false;
+        input.focus();
+        box.scrollTop = box.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,842 @@
+﻿2026-05-11 09:38:39,911 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+python : INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+At line:1 char:1
++ python test_econet.py 2>&1 | Out-File -Encoding utf8 test_econet_outp ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INFO:sqlalchemy...EGIN (implicit):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-05-11 09:38:39,924 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:38:39,924 INFO sqlalchemy.engine.Engine [generated in 0.00055s] (43, 1, 0)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00055s] (43, 1, 0)
+INFO:app.scraping.org_pipeline:[Pipeline] Starting scrape for: Econet Wireless Zimbabwe
+INFO:httpx:HTTP Request: GET https://www.econet.co.zw "HTTP/1.1 200 OK"
+INFO:app.scraping.org_pipeline:[Pipeline] Website scraper got 5 fields for Econet Wireless Zimbabwe
+INFO:httpx:HTTP Request: GET https://www.econet.co.zw "HTTP/1.1 200 OK"
+WARNING:app.scraping.org_pipeline:[Pipeline] Google Maps scraper failed for Econet Wireless Zimbabwe: No module named 
+'app.scraping.fetcher'
+INFO:app.scraping.org_scrapers.social_scraper:[SocialScraper] Checking 4 social profiles
+INFO:httpx:HTTP Request: GET https://facebook.com/econetzimbabwe/ "HTTP/1.1 301 Moved Permanently"
+INFO:httpx:HTTP Request: GET https://www.facebook.com/econetzimbabwe/ "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://x.com/econetzimbabwe "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://instagram.com/econetzimbabwe/?hl=en "HTTP/1.1 301 Moved Permanently"
+INFO:httpx:HTTP Request: GET https://www.instagram.com/econetzimbabwe/?hl=en "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://youtube.com/channel/UCrMWdAO1TzGqj03tlL0S4JA "HTTP/1.1 301 Moved Permanently"
+INFO:httpx:HTTP Request: GET https://www.youtube.com/channel/UCrMWdAO1TzGqj03tlL0S4JA "HTTP/1.1 200 OK"
+INFO:sqlalchemy.engine.Engine:COMMIT
+--- Starting Scrape for Econet Wireless Zimbabwe ---
+2026-05-11 09:38:51,650 INFO sqlalchemy.engine.Engine COMMIT
+C:\Users\USER 2\Downloads\scraper-hub-v1\scraper-hub-\app\services\org_intelligence_service.py:3: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+2026-05-11 09:38:53,981 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+2026-05-11 09:38:53,985 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+2026-05-11 09:38:53,985 INFO sqlalchemy.engine.Engine [generated in 0.00040s] (43,)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00040s] (43,)
+INFO:app.services.org_intelligence_service:[OrgIntelligence] Running Gemini for Econet Wireless Zimbabwe
+2026-05-11 09:39:13,424 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,424 INFO sqlalchemy.engine.Engine [generated in 0.00028s] (43, 'USD Data Bundles', 1, 0)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00028s] (43, 'USD Data Bundles', 1, 0)
+2026-05-11 09:39:13,429 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,429 INFO sqlalchemy.engine.Engine [generated in 0.00025s] (None, 43, 'USD Data Bundles', 'Econet', 'Data Bundles', None, 'Mobile data packages denominated in US Dollars.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:[generated in 0.00025s] (None, 43, 'USD Data Bundles', 'Econet', 'Data Bundles', None, 
+'Mobile data packages denominated in US Dollars.', '[]', '{}', '[]')
+2026-05-11 09:39:13,435 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,435 INFO sqlalchemy.engine.Engine [generated in 0.00028s] (1, 1, 0)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00028s] (1, 1, 0)
+2026-05-11 09:39:13,438 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+2026-05-11 09:39:13,439 INFO sqlalchemy.engine.Engine [cached since 0.01454s ago] (43, 'ZWG Data Bundles', 1, 0)
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01454s ago] (43, 'ZWG Data Bundles', 1, 0)
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,439 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,439 INFO sqlalchemy.engine.Engine [cached since 0.01068s ago] (None, 43, 'ZWG Data Bundles', 'Econet', 'Data Bundles', None, 'Mobile data packages denominated in Zimbabwe Gold (ZWG) currency.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:[cached since 0.01068s ago] (None, 43, 'ZWG Data Bundles', 'Econet', 'Data Bundles', 
+None, 'Mobile data packages denominated in Zimbabwe Gold (ZWG) currency.', '[]', '{}', '[]')
+2026-05-11 09:39:13,440 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,440 INFO sqlalchemy.engine.Engine [cached since 0.004949s ago] (2, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.004949s ago] (2, 1, 0)
+2026-05-11 09:39:13,441 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,441 INFO sqlalchemy.engine.Engine [cached since 0.01677s ago] (43, 'EcoChat AI', 1, 0)
+INFO:sqlalchemy.engine.Engine:[cached since 0.01677s ago] (43, 'EcoChat AI', 1, 0)
+2026-05-11 09:39:13,441 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,441 INFO sqlalchemy.engine.Engine [cached since 0.01269s ago] (None, 43, 'EcoChat AI', 'Econet', 'Artificial Intelligence', None, 'An OpenAI tool configured with ChatGPT API providing interactions across voice, SMS, USSD, and web channels.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:[cached since 0.01269s ago] (None, 43, 'EcoChat AI', 'Econet', 'Artificial 
+Intelligence', None, 'An OpenAI tool configured with ChatGPT API providing interactions across voice, SMS, USSD, and 
+web channels.', '[]', '{}', '[]')
+2026-05-11 09:39:13,442 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,442 INFO sqlalchemy.engine.Engine [cached since 0.006804s ago] (3, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.006804s ago] (3, 1, 0)
+2026-05-11 09:39:13,442 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01865s ago] (43, 'eSim', 1, 0)
+2026-05-11 09:39:13,443 INFO sqlalchemy.engine.Engine [cached since 0.01865s ago] (43, 'eSim', 1, 0)
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,443 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,443 INFO sqlalchemy.engine.Engine [cached since 0.01473s ago] (None, 43, 'eSim', 'Econet', 'Devices/Connectivity', None, 'Embedded SIM technology for mobile devices.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:[cached since 0.01473s ago] (None, 43, 'eSim', 'Econet', 'Devices/Connectivity', None, 
+'Embedded SIM technology for mobile devices.', '[]', '{}', '[]')
+2026-05-11 09:39:13,444 INFO sqlalchemy.engine.Engine INSERT INTO price_entries (product_id, service_id, organization_id, price_value, currency, discount_price, previous_price, is_promotion, promotion_details, source_url, snapshot_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at
+2026-05-11 09:39:13,444 INFO sqlalchemy.engine.Engine [generated in 0.00017s] (3, None, 43, 0.0, 'USD', None, None, 0, None, None, None)
+INFO:sqlalchemy.engine.Engine:INSERT INTO price_entries (product_id, service_id, organization_id, price_value, 
+currency, discount_price, previous_price, is_promotion, promotion_details, source_url, snapshot_id) VALUES (?, ?, ?, 
+?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at
+INFO:sqlalchemy.engine.Engine:[generated in 0.00017s] (3, None, 43, 0.0, 'USD', None, None, 0, None, None, None)
+2026-05-11 09:39:13,446 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01128s ago] (4, 1, 0)
+2026-05-11 09:39:13,446 INFO sqlalchemy.engine.Engine [cached since 0.01128s ago] (4, 1, 0)
+2026-05-11 09:39:13,447 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+2026-05-11 09:39:13,447 INFO sqlalchemy.engine.Engine [cached since 0.02308s ago] (43, 'YoGamez Hunt', 1, 0)
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.02308s ago] (43, 'YoGamez Hunt', 1, 0)
+2026-05-11 09:39:13,448 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,448 INFO sqlalchemy.engine.Engine [cached since 0.019s ago] (None, 43, 'YoGamez Hunt', 'YoGamez', 'Gaming', None, 'A treasure hunt contest platform where users join and follow clues.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:[cached since 0.019s ago] (None, 43, 'YoGamez Hunt', 'YoGamez', 'Gaming', None, 'A 
+treasure hunt contest platform where users join and follow clues.', '[]', '{}', '[]')
+2026-05-11 09:39:13,448 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,448 INFO sqlalchemy.engine.Engine [cached since 0.01315s ago] (5, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01315s ago] (5, 1, 0)
+2026-05-11 09:39:13,449 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,449 INFO sqlalchemy.engine.Engine [cached since 0.02487s ago] (43, 'YoFootball', 1, 0)
+INFO:sqlalchemy.engine.Engine:[cached since 0.02487s ago] (43, 'YoFootball', 1, 0)
+2026-05-11 09:39:13,449 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,449 INFO sqlalchemy.engine.Engine [cached since 0.02075s ago] (None, 43, 'YoFootball', 'YoFootball', 'Gaming', None, 'Fantasy football platform for the 2025/26 season with point earning and cash prizes.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:[cached since 0.02075s ago] (None, 43, 'YoFootball', 'YoFootball', 'Gaming', None, 
+'Fantasy football platform for the 2025/26 season with point earning and cash prizes.', '[]', '{}', '[]')
+2026-05-11 09:39:13,450 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,450 INFO sqlalchemy.engine.Engine [cached since 0.01486s ago] (6, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01486s ago] (6, 1, 0)
+2026-05-11 09:39:13,450 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+2026-05-11 09:39:13,451 INFO sqlalchemy.engine.Engine [cached since 0.02661s ago] (43, 'Smart4U', 1, 0)
+FROM products 
+WHERE products.organization_id = ? AND products.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.02661s ago] (43, 'Smart4U', 1, 0)
+2026-05-11 09:39:13,452 INFO sqlalchemy.engine.Engine INSERT INTO products (source_id, organization_id, name, brand, category, sku, description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO products (source_id, organization_id, name, brand, category, sku, 
+description, images, specifications, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,452 INFO sqlalchemy.engine.Engine [cached since 0.02373s ago] (None, 43, 'Smart4U', 'Econet', 'Smart Suite', None, 'A suite of digital services and loyalty offerings.', '[]', '{}', '[]')
+INFO:sqlalchemy.engine.Engine:[cached since 0.02373s ago] (None, 43, 'Smart4U', 'Econet', 'Smart Suite', None, 'A 
+suite of digital services and loyalty offerings.', '[]', '{}', '[]')
+2026-05-11 09:39:13,454 INFO sqlalchemy.engine.Engine INSERT INTO price_entries (product_id, service_id, organization_id, price_value, currency, discount_price, previous_price, is_promotion, promotion_details, source_url, snapshot_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO price_entries (product_id, service_id, organization_id, price_value, 
+currency, discount_price, previous_price, is_promotion, promotion_details, source_url, snapshot_id) VALUES (?, ?, ?, 
+?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at
+2026-05-11 09:39:13,455 INFO sqlalchemy.engine.Engine [cached since 0.01048s ago] (6, None, 43, 25000.0, 'USD', None, None, 0, None, None, None)
+INFO:sqlalchemy.engine.Engine:[cached since 0.01048s ago] (6, None, 43, 25000.0, 'USD', None, None, 0, None, None, 
+None)
+2026-05-11 09:39:13,456 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.product_id = ? ORDER BY price_entries.captured_at DESC
+2026-05-11 09:39:13,456 INFO sqlalchemy.engine.Engine [cached since 0.02093s ago] (7, 1, 0)
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.02093s ago] (7, 1, 0)
+2026-05-11 09:39:13,458 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+2026-05-11 09:39:13,458 INFO sqlalchemy.engine.Engine [generated in 0.00021s] (43, '5G Network Connectivity', 1, 0)
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] (43, '5G Network Connectivity', 1, 0)
+2026-05-11 09:39:13,460 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,460 INFO sqlalchemy.engine.Engine [generated in 0.00019s] (None, 43, '5G Network Connectivity', 'Telecommunications', 'High-speed fifth-generation mobile network services.', '["Faster data speeds", "Low latency", "Digital lifestyle support"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00019s] (None, 43, '5G Network Connectivity', 'Telecommunications', 
+'High-speed fifth-generation mobile network services.', '["Faster data speeds", "Low latency", "Digital lifestyle 
+support"]', None, None, None)
+2026-05-11 09:39:13,461 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,461 INFO sqlalchemy.engine.Engine [generated in 0.00017s] (1, 1, 0)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00017s] (1, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+2026-05-11 09:39:13,462 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,462 INFO sqlalchemy.engine.Engine [cached since 0.003557s ago] (43, 'Personal Airtime Credit Service', 1, 0)
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.003557s ago] (43, 'Personal Airtime Credit Service', 1, 0)
+2026-05-11 09:39:13,462 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,462 INFO sqlalchemy.engine.Engine [cached since 0.002884s ago] (None, 43, 'Personal Airtime Credit Service', 'Financial Services', 'Credit service allowing customers to borrow airtime for later repayment.', '["Instant airtime", "Borrowing on credit"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:[cached since 0.002884s ago] (None, 43, 'Personal Airtime Credit Service', 'Financial 
+Services', 'Credit service allowing customers to borrow airtime for later repayment.', '["Instant airtime", "Borrowing 
+on credit"]', None, None, None)
+2026-05-11 09:39:13,463 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,463 INFO sqlalchemy.engine.Engine [cached since 0.002099s ago] (2, 1, 0)
+2026-05-11 09:39:13,463 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,463 INFO sqlalchemy.engine.Engine [cached since 0.005261s ago] (43, 'Private 5G Networks for Mining', 1, 0)
+2026-05-11 09:39:13,464 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,464 INFO sqlalchemy.engine.Engine [cached since 0.004526s ago] (None, 43, 'Private 5G Networks for Mining', 'Enterprise Solutions', 'Dedicated 5G infrastructure for industrial mining operations.', '["Private infrastructure", "Optimized for industrial use", "High security"]', None, None, None)
+2026-05-11 09:39:13,464 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,465 INFO sqlalchemy.engine.Engine [cached since 0.003755s ago] (3, 1, 0)
+2026-05-11 09:39:13,465 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,465 INFO sqlalchemy.engine.Engine [cached since 0.006906s ago] (43, 'Econet Data Centres', 1, 0)
+2026-05-11 09:39:13,466 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,466 INFO sqlalchemy.engine.Engine [cached since 0.0062s ago] (None, 43, 'Econet Data Centres', 'Enterprise Solutions', 'Managed hosting and data storage solutions for businesses.', '["Data hosting", "Cloud services"]', None, None, None)
+2026-05-11 09:39:13,466 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.002099s ago] (2, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.005261s ago] (43, 'Private 5G Networks for Mining', 1, 0)
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:[cached since 0.004526s ago] (None, 43, 'Private 5G Networks for Mining', 'Enterprise 
+Solutions', 'Dedicated 5G infrastructure for industrial mining operations.', '["Private infrastructure", "Optimized 
+for industrial use", "High security"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.003755s ago] (3, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.006906s ago] (43, 'Econet Data Centres', 1, 0)
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:[cached since 0.0062s ago] (None, 43, 'Econet Data Centres', 'Enterprise Solutions', 
+'Managed hosting and data storage solutions for businesses.', '["Data hosting", "Cloud services"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01278s ago] (4, 1, 0)
+2026-05-11 09:39:13,474 INFO sqlalchemy.engine.Engine [cached since 0.01278s ago] (4, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,474 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,475 INFO sqlalchemy.engine.Engine [cached since 0.01641s ago] (43, 'Yamurai Virtual Assistant', 1, 0)
+INFO:sqlalchemy.engine.Engine:[cached since 0.01641s ago] (43, 'Yamurai Virtual Assistant', 1, 0)
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,476 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:[cached since 0.01619s ago] (None, 43, 'Yamurai Virtual Assistant', 'Customer 
+Experience', 'Virtual assistant for checking balances, buying data, and support.', '["Balance checks", "Data 
+purchases", "24/7 support"]', None, None, None)
+2026-05-11 09:39:13,476 INFO sqlalchemy.engine.Engine [cached since 0.01619s ago] (None, 43, 'Yamurai Virtual Assistant', 'Customer Experience', 'Virtual assistant for checking balances, buying data, and support.', '["Balance checks", "Data purchases", "24/7 support"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,476 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,477 INFO sqlalchemy.engine.Engine [cached since 0.01574s ago] (5, 1, 0)
+INFO:sqlalchemy.engine.Engine:[cached since 0.01574s ago] (5, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+2026-05-11 09:39:13,477 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01932s ago] (43, 'A2P and M2M Services', 1, 0)
+2026-05-11 09:39:13,478 INFO sqlalchemy.engine.Engine [cached since 0.01932s ago] (43, 'A2P and M2M Services', 1, 0)
+2026-05-11 09:39:13,478 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,478 INFO sqlalchemy.engine.Engine [cached since 0.01901s ago] (None, 43, 'A2P and M2M Services', 'Business Services', 'Application-to-Person and Machine-to-Machine messaging and connectivity.', '["Bulk SMS", "IoT connectivity", "Enterprise communication"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:[cached since 0.01901s ago] (None, 43, 'A2P and M2M Services', 'Business Services', 
+'Application-to-Person and Machine-to-Machine messaging and connectivity.', '["Bulk SMS", "IoT connectivity", 
+"Enterprise communication"]', None, None, None)
+2026-05-11 09:39:13,479 INFO sqlalchemy.engine.Engine INSERT INTO price_entries (product_id, service_id, organization_id, price_value, currency, discount_price, previous_price, is_promotion, promotion_details, source_url, snapshot_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO price_entries (product_id, service_id, organization_id, price_value, 
+currency, discount_price, previous_price, is_promotion, promotion_details, source_url, snapshot_id) VALUES (?, ?, ?, 
+?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at
+INFO:sqlalchemy.engine.Engine:[cached since 0.03483s ago] (None, 5, 43, 0.0, 'USD', None, None, 0, None, None, None)
+2026-05-11 09:39:13,479 INFO sqlalchemy.engine.Engine [cached since 0.03483s ago] (None, 5, 43, 0.0, 'USD', None, None, 0, None, None, None)
+2026-05-11 09:39:13,480 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.01879s ago] (6, 1, 0)
+2026-05-11 09:39:13,480 INFO sqlalchemy.engine.Engine [cached since 0.01879s ago] (6, 1, 0)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+2026-05-11 09:39:13,480 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+WHERE services.organization_id = ? AND services.name = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,481 INFO sqlalchemy.engine.Engine [cached since 0.02229s ago] (43, 'Enterprise Resource Planning (ERP)', 1, 0)
+INFO:sqlalchemy.engine.Engine:[cached since 0.02229s ago] (43, 'Enterprise Resource Planning (ERP)', 1, 0)
+2026-05-11 09:39:13,481 INFO sqlalchemy.engine.Engine INSERT INTO services (source_id, organization_id, name, category, description, features, requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+INFO:sqlalchemy.engine.Engine:INSERT INTO services (source_id, organization_id, name, category, description, features, 
+requirements, eligibility, duration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, captured_at, updated_at
+2026-05-11 09:39:13,481 INFO sqlalchemy.engine.Engine [cached since 0.022s ago] (None, 43, 'Enterprise Resource Planning (ERP)', 'Business Services', 'Integrated management of main business processes.', '["Business process remodeling", "Strategic planning tools"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:[cached since 0.022s ago] (None, 43, 'Enterprise Resource Planning (ERP)', 'Business 
+Services', 'Integrated management of main business processes.', '["Business process remodeling", "Strategic planning 
+tools"]', None, None, None)
+INFO:sqlalchemy.engine.Engine:SELECT price_entries.id AS price_entries_id, price_entries.product_id AS 
+price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS 
+price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS 
+price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS 
+price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, 
+price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS 
+price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS 
+price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+2026-05-11 09:39:13,482 INFO sqlalchemy.engine.Engine SELECT price_entries.id AS price_entries_id, price_entries.product_id AS price_entries_product_id, price_entries.service_id AS price_entries_service_id, price_entries.organization_id AS price_entries_organization_id, price_entries.price_value AS price_entries_price_value, price_entries.currency AS price_entries_currency, price_entries.discount_price AS price_entries_discount_price, price_entries.previous_price AS price_entries_previous_price, price_entries.is_promotion AS price_entries_is_promotion, price_entries.promotion_details AS price_entries_promotion_details, price_entries.captured_at AS price_entries_captured_at, price_entries.source_url AS price_entries_source_url, price_entries.snapshot_id AS price_entries_snapshot_id 
+FROM price_entries 
+WHERE price_entries.service_id = ? ORDER BY price_entries.captured_at DESC
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:[cached since 0.02147s ago] (7, 1, 0)
+2026-05-11 09:39:13,482 INFO sqlalchemy.engine.Engine [cached since 0.02147s ago] (7, 1, 0)
+INFO:sqlalchemy.engine.Engine:COMMIT
+2026-05-11 09:39:13,483 INFO sqlalchemy.engine.Engine COMMIT
+2026-05-11 09:39:13,489 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+2026-05-11 09:39:13,489 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:[cached since 19.51s ago] (43,)
+2026-05-11 09:39:13,490 INFO sqlalchemy.engine.Engine [cached since 19.51s ago] (43,)
+INFO:app.services.org_intelligence_service:[OrgIntelligence] Saved 7 products and 7 services for Econet Wireless 
+Zimbabwe
+INFO:app.scraping.org_pipeline:[Pipeline] AI Enrichment completed for Econet Wireless Zimbabwe
+INFO:sqlalchemy.engine.Engine:UPDATE organizations SET ai_summary=?, sector_classification=?, risk_score=?, 
+market_influence_score=?, innovation_score=?, reputation_score=?, last_scraped_at=?, data_completeness=?, 
+updated_at=CURRENT_TIMESTAMP WHERE organizations.id = ?
+2026-05-11 09:39:13,493 INFO sqlalchemy.engine.Engine UPDATE organizations SET ai_summary=?, sector_classification=?, risk_score=?, market_influence_score=?, innovation_score=?, reputation_score=?, last_scraped_at=?, data_completeness=?, updated_at=CURRENT_TIMESTAMP WHERE organizations.id = ?
+2026-05-11 09:39:13,493 INFO sqlalchemy.engine.Engine [generated in 0.00023s] ("Econet Wireless Zimbabwe is the leading telecommunications and digital technology company in Zimbabwe, positioning itself as a 'Digital Lifestyle Net ... (111 characters truncated) ... cies, AI-driven customer engagement tools, and specialized enterprise solutions including data centers and private 5G networks for the mining sector.", 'Telecommunications and ICT', 25.0, 90.0, 80.0, 85.0, '2026-05-11 07:39:13.490754', 33.3, 43)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00023s] ("Econet Wireless Zimbabwe is the leading telecommunications and 
+digital technology company in Zimbabwe, positioning itself as a 'Digital Lifestyle Net ... (111 characters truncated) 
+... cies, AI-driven customer engagement tools, and specialized enterprise solutions including data centers and private 
+5G networks for the mining sector.", 'Telecommunications and ICT', 25.0, 90.0, 80.0, 85.0, '2026-05-11 
+07:39:13.490754', 33.3, 43)
+2026-05-11 09:39:13,495 INFO sqlalchemy.engine.Engine COMMIT
+INFO:sqlalchemy.engine.Engine:COMMIT
+2026-05-11 09:39:13,499 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+2026-05-11 09:39:13,499 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+2026-05-11 09:39:13,500 INFO sqlalchemy.engine.Engine [cached since 19.52s ago] (43,)
+INFO:sqlalchemy.engine.Engine:[cached since 19.52s ago] (43,)
+INFO:app.scraping.org_pipeline:[Pipeline] Done for Econet Wireless Zimbabwe. Completeness: 33%
+2026-05-11 09:39:13,501 INFO sqlalchemy.engine.Engine SELECT organizations.id, organizations.name, organizations.slug, organizations.category, organizations.description, organizations.logo_url, organizations.website, organizations.emails, organizations.phone_numbers, organizations.whatsapp_numbers, organizations.physical_addresses, organizations.gps_lat, organizations.gps_lng, organizations.branches, organizations.operating_hours, organizations.social_links, organizations.registration_status, organizations.registration_number, organizations.industry_tags, organizations.keywords, organizations.executive_leadership, organizations.founders, organizations.ceo, organizations.board_members, organizations.employee_size, organizations.revenue_estimate, organizations.partnerships, organizations.competitors, organizations.services_offered, organizations.products, organizations.pricing_notes, organizations.customer_reviews, organizations.rating_avg, organizations.review_count, organizations.sentiment_score, organizations.seo_metadata, organizations.tech_stack, organizations.hosting_provider, organizations.analytics_tools, organizations.mobile_apps, organizations.api_endpoints, organizations.traffic_estimate, organizations.digital_presence_score, organizations.ai_summary, organizations.ai_profile, organizations.sector_classification, organizations.risk_score, organizations.market_influence_score, organizations.innovation_score, organizations.reputation_score, organizations.last_scraped_at, organizations.last_changed_at, organizations.scrape_status, organizations.scrape_error, organizations.data_completeness, organizations.created_at, organizations.updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id, organizations.name, organizations.slug, organizations.category, 
+organizations.description, organizations.logo_url, organizations.website, organizations.emails, 
+organizations.phone_numbers, organizations.whatsapp_numbers, organizations.physical_addresses, organizations.gps_lat, 
+organizations.gps_lng, organizations.branches, organizations.operating_hours, organizations.social_links, 
+organizations.registration_status, organizations.registration_number, organizations.industry_tags, 
+organizations.keywords, organizations.executive_leadership, organizations.founders, organizations.ceo, 
+organizations.board_members, organizations.employee_size, organizations.revenue_estimate, organizations.partnerships, 
+organizations.competitors, organizations.services_offered, organizations.products, organizations.pricing_notes, 
+organizations.customer_reviews, organizations.rating_avg, organizations.review_count, organizations.sentiment_score, 
+organizations.seo_metadata, organizations.tech_stack, organizations.hosting_provider, organizations.analytics_tools, 
+organizations.mobile_apps, organizations.api_endpoints, organizations.traffic_estimate, 
+organizations.digital_presence_score, organizations.ai_summary, organizations.ai_profile, 
+organizations.sector_classification, organizations.risk_score, organizations.market_influence_score, 
+organizations.innovation_score, organizations.reputation_score, organizations.last_scraped_at, 
+organizations.last_changed_at, organizations.scrape_status, organizations.scrape_error, 
+organizations.data_completeness, organizations.created_at, organizations.updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] (43,)
+2026-05-11 09:39:13,501 INFO sqlalchemy.engine.Engine [generated in 0.00021s] (43,)
+
+--- Scrape Results ---
+AI Summary: Econet Wireless Zimbabwe is the leading telecommunications and digital technology company in Zimbabwe, positioning itself as a 'Digital Lifestyle Network.' The company provides extensive mobile network services (Voice, SMS, 5G), data bundles in multiple currencies, AI-driven customer engagement tools, and specialized enterprise solutions including data centers and private 5G networks for the mining sector.
+Risk Score: 25.0
+Reputation Score: 85.0
+Data Completeness: 33.3%
+2026-05-11 09:39:13,505 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ?
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+WHERE products.organization_id = ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00033s] (43,)
+2026-05-11 09:39:13,505 INFO sqlalchemy.engine.Engine [generated in 0.00033s] (43,)
+2026-05-11 09:39:13,507 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ?
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ?
+2026-05-11 09:39:13,507 INFO sqlalchemy.engine.Engine [generated in 0.00020s] (43,)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00020s] (43,)
+INFO:sqlalchemy.engine.Engine:ROLLBACK
+
+Extracted Products (7):
+- USD Data Bundles (Data Bundles)
+- ZWG Data Bundles (Data Bundles)
+- EcoChat AI (Artificial Intelligence)
+- eSim (Devices/Connectivity)
+- YoGamez Hunt (Gaming)
+- YoFootball (Gaming)
+- Smart4U (Smart Suite)
+
+Extracted Services (7):
+- 5G Network Connectivity (Telecommunications)
+- Personal Airtime Credit Service (Financial Services)
+- Private 5G Networks for Mining (Enterprise Solutions)
+- Econet Data Centres (Enterprise Solutions)
+- Yamurai Virtual Assistant (Customer Experience)
+- A2P and M2M Services (Business Services)
+- Enterprise Resource Planning (ERP) (Business Services)
+2026-05-11 09:39:13,507 INFO sqlalchemy.engine.Engine ROLLBACK

@@ -1,0 +1,377 @@
+{% extends "base.html" %}
+
+{% block title %}Developer APIs — Scraper Hub Intelligence{% endblock %}
+
+{% block content %}
+<div class="row mb-4 align-items-end">
+    <div class="col-md-8">
+        <h1 class="display-5 mb-1">Developer <span class="text-gradient">APIs</span></h1>
+        <p class="text-muted">Complete reference for AI coders, autonomous agents, and custom integrations.</p>
+    </div>
+    <div class="col-md-4 text-md-end d-flex gap-2 justify-content-md-end flex-wrap">
+        <a href="/docs" target="_blank" class="btn btn-outline-info btn-sm">
+            <i class="fas fa-book-open me-1"></i>Swagger UI
+        </a>
+        <a href="/redoc" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-code-branch me-1"></i>ReDoc
+        </a>
+        <a href="/export/api-docs" class="btn btn-primary btn-sm">
+            <i class="fas fa-download me-1"></i>Download Guide (.md)
+        </a>
+    </div>
+</div>
+
+<!-- Base URL Banner -->
+<div class="glass-card p-3 mb-5 d-flex align-items-center gap-3 flex-wrap">
+    <div class="metric-icon accent d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:10px;background:rgba(99,102,241,.15);">
+        <i class="fas fa-server text-gradient"></i>
+    </div>
+    <div>
+        <div class="text-muted" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;">Base URL</div>
+        <code style="color:var(--accent2-glow);font-size:1rem;font-weight:700;">http://localhost:8000</code>
+    </div>
+    <div class="ms-auto d-flex gap-3 flex-wrap">
+        <div>
+            <div class="text-muted" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;">OpenAPI Schema</div>
+            <a href="/openapi.json" target="_blank" style="color:var(--accent-glow);font-size:.85rem;font-family:monospace;">/openapi.json</a>
+        </div>
+        <div>
+            <div class="text-muted" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;">Health Check</div>
+            <a href="/health" target="_blank" style="color:#34d399;font-size:.85rem;font-family:monospace;">/health</a>
+        </div>
+    </div>
+</div>
+
+<!-- WHO IS THIS FOR? TABS -->
+<ul class="nav nav-pills mb-4 gap-2" id="audienceTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="ai-tab" data-bs-toggle="pill" data-bs-target="#ai-content" type="button">
+            <i class="fas fa-magic me-2"></i>AI Coding Assistants
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="agents-tab" data-bs-toggle="pill" data-bs-target="#agents-content" type="button">
+            <i class="fas fa-robot me-2"></i>Autonomous Agents
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="reference-tab" data-bs-toggle="pill" data-bs-target="#reference-content" type="button">
+            <i class="fas fa-list me-2"></i>Full API Reference
+        </button>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <!-- ==================== AI CODING ASSISTANTS ==================== -->
+    <div class="tab-pane fade show active" id="ai-content">
+        <div class="glass-card mb-4">
+            <h4 class="mb-1"><i class="fas fa-magic text-gradient me-2"></i>For AI Coding Assistants</h4>
+            <p class="text-muted small mb-4">Works with Cursor, GitHub Copilot, Gemini Code, and any LLM-powered IDE. Use the snippets below as system-prompt context.</p>
+
+            <h6 class="text-info fw-bold mb-2"><i class="fas fa-clipboard-list me-2"></i>Step 1 — Provide this schema to your AI</h6>
+            <p class="text-muted small mb-2">Tell the AI that any extracted price/product data must match this structure before submitting:</p>
+            <pre class="p-3 rounded mb-4" style="background:rgba(0,0,0,.35);border:1px solid var(--border);font-size:.82rem;color:#a5b4fc;overflow-x:auto;">{
+  "url":            "https://www.econet.co.zw/usd-data-bundles",
+  "category":       "telecoms",
+  "extractor_type": "auto",      // "auto" | "generic" | "telecom" | "banking"
+  "store_result":   true
+}</pre>
+
+            <h6 class="text-info fw-bold mb-2"><i class="fas fa-paper-plane me-2"></i>Step 2 — Submit to the Scraper Endpoint</h6>
+            <p class="text-muted small mb-2">Your AI should generate and run this code after scraping a URL:</p>
+            <pre class="p-3 rounded mb-4" style="background:rgba(0,0,0,.35);border:1px solid var(--border);font-size:.82rem;color:#a5b4fc;overflow-x:auto;">import httpx
+
+# Trigger real-time extraction
+resp = httpx.post(
+    "http://localhost:8000/api/v1/manual-scrape/",
+    json={
+        "url": "https://www.econet.co.zw/usd-data-bundles",
+        "category": "telecoms",
+        "extractor_type": "auto",
+        "store_result": True
+    },
+    timeout=60
+)
+data = resp.json()
+print(f"Extracted {len(data.get('items', []))} items")</pre>
+
+            <h6 class="text-info fw-bold mb-2"><i class="fas fa-search me-2"></i>Step 3 — Read Back Structured Records</h6>
+            <pre class="p-3 rounded mb-4" style="background:rgba(0,0,0,.35);border:1px solid var(--border);font-size:.82rem;color:#a5b4fc;overflow-x:auto;">import httpx
+
+# Fetch last 20 telecom records
+records = httpx.get(
+    "http://localhost:8000/api/v1/records/",
+    params={"category": "telecoms", "limit": 20}
+).json()
+
+for r in records:
+    print(f"{r['entity_name']} | {r['title']} | {r['price_currency']} {r['price_value']}")</pre>
+
+            <div class="alert-info p-3 rounded" style="background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.25);border-radius:10px;">
+                <i class="fas fa-lightbulb me-2" style="color:var(--accent2-glow);"></i>
+                <strong>Pro tip:</strong> Paste the OpenAPI schema from
+                <a href="/openapi.json" target="_blank" style="color:var(--accent2-glow);">/openapi.json</a>
+                directly into your AI coding assistant — it will auto-generate fully typed client code in any language.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AUTONOMOUS AGENTS ==================== -->
+    <div class="tab-pane fade" id="agents-content">
+        <div class="glass-card mb-4">
+            <h4 class="mb-1"><i class="fas fa-robot text-gradient me-2"></i>For Autonomous Agents</h4>
+            <p class="text-muted small mb-4">Built for LangChain, CrewAI, OpenAI Agents SDK, AutoGPT, and custom agent frameworks.</p>
+
+            <h6 class="text-primary fw-bold mb-2"><i class="fas fa-plug me-2"></i>LangChain Tool Definitions</h6>
+            <p class="text-muted small mb-2">Copy and register these as agent tools at startup:</p>
+            <pre class="p-3 rounded mb-4" style="background:rgba(0,0,0,.35);border:1px solid var(--border);font-size:.82rem;color:#a5b4fc;overflow-x:auto;">from langchain.tools import tool
+import httpx
+
+BASE = "http://localhost:8000"
+
+@tool
+def scrape_url(url: str, category: str = "auto") -> dict:
+    """Trigger real-time price & product intelligence extraction from any institutional URL.
+    Returns structured records with pricing, category, confidence score and entity info.
+    Args:
+        url: The target page URL to scrape (e.g. 'https://econet.co.zw/usd-data-bundles')
+        category: Sector label ('telecoms', 'banking', 'insurance', 'retail')
+    """
+    resp = httpx.post(f"{BASE}/api/v1/manual-scrape/",
+                      json={"url": url, "category": category, "extractor_type": "auto"},
+                      timeout=90)
+    return resp.json()
+
+@tool
+def get_records(category: str = None, market: str = None, limit: int = 50) -> list:
+    """Retrieve already-extracted and stored intelligence records.
+    Useful for comparing prices, detecting changes, or feeding analysis pipelines.
+    Args:
+        category: Filter by sector (optional)
+        market:   Filter by market geography (optional)
+        limit:    Maximum records to return (default 50)
+    """
+    params = {"limit": limit}
+    if category: params["category"] = category
+    if market:   params["market"]   = market
+    return httpx.get(f"{BASE}/api/v1/records/", params=params).json()
+
+@tool
+def list_sources() -> list:
+    """Get all configured crawling sources — their URLs, categories, and schedules.
+    Use this before choosing which URL to scrape."""
+    return httpx.get(f"{BASE}/api/v1/sources/").json()
+
+@tool
+def get_organizations(category: str = None) -> list:
+    """Browse the registry of tracked Zimbabwean institutional entities.
+    Returns names, slugs, categories, and latest change events."""
+    params = {"category": category} if category else {}
+    return httpx.get(f"{BASE}/api/v1/organizations/", params=params).json()</pre>
+
+            <h6 class="text-primary fw-bold mb-2"><i class="fas fa-bell me-2"></i>Webhook Subscriptions (Real-time Alerts)</h6>
+            <p class="text-muted small mb-2">Let the platform notify your agent when new data arrives instead of polling:</p>
+            <pre class="p-3 rounded mb-4" style="background:rgba(0,0,0,.35);border:1px solid var(--border);font-size:.82rem;color:#a5b4fc;overflow-x:auto;">import httpx
+
+# Subscribe your agent's callback URL
+httpx.post("http://localhost:8000/api/v1/webhook-targets/", json={
+    "name":         "My Agent Hook",
+    "url":          "https://my-agent.example.com/on-new-record",
+    "secret":       "my-hmac-secret",
+    "is_active":    True
+})
+
+# List active subscriptions
+subs = httpx.get("http://localhost:8000/api/v1/webhook-targets/").json()
+print(subs)</pre>
+
+            <h6 class="text-primary fw-bold mb-2"><i class="fas fa-route me-2"></i>Recommended Agent Workflow</h6>
+            <div class="row g-3">
+                {% for step in [
+                    ("1", "fas fa-play-circle", "accent", "Boot", "Call GET /api/v1/sources/ to discover which URLs are tracked and what categories exist."),
+                    ("2", "fas fa-spider", "cyan", "Crawl", "Trigger POST /api/v1/manual-scrape/ for each URL. Store job IDs."),
+                    ("3", "fas fa-table", "green", "Analyse", "Query GET /api/v1/records/ with category/market filters to get structured data."),
+                    ("4", "fas fa-bell", "amber", "React", "Subscribe via POST /api/v1/webhook-targets/ so you receive alerts on new scrapes.")
+                ] %}
+                <div class="col-md-3">
+                    <div class="p-3 rounded text-center" style="background:rgba(255,255,255,.03);border:1px solid var(--border);">
+                        <div style="font-size:1.5rem;margin-bottom:.5rem;color:var(--accent-glow);">{{ step[0] }}</div>
+                        <i class="{{ step[1] }} mb-2" style="color:var(--accent-glow);font-size:1.25rem;"></i>
+                        <div class="fw-bold mb-1">{{ step[3] }}</div>
+                        <div class="text-muted" style="font-size:.78rem;">{{ step[4] }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FULL REFERENCE ==================== -->
+    <div class="tab-pane fade" id="reference-content">
+
+        <!-- v1 APIs -->
+        <div class="glass-card p-0 mb-4 overflow-hidden">
+            <div class="p-4 border-bottom" style="border-color:var(--border)!important;">
+                <h5 class="mb-0"><span class="badge bg-info-subtle me-2">v1</span>Core Intelligence APIs</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width:80px;">Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Key Params</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/records/</code></td>
+                            <td>Fetch extracted intelligence records</td>
+                            <td><code class="text-muted">category, market, limit</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-success-subtle">POST</span></td>
+                            <td><code>/api/v1/manual-scrape/</code></td>
+                            <td>Trigger real-time extraction on a URL</td>
+                            <td><code class="text-muted">url, category, extractor_type</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/sources/</code></td>
+                            <td>List all configured sources</td>
+                            <td><code class="text-muted">category, market</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-success-subtle">POST</span></td>
+                            <td><code>/api/v1/sources/</code></td>
+                            <td>Register a new data source</td>
+                            <td><code class="text-muted">name, base_url, category</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/organizations/</code></td>
+                            <td>Browse tracked entities by sector</td>
+                            <td><code class="text-muted">category, search</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/organizations/{slug}/</code></td>
+                            <td>Get single org profile & change events</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/webhook-targets/</code></td>
+                            <td>List webhook subscriptions</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-success-subtle">POST</span></td>
+                            <td><code>/api/v1/webhook-targets/</code></td>
+                            <td>Subscribe to real-time record events</td>
+                            <td><code class="text-muted">url, name, secret</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-danger-subtle">DELETE</span></td>
+                            <td><code>/api/v1/webhook-targets/{id}/</code></td>
+                            <td>Remove a webhook subscription</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/delivery-attempts/</code></td>
+                            <td>Inspect webhook delivery logs</td>
+                            <td><code class="text-muted">target_id, success</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v1/health/</code></td>
+                            <td>Health check — liveness probe</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- v2 APIs -->
+        <div class="glass-card p-0 mb-4 overflow-hidden">
+            <div class="p-4 border-bottom" style="border-color:var(--border)!important;">
+                <h5 class="mb-0"><span class="badge bg-primary-subtle me-2">v2</span>Market Data APIs</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width:80px;">Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Key Params</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/api/v2/market-data/</code></td>
+                            <td>Live exchange rates & market telemetry</td>
+                            <td><code class="text-muted">currency, period</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Export -->
+        <div class="glass-card p-0 overflow-hidden">
+            <div class="p-4 border-bottom" style="border-color:var(--border)!important;">
+                <h5 class="mb-0"><span class="badge bg-warning-subtle me-2" style="background:rgba(245,158,11,.12)!important;color:#fbbf24!important;">Export</span>Data Export APIs</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width:80px;">Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Format</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/export/records</code></td>
+                            <td>Download all intelligence records</td>
+                            <td><span class="badge bg-success-subtle">.xlsx</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge bg-info-subtle">GET</span></td>
+                            <td><code>/export/api-docs</code></td>
+                            <td>Download this developer guide</td>
+                            <td><span class="badge bg-info-subtle">.md</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Bootstrap pill tabs initialization (Bootstrap 5 — no jQuery needed)
+document.querySelectorAll('[data-bs-toggle="pill"]').forEach(btn => {
+    btn.addEventListener('click', function () {
+        // Deactivate all
+        document.querySelectorAll('[data-bs-toggle="pill"]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => { p.classList.remove('show','active'); });
+        // Activate clicked
+        this.classList.add('active');
+        const target = document.querySelector(this.getAttribute('data-bs-target'));
+        if (target) { target.classList.add('show','active'); }
+    });
+});
+</script>
+
+{% endblock %}

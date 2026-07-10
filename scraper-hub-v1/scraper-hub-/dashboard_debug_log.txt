@@ -1,0 +1,23 @@
+Starting Dashboard Debug...
+Fetching counts...
+Sources: 231, Records: 8079
+Fetching markets...
+Markets raw: [('global', 1745), ('local', 6334)]
+Calling dashboard route...
+ERROR: debug_dashboard.<locals>.mock_render() takes 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "C:\Users\USER 2\Downloads\scraper-hub-v1\scraper-hub-\detailed_dashboard_debug.py", line 59, in debug_dashboard
+    await dashboard(request, db)
+  File "C:\Users\USER 2\Downloads\scraper-hub-v1\scraper-hub-\app\web\router.py", line 82, in dashboard
+    raise e
+  File "C:\Users\USER 2\Downloads\scraper-hub-v1\scraper-hub-\app\web\router.py", line 61, in dashboard
+    return templates.TemplateResponse(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        request,
+        ^^^^^^^^
+    ...<14 lines>...
+        }
+        ^
+    )
+    ^
+TypeError: debug_dashboard.<locals>.mock_render() takes 2 positional arguments but 3 were given

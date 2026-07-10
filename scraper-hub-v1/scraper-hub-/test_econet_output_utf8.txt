@@ -1,0 +1,220 @@
+﻿2026-05-11 09:28:40,434 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+python : INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+At line:1 char:1
++ python test_econet.py 2>&1 | Out-File -Encoding utf8 test_econet_outp ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INFO:sqlalchemy...EGIN (implicit):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-05-11 09:28:40,473 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+ LIMIT ? OFFSET ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+ LIMIT ? OFFSET ?
+2026-05-11 09:28:40,478 INFO sqlalchemy.engine.Engine [generated in 0.00089s] (43, 1, 0)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00089s] (43, 1, 0)
+INFO:app.scraping.org_pipeline:[Pipeline] Starting scrape for: Econet Wireless Zimbabwe
+INFO:httpx:HTTP Request: GET https://www.econet.co.zw "HTTP/1.1 200 OK"
+INFO:app.scraping.org_pipeline:[Pipeline] Website scraper got 5 fields for Econet Wireless Zimbabwe
+INFO:httpx:HTTP Request: GET https://www.econet.co.zw "HTTP/1.1 200 OK"
+WARNING:app.scraping.org_pipeline:[Pipeline] Google Maps scraper failed for Econet Wireless Zimbabwe: No module named 
+'app.scraping.fetcher'
+INFO:app.scraping.org_scrapers.social_scraper:[SocialScraper] Checking 4 social profiles
+INFO:httpx:HTTP Request: GET https://facebook.com/econetzimbabwe/ "HTTP/1.1 301 Moved Permanently"
+INFO:httpx:HTTP Request: GET https://www.facebook.com/econetzimbabwe/ "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://x.com/econetzimbabwe "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://instagram.com/econetzimbabwe/?hl=en "HTTP/1.1 301 Moved Permanently"
+INFO:httpx:HTTP Request: GET https://www.instagram.com/econetzimbabwe/?hl=en "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://youtube.com/channel/UCrMWdAO1TzGqj03tlL0S4JA "HTTP/1.1 301 Moved Permanently"
+INFO:httpx:HTTP Request: GET https://www.youtube.com/channel/UCrMWdAO1TzGqj03tlL0S4JA "HTTP/1.1 200 OK"
+--- Starting Scrape for Econet Wireless Zimbabwe ---
+2026-05-11 09:28:57,705 INFO sqlalchemy.engine.Engine COMMIT
+INFO:sqlalchemy.engine.Engine:COMMIT
+2026-05-11 09:28:57,715 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+2026-05-11 09:28:57,720 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+2026-05-11 09:28:57,720 INFO sqlalchemy.engine.Engine [generated in 0.00037s] (43,)
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00037s] (43,)
+ERROR:app.scraping.org_pipeline:[Pipeline] AI enrichment failed for Econet Wireless Zimbabwe: No module named 'google'
+2026-05-11 09:28:57,732 INFO sqlalchemy.engine.Engine UPDATE organizations SET last_scraped_at=?, updated_at=CURRENT_TIMESTAMP WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:UPDATE organizations SET last_scraped_at=?, updated_at=CURRENT_TIMESTAMP WHERE 
+organizations.id = ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00026s] ('2026-05-11 07:28:57.724100', 43)
+2026-05-11 09:28:57,732 INFO sqlalchemy.engine.Engine [generated in 0.00026s] ('2026-05-11 07:28:57.724100', 43)
+2026-05-11 09:28:57,736 INFO sqlalchemy.engine.Engine COMMIT
+INFO:sqlalchemy.engine.Engine:COMMIT
+2026-05-11 09:28:57,741 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+2026-05-11 09:28:57,743 INFO sqlalchemy.engine.Engine SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS organizations_social_links, organizations.registration_status AS organizations_registration_status, organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id AS organizations_id, organizations.name AS organizations_name, 
+organizations.slug AS organizations_slug, organizations.category AS organizations_category, organizations.description 
+AS organizations_description, organizations.logo_url AS organizations_logo_url, organizations.website AS 
+organizations_website, organizations.emails AS organizations_emails, organizations.phone_numbers AS 
+organizations_phone_numbers, organizations.whatsapp_numbers AS organizations_whatsapp_numbers, 
+organizations.physical_addresses AS organizations_physical_addresses, organizations.gps_lat AS organizations_gps_lat, 
+organizations.gps_lng AS organizations_gps_lng, organizations.branches AS organizations_branches, 
+organizations.operating_hours AS organizations_operating_hours, organizations.social_links AS 
+organizations_social_links, organizations.registration_status AS organizations_registration_status, 
+organizations.registration_number AS organizations_registration_number, organizations.industry_tags AS 
+organizations_industry_tags, organizations.keywords AS organizations_keywords, organizations.executive_leadership AS 
+organizations_executive_leadership, organizations.founders AS organizations_founders, organizations.ceo AS 
+organizations_ceo, organizations.board_members AS organizations_board_members, organizations.employee_size AS 
+organizations_employee_size, organizations.revenue_estimate AS organizations_revenue_estimate, 
+organizations.partnerships AS organizations_partnerships, organizations.competitors AS organizations_competitors, 
+organizations.services_offered AS organizations_services_offered, organizations.products AS organizations_products, 
+organizations.pricing_notes AS organizations_pricing_notes, organizations.customer_reviews AS 
+organizations_customer_reviews, organizations.rating_avg AS organizations_rating_avg, organizations.review_count AS 
+organizations_review_count, organizations.sentiment_score AS organizations_sentiment_score, organizations.seo_metadata 
+AS organizations_seo_metadata, organizations.tech_stack AS organizations_tech_stack, organizations.hosting_provider AS 
+organizations_hosting_provider, organizations.analytics_tools AS organizations_analytics_tools, 
+organizations.mobile_apps AS organizations_mobile_apps, organizations.api_endpoints AS organizations_api_endpoints, 
+organizations.traffic_estimate AS organizations_traffic_estimate, organizations.digital_presence_score AS 
+organizations_digital_presence_score, organizations.ai_summary AS organizations_ai_summary, organizations.ai_profile 
+AS organizations_ai_profile, organizations.sector_classification AS organizations_sector_classification, 
+organizations.risk_score AS organizations_risk_score, organizations.market_influence_score AS 
+organizations_market_influence_score, organizations.innovation_score AS organizations_innovation_score, 
+organizations.reputation_score AS organizations_reputation_score, organizations.last_scraped_at AS 
+organizations_last_scraped_at, organizations.last_changed_at AS organizations_last_changed_at, 
+organizations.scrape_status AS organizations_scrape_status, organizations.scrape_error AS organizations_scrape_error, 
+organizations.data_completeness AS organizations_data_completeness, organizations.created_at AS 
+organizations_created_at, organizations.updated_at AS organizations_updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+2026-05-11 09:28:57,743 INFO sqlalchemy.engine.Engine [cached since 0.02307s ago] (43,)
+INFO:sqlalchemy.engine.Engine:[cached since 0.02307s ago] (43,)
+INFO:app.scraping.org_pipeline:[Pipeline] Done for Econet Wireless Zimbabwe. Completeness: 27%
+2026-05-11 09:28:57,746 INFO sqlalchemy.engine.Engine SELECT organizations.id, organizations.name, organizations.slug, organizations.category, organizations.description, organizations.logo_url, organizations.website, organizations.emails, organizations.phone_numbers, organizations.whatsapp_numbers, organizations.physical_addresses, organizations.gps_lat, organizations.gps_lng, organizations.branches, organizations.operating_hours, organizations.social_links, organizations.registration_status, organizations.registration_number, organizations.industry_tags, organizations.keywords, organizations.executive_leadership, organizations.founders, organizations.ceo, organizations.board_members, organizations.employee_size, organizations.revenue_estimate, organizations.partnerships, organizations.competitors, organizations.services_offered, organizations.products, organizations.pricing_notes, organizations.customer_reviews, organizations.rating_avg, organizations.review_count, organizations.sentiment_score, organizations.seo_metadata, organizations.tech_stack, organizations.hosting_provider, organizations.analytics_tools, organizations.mobile_apps, organizations.api_endpoints, organizations.traffic_estimate, organizations.digital_presence_score, organizations.ai_summary, organizations.ai_profile, organizations.sector_classification, organizations.risk_score, organizations.market_influence_score, organizations.innovation_score, organizations.reputation_score, organizations.last_scraped_at, organizations.last_changed_at, organizations.scrape_status, organizations.scrape_error, organizations.data_completeness, organizations.created_at, organizations.updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+INFO:sqlalchemy.engine.Engine:SELECT organizations.id, organizations.name, organizations.slug, organizations.category, 
+organizations.description, organizations.logo_url, organizations.website, organizations.emails, 
+organizations.phone_numbers, organizations.whatsapp_numbers, organizations.physical_addresses, organizations.gps_lat, 
+organizations.gps_lng, organizations.branches, organizations.operating_hours, organizations.social_links, 
+organizations.registration_status, organizations.registration_number, organizations.industry_tags, 
+organizations.keywords, organizations.executive_leadership, organizations.founders, organizations.ceo, 
+organizations.board_members, organizations.employee_size, organizations.revenue_estimate, organizations.partnerships, 
+organizations.competitors, organizations.services_offered, organizations.products, organizations.pricing_notes, 
+organizations.customer_reviews, organizations.rating_avg, organizations.review_count, organizations.sentiment_score, 
+organizations.seo_metadata, organizations.tech_stack, organizations.hosting_provider, organizations.analytics_tools, 
+organizations.mobile_apps, organizations.api_endpoints, organizations.traffic_estimate, 
+organizations.digital_presence_score, organizations.ai_summary, organizations.ai_profile, 
+organizations.sector_classification, organizations.risk_score, organizations.market_influence_score, 
+organizations.innovation_score, organizations.reputation_score, organizations.last_scraped_at, 
+organizations.last_changed_at, organizations.scrape_status, organizations.scrape_error, 
+organizations.data_completeness, organizations.created_at, organizations.updated_at 
+FROM organizations 
+WHERE organizations.id = ?
+2026-05-11 09:28:57,746 INFO sqlalchemy.engine.Engine [generated in 0.00029s] (43,)
+
+--- Scrape Results ---
+AI Summary: None
+Risk Score: None
+Reputation Score: None
+Data Completeness: 26.7%
+2026-05-11 09:28:57,749 INFO sqlalchemy.engine.Engine SELECT products.id AS products_id, products.source_id AS products_source_id, products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS products_description, products.images AS products_images, products.specifications AS products_specifications, products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS products_updated_at 
+FROM products 
+WHERE products.organization_id = ?
+2026-05-11 09:28:57,749 INFO sqlalchemy.engine.Engine [generated in 0.00025s] (43,)
+2026-05-11 09:28:57,753 INFO sqlalchemy.engine.Engine SELECT services.id AS services_id, services.source_id AS services_source_id, services.organization_id AS services_organization_id, services.name AS services_name, services.category AS services_category, services.description AS services_description, services.features AS services_features, services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ?
+2026-05-11 09:28:57,753 INFO sqlalchemy.engine.Engine [generated in 0.00036s] (43,)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00029s] (43,)
+INFO:sqlalchemy.engine.Engine:SELECT products.id AS products_id, products.source_id AS products_source_id, 
+products.organization_id AS products_organization_id, products.name AS products_name, products.brand AS 
+products_brand, products.category AS products_category, products.sku AS products_sku, products.description AS 
+products_description, products.images AS products_images, products.specifications AS products_specifications, 
+products.tags AS products_tags, products.captured_at AS products_captured_at, products.updated_at AS 
+products_updated_at 
+FROM products 
+WHERE products.organization_id = ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00025s] (43,)
+INFO:sqlalchemy.engine.Engine:SELECT services.id AS services_id, services.source_id AS services_source_id, 
+services.organization_id AS services_organization_id, services.name AS services_name, services.category AS 
+services_category, services.description AS services_description, services.features AS services_features, 
+services.requirements AS services_requirements, services.eligibility AS services_eligibility, services.duration AS 
+services_duration, services.captured_at AS services_captured_at, services.updated_at AS services_updated_at 
+FROM services 
+WHERE services.organization_id = ?
+INFO:sqlalchemy.engine.Engine:[generated in 0.00036s] (43,)
+
+Extracted Products (2):
+- 5G data bundles (Mobile Data)
+- Smart USD bundles (Mobile Data)
+
+Extracted Services (1):
+- Fiber Internet (Broadband)
+2026-05-11 09:28:57,754 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:sqlalchemy.engine.Engine:ROLLBACK

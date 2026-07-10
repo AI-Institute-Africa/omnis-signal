@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Manual Scrape - Scraper Hub Intelligence{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col-md-8">
+        <h1 class="display-5 mb-1">Manual <span class="text-gradient">Scrape</span></h1>
+        <p class="text-muted">Instantly trigger data extraction for any institutional URL.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="glass-card p-4">
+            <h5 class="mb-4 d-flex align-items-center">
+                <i class="fas fa-satellite-dish text-info me-3"></i>Configuration
+            </h5>
+            <form hx-post="/api/v1/manual-scrape/" hx-target="#result" hx-indicator="#loading">
+                <div class="mb-4">
+                    <label class="form-label text-muted small fw-bold">TARGET URL</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-secondary text-muted"><i class="fas fa-link"></i></span>
+                        <input type="url" name="url" class="form-control bg-transparent border-secondary text-white" placeholder="https://www.econet.co.zw/plans" required>
+                    </div>
+                </div>
+                
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label text-muted small fw-bold">SECTOR CATEGORY</label>
+                        <select name="category" class="form-select bg-transparent border-secondary text-white">
+                            <option value="telecoms">Telecoms</option>
+                            <option value="banking" selected>Banking</option>
+                            <option value="insurance">Insurance</option>
+                            <option value="universities">Education</option>
+                            <option value="transport">Transport</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-muted small fw-bold">EXTRACTOR TYPE</label>
+                        <select name="extractor_type" class="form-select bg-transparent border-secondary text-white">
+                            <option value="auto">Auto-Detect</option>
+                            <option value="generic">AI Structured (Gemini)</option>
+                            <option value="telecom">Telecom Heuristic</option>
+                            <option value="banking">Banking Heuristic</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="store_result" checked>
+                        <label class="form-check-label text-muted small">Persist extracted records to database</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-3 mt-2">
+                    <i class="fas fa-play-circle me-2"></i>Execute Intelligence Extraction
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="col-lg-7">
+        <div id="loading" class="htmx-indicator glass-card p-5 text-center mb-4 border-info">
+            <div class="spinner-border text-info mb-3" style="width: 3rem; height: 3rem;"></div>
+            <h5 class="text-gradient">Scanning Target Page...</h5>
+            <p class="text-muted small">Gemini is analyzing structure and extracting pricing metrics.</p>
+        </div>
+        
+        <div id="result" class="glass-card h-100">
+            <div class="d-flex flex-column align-items-center justify-content-center py-5 h-100 opacity-50">
+                <i class="fas fa-terminal fa-3x mb-3 text-muted"></i>
+                <p class="fw-medium">Execution Output Pipeline</p>
+                <p class="text-muted small px-5 text-center">Results will be streamed here after the scraper completes its run.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus, .form-select:focus {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: var(--accent-primary);
+        color: white;
+        box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.1);
+    }
+    .form-select option { background-color: var(--bg-deep); }
+    .htmx-indicator { display: none; }
+    .htmx-request .htmx-indicator { display: block; }
+    .htmx-request #result { display: none; }
+</style>
+{% endblock %}

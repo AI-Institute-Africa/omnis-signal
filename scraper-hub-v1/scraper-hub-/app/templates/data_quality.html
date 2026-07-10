@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Data Quality Audit{% endblock %}
+
+{% block content %}
+<div class="row mb-5 align-items-center">
+    <div class="col-md-8">
+        <h1 class="display-5 mb-1">Data Quality Audit</h1>
+        <p class="text-muted">Track verified, partial, and dirty extraction coverage across categories.</p>
+    </div>
+    <div class="col-md-4 text-md-end">
+        <a href="/dashboard" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Total Extracted Records</h5>
+            <div class="display-6 fw-bold">{{ total_count }}</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Verified Records</h5>
+            <div class="display-6 fw-bold text-success">{{ good_count }}</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Partial / Dirty Records</h5>
+            <div class="display-6 fw-bold text-warning">{{ partial_count }} / {{ poor_count }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Category Coverage</h5>
+            <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th class="text-end">Data Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category, count in category_counts %}
+                        <tr>
+                            <td>{{ category or 'Unknown' }}</td>
+                            <td class="text-end">{{ count }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% if not category_counts %}
+                        <tr>
+                            <td colspan="2" class="text-center text-muted">No extracted records found.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card shadow-sm p-4 mb-4">
+            <h5 class="mb-3">Missing Categories</h5>
+            {% if missing_categories %}
+            <ul class="list-group list-group-flush">
+                {% for category in missing_categories %}
+                <li class="list-group-item">{{ category }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-success mb-0">All source categories currently have extracted records.</p>
+            {% endif %}
+        </div>
+        <div class="card shadow-sm p-4">
+            <h5 class="mb-3">Expected Taxonomy</h5>
+            <div class="small text-muted">Targets for structured extraction and normalized comparison.</div>
+            <div class="mt-3 d-flex flex-wrap gap-2">
+                {% for category in expected_categories %}
+                <span class="badge bg-secondary bg-opacity-10 text-dark">{{ category }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm p-4">
+    <h5 class="mb-3">Audit Recommendations</h5>
+    <ul>
+        <li>Only surface records with verified prices and confidence scores above 75% for comparison charts.</li>
+        <li>Map frontend tabs to backend category slugs and clean missing categories with empty-state messaging.</li>
+        <li>Use the realtime scrape endpoint to refresh coverage for all active sources.</li>
+    </ul>
+</div>
+{% endblock %}

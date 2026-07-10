@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Market Intelligence Matrix - Scraper Hub{% endblock %}
+
+{% block content %}
+<div class="row mb-5 align-items-center">
+    <div class="col-md-8">
+        <h1 class="display-5 mb-1">{{ page_title or 'Market Intelligence Matrix' }}</h1>
+        <p class="text-muted">{{ page_subtitle or 'Structured comparison of services, pricing, and features across time periods.' }}</p>
+    </div>
+    <div class="col-md-4 text-md-end">
+        <div class="btn-group">
+            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-filter me-2"></i>Filter</button>
+            <a href="/export/records" class="btn btn-outline-info btn-sm"><i class="fas fa-download me-2"></i>Export</a>
+        </div>
+    </div>
+</div>
+
+{% set grouped = records | groupby('category') %}
+
+{% for category, category_items in grouped %}
+<div class="mb-4">
+    <h4 class="mb-3 text-uppercase fw-bold text-gradient">{{ category }}</h4>
+    
+    {% set subcategory_grouped = category_items | groupby('subcategory') %}
+    
+    {% for subcategory, subcategory_items in subcategory_grouped %}
+    <div class="glass-card overflow-auto mb-3">
+        <div class="p-3 border-bottom bg-light">
+            <h6 class="mb-0">{{ subcategory or 'General' }}</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-sm mb-0 matrix-table">
+                <thead>
+                    <tr class="bg-light">
+                        <th class="ps-3" style="min-width: 200px;">
+                            <strong>Service / Product</strong>
+                        </th>
+                        <th style="min-width: 120px;">
+                            <small>Provider</small>
+                        </th>
+                        <th style="min-width: 130px;">
+                            <small>Unit / Type</small>
+                        </th>
+                        <th style="min-width: 130px;">
+                            <small>Billing Period</small>
+                        </th>
+                        <th class="text-end pe-3" style="min-width: 150px;">
+                            <small>Price</small>
+                        </th>
+                        <th style="min-width: 100px; text-align: center;">
+                            <small>Confidence</small>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in subcategory_items %}
+                    <tr class="align-middle">
+                        <td class="ps-3">
+                            <div class="fw-semibold">{{ item.title or 'Untitled' }}</div>
+                            {% if item.description %}
+                            <div class="small text-muted text-truncate">{{ item.description | truncate(60) }}</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="small fw-medium">{{ item.entity_name or '-' }}</span>
+                        </td>
+                        <td>
+                            {% if item.unit_value and item.unit_type %}
+                            <span class="badge bg-info text-white">{{ item.unit_value }}{{ item.unit_type }}</span>
+                            {% elif item.description %}
+                            <span class="badge bg-secondary text-white small" style="max-width: 120px; overflow: hidden; text-overflow: ellipsis; display: inline-block;">{{ item.description | truncate(40) }}</span>
+                            {% else %}
+                            <span class="text-muted small">-</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.billing_period %}
+                            <span class="badge bg-secondary text-white">{{ item.billing_period }}</span>
+                            {% else %}
+                            <span class="text-muted small">Not specified</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end pe-3">
+                            {% if item.price_value %}
+                            <div class="fw-bold text-gradient h6 mb-0">{{ item.price_currency or 'USD' }} {{ "{:,.2f}".format(item.price_value) }}</div>
+                            {% else %}
+                            <span class="text-muted small">N/A</span>
+                            {% endif %}
+                        </td>
+                        <td style="text-align: center;">
+                            {% if item.confidence_score %}
+                            <span class="badge bg-secondary text-white">{{ (item.confidence_score * 100)|round(0)|int }}%</span>
+                            {% else %}
+                            <span class="text-muted small">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<style>
+    .matrix-table {
+        font-size: 0.9rem;
+    }
+    .matrix-table thead th {
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .matrix-table thead th:first-child,
+    .matrix-table tbody td:first-child {
+        text-align: left;
+    }
+    .matrix-table tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.5rem;
+    }
+</style>
+{% endblock %}

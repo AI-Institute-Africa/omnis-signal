@@ -1,0 +1,169 @@
+version: '3.8'
+
+services:
+  # Shared PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: production_postgres
+    environment:
+      POSTGRES_USER: production_user
+      POSTGRES_PASSWORD: secure_database_password
+      POSTGRES_DB: scraper_hub
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U production_user -d scraper_hub"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - prod_network
+    restart: always
+
+  # Shared Redis Broker
+  redis:
+    image: redis:7-alpine
+    container_name: production_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - prod_network
+    restart: always
+
+  # Qdrant Vector DB for AI Research RAG Search
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: production_qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - prod_network
+    restart: always
+
+  # -------------------------------------------------------------
+  # SCRAPER HUB SERVICE GROUP (Port 8000)
+  # -------------------------------------------------------------
+  scraper_hub_web:
+    build:
+      context: ./scraper-hub-v1/scraper-hub-
+      dockerfile: Dockerfile
+    container_name: scraper_hub_web
+    environment:
+      DATABASE_URL: postgresql://production_user:secure_database_password@postgres:5432/scraper_hub
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - prod_network
+    restart: always
+
+  scraper_hub_worker:
+    build:
+      context: ./scraper-hub-v1/scraper-hub-
+      dockerfile: Dockerfile
+    container_name: scraper_hub_worker
+    environment:
+      DATABASE_URL: postgresql://production_user:secure_database_password@postgres:5432/scraper_hub
+      REDIS_URL: redis://redis:6379/0
+    command: sh -c "rq worker default"
+    depends_on:
+      - scraper_hub_web
+    networks:
+      - prod_network
+    restart: always
+
+  # -------------------------------------------------------------
+  # AI RESEARCH INTELLIGENCE SERVICE GROUP (Port 8002)
+  # -------------------------------------------------------------
+  ai_research_web:
+    build:
+      context: ./ai_research_intelligence
+      dockerfile: Dockerfile
+    container_name: ai_research_web
+    environment:
+      DATABASE_URL: postgresql://production_user:secure_database_password@postgres:5432/ai_research_intelligence
+      REDIS_URL: redis://redis:6379/1
+      CELERY_BROKER_URL: redis://redis:6379/2
+      CELERY_RESULT_BACKEND: redis://redis:6379/3
+      QDRANT_URL: http://qdrant:6333
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ports:
+      - "8002:8002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    networks:
+      - prod_network
+    restart: always
+
+  ai_research_worker:
+    build:
+      context: ./ai_research_intelligence
+      dockerfile: Dockerfile.worker
+    container_name: ai_research_worker
+    environment:
+      DATABASE_URL: postgresql://production_user:secure_database_password@postgres:5432/ai_research_intelligence
+      REDIS_URL: redis://redis:6379/1
+      CELERY_BROKER_URL: redis://redis:6379/2
+      CELERY_RESULT_BACKEND: redis://redis:6379/3
+      QDRANT_URL: http://qdrant:6333
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    command: celery -A app.workers.celery_app worker -l info -c 4
+    depends_on:
+      - ai_research_web
+    networks:
+      - prod_network
+    restart: always
+
+  ai_research_beat:
+    build:
+      context: ./ai_research_intelligence
+      dockerfile: Dockerfile.beat
+    container_name: ai_research_beat
+    environment:
+      DATABASE_URL: postgresql://production_user:secure_database_password@postgres:5432/ai_research_intelligence
+      REDIS_URL: redis://redis:6379/1
+      CELERY_BROKER_URL: redis://redis:6379/2
+      CELERY_RESULT_BACKEND: redis://redis:6379/3
+      QDRANT_URL: http://qdrant:6333
+    command: celery -A app.workers.celery_app beat -l info
+    depends_on:
+      - ai_research_web
+    networks:
+      - prod_network
+    restart: always
+
+volumes:
+  pg_data:
+  redis_data:
+  qdrant_data:
+
+networks:
+  prod_network:
+    driver: bridge
