@@ -48,5 +48,7 @@ async def shutdown_event():
         print(f"Warning: Scheduler failed to stop: {e}")
 
 @app.get("/health")
+@app.get("/api/health")
+@app.get("/api/v1/health")
 async def health_check():
     return {"status": "healthy"}

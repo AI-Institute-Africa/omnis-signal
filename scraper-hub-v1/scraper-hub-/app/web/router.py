@@ -17,6 +17,12 @@ import io
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
+@router.get("/export/send-12h-report")
+async def trigger_12h_report():
+    from app.services.email_reporter import EmailReporterService
+    res = EmailReporterService.send_digest_email()
+    return res
+
 @router.get("/")
 async def dashboard(request: Request, db: Session = Depends(get_db)):
     try:

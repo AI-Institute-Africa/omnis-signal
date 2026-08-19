@@ -19,9 +19,9 @@ class IntelligenceService:
         """Perform AI-driven extraction and intelligence analysis on a snapshot."""
         logger.info(f"Running AI Intelligence Engine for snapshot {snapshot.id}")
         
-        # 2. Use Gemini to extract structured products/services
+        # 2. Use LLM Engine (DeepSeek, Qwen, OpenRouter, Groq, Gemini, Ollama)
         content = snapshot.content[:20000] 
-        extraction: ExtractionResponse = extractor._extract_with_gemini(content)
+        extraction: ExtractionResponse = extractor._extract_with_llm(content)
         
         # 3. Process Products
         for p_schema in extraction.products:

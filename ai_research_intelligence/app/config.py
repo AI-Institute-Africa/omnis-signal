@@ -35,6 +35,10 @@ class Settings(BaseSettings):
     SMTP_FROM_EMAIL: str = "noreply@airesearchintel.com"
     EMAIL_ENABLED: bool = False
     
+    # Gemini API
+    GEMINI_API_KEY: str = "AIzaSyANqI_aWF854Wu-IDlk7dhtb6_7Dd74S_s"
+    GEMINI_MODEL: str = "gemini-1.5-flash"
+    
     # OpenAI API
     OPENAI_API_KEY: str = ""
     OPENAI_MODEL: str = "gpt-4-turbo-preview"
@@ -42,9 +46,9 @@ class Settings(BaseSettings):
     # Anthropic API
     ANTHROPIC_API_KEY: str = ""
     ANTHROPIC_MODEL: str = "claude-3-opus-20240229"
-    
+
     # LLM Configuration
-    DEFAULT_LLM_PROVIDER: str = "openai"  # openai | anthropic | litellm
+    DEFAULT_LLM_PROVIDER: str = "gemini"  # gemini | openai | anthropic | litellm
     
     # Qdrant Vector Database
     QDRANT_URL: str = "http://localhost:6333"
@@ -84,6 +88,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+        extra = "ignore"
 
 
 @lru_cache()

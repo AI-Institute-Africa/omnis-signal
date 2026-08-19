@@ -74,11 +74,15 @@ app.include_router(sources_api.router)
 app.include_router(agents_api.router)
 
 
+
+
 # ============================================================================
 # HEALTH CHECKS
 # ============================================================================
 
 @app.get("/health")
+@app.get("/api/health")
+@app.get("/api/v1/health")
 async def health_check():
     """Health check endpoint."""
     return {

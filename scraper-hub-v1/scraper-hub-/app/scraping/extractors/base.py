@@ -465,73 +465,141 @@ class BaseExtractor(ABC):
                 if record: records.append(record)
         return records
 
-    def _extract_with_gemini(self, text: str) -> ExtractionResponse:
-        """Call Gemini for highly accurate structured data extraction."""
+    def _parse_json_response(self, raw_text: str) -> ExtractionResponse:
+        """Helper to safely parse JSON from LLM response text."""
         try:
-            import google.generativeai as genai
-        except ImportError:
-            print("Warning: google-generativeai not installed. Skipping AI extraction.")
-            return ExtractionResponse()
-
-        if not settings.GEMINI_API_KEY or settings.GEMINI_API_KEY == "your-api-key-here":
-            print("Warning: GEMINI_API_KEY not configured. Skipping AI extraction.")
-            return ExtractionResponse()
-
-        try:
-            genai.configure(api_key=settings.GEMINI_API_KEY)
-            model = genai.GenerativeModel('gemini-flash-latest')
-            
-            from app.scraping.taxonomy import TAXONOMY
-            
-            logger.info(f"Sending text to Gemini (len={len(text)}): {text[:500]}...")
-            prompt = f"""
-            You are an expert market intelligence analyst focusing on the Zimbabwean market.
-            Extract all products, services, and pricing information from the following text.
-            
-            STRUCTURE AND TAXONOMY:
-            Use the following categories and subcategories for classification. For each product/service, 
-            determine the correct normalization unit and formula based on this table:
-            {json.dumps(TAXONOMY, indent=2)}
-            
-            Text to analyze:
-            {text[:15000]}
-            
-            Return the data as a JSON object matching this schema:
-            {ExtractionResponse.model_json_schema()}
-            
-            CRITICAL INSTRUCTIONS:
-            1. Categorize each item into one of the main categories: {", ".join(TAXONOMY.keys())}.
-            2. Map it to the most specific subcategory from the taxonomy above.
-            3. Populate the 'price' object with:
-               - 'normalized_value': The price converted to the standard unit (e.g., price per GB).
-               - 'normalized_unit': The standard unit from the taxonomy.
-               - 'formula': The calculation used (e.g., 'price / 10' for a 10GB bundle).
-               - Set the appropriate billing cycle flags (e.g., 'daily': true, 'monthly': true) based on the plan duration.
-            4. Focus on physical products and service plans/bundles.
-            
-            Only return valid JSON.
-            """
-            
-            response = model.generate_content(prompt)
-            logger.info(f"Gemini Raw Response: {response.text[:500]}...")
-            
-            # Use a more robust parsing
-            text = response.text
+            text = raw_text.strip()
             if "```json" in text:
                 text = text.split("```json")[1].split("```")[0]
             elif "```" in text:
                 text = text.split("```")[1].split("```")[0]
-            
             data = json.loads(text.strip())
             extraction = ExtractionResponse(**data)
-            logger.info(f"Gemini parsed {len(extraction.products)} products and {len(extraction.services)} services.")
+            logger.info(f"LLM parsed {len(extraction.products)} products and {len(extraction.services)} services.")
             return extraction
         except Exception as e:
-            print(f"Error during Gemini extraction: {e}")
+            logger.error(f"Failed to parse LLM JSON extraction: {e}")
             return ExtractionResponse()
 
+    def _extract_with_llm(self, text: str) -> ExtractionResponse:
+        """Call DeepSeek, Qwen, OpenRouter, Groq, Gemini, or Ollama for real price extraction."""
+        import requests
+        from app.scraping.taxonomy import TAXONOMY
+
+        prompt = f"""
+        You are an expert market intelligence analyst focusing on real price extraction.
+        Extract all products, services, and exact pricing details from the text below.
+
+        STRUCTURE AND TAXONOMY:
+        Categories and subcategories for classification:
+        {json.dumps(TAXONOMY, indent=2)}
+
+        Text to analyze:
+        {text[:15000]}
+
+        Return JSON matching this schema:
+        {ExtractionResponse.model_json_schema()}
+
+        CRITICAL INSTRUCTIONS:
+        1. Categorize each item into one of the main categories: {", ".join(TAXONOMY.keys())}.
+        2. Map to the most specific subcategory from taxonomy.
+        3. Populate the 'price' object with:
+           - 'amount': exact numeric price value (e.g. 50.0)
+           - 'currency': currency code (e.g. 'USD', 'ZWG', 'ZAR')
+           - 'normalized_value': price per standard unit (e.g. per GB).
+           - 'normalized_unit': standard unit label.
+           - 'formula': calculation description.
+        4. Focus on items with real prices.
+
+        Only return valid JSON.
+        """
+
+        provider = getattr(settings, "LLM_PROVIDER", "auto").lower()
+
+        # 1. DeepSeek API / DeepSeek R1
+        deepseek_key = getattr(settings, "DEEPSEEK_API_KEY", None)
+        if (provider in ["deepseek", "auto"]) and deepseek_key:
+            try:
+                headers = {"Authorization": f"Bearer {deepseek_key}", "Content-Type": "application/json"}
+                payload = {
+                    "model": getattr(settings, "DEEPSEEK_MODEL", "deepseek-chat"),
+                    "messages": [{"role": "user", "content": prompt}],
+                    "response_format": {"type": "json_object"}
+                }
+                res = requests.post("https://api.deepseek.com/v1/chat/completions", json=payload, headers=headers, timeout=30)
+                if res.status_code == 200:
+                    content = res.json()["choices"][0]["message"]["content"]
+                    return self._parse_json_response(content)
+            except Exception as e:
+                logger.warning(f"DeepSeek API extraction failed: {e}")
+
+        # 2. OpenRouter (Free Tier DeepSeek R1 free / Qwen 2.5 free)
+        openrouter_key = getattr(settings, "OPENROUTER_API_KEY", None)
+        if (provider in ["openrouter", "auto"]) and openrouter_key:
+            try:
+                headers = {"Authorization": f"Bearer {openrouter_key}", "Content-Type": "application/json"}
+                payload = {
+                    "model": getattr(settings, "OPENROUTER_MODEL", "deepseek/deepseek-r1:free"),
+                    "messages": [{"role": "user", "content": prompt}]
+                }
+                res = requests.post("https://openrouter.ai/api/v1/chat/completions", json=payload, headers=headers, timeout=30)
+                if res.status_code == 200:
+                    content = res.json()["choices"][0]["message"]["content"]
+                    return self._parse_json_response(content)
+            except Exception as e:
+                logger.warning(f"OpenRouter extraction failed: {e}")
+
+        # 3. Groq (Free fast inference for Qwen 2.5 / Llama 3.3)
+        groq_key = getattr(settings, "GROQ_API_KEY", None)
+        if (provider in ["groq", "qwen", "auto"]) and groq_key:
+            try:
+                headers = {"Authorization": f"Bearer {groq_key}", "Content-Type": "application/json"}
+                payload = {
+                    "model": getattr(settings, "GROQ_MODEL", "qwen-2.5-32b"),
+                    "messages": [{"role": "user", "content": prompt}],
+                    "response_format": {"type": "json_object"}
+                }
+                res = requests.post("https://api.groq.com/openai/v1/chat/completions", json=payload, headers=headers, timeout=30)
+                if res.status_code == 200:
+                    content = res.json()["choices"][0]["message"]["content"]
+                    return self._parse_json_response(content)
+            except Exception as e:
+                logger.warning(f"Groq Qwen extraction failed: {e}")
+
+        # 4. Ollama (Local free DeepSeek / Qwen models)
+        if provider in ["ollama", "local", "auto"]:
+            try:
+                url = f"{getattr(settings, 'OLLAMA_BASE_URL', 'http://localhost:11434')}/v1/chat/completions"
+                payload = {
+                    "model": getattr(settings, "OLLAMA_MODEL", "qwen2.5:7b"),
+                    "messages": [{"role": "user", "content": prompt}]
+                }
+                res = requests.post(url, json=payload, timeout=10)
+                if res.status_code == 200:
+                    content = res.json()["choices"][0]["message"]["content"]
+                    return self._parse_json_response(content)
+            except Exception:
+                pass
+
+        # 5. Gemini Fallback
+        return self._extract_with_gemini(text)
+
+    def _extract_with_gemini(self, text: str) -> ExtractionResponse:
+        """Gemini structured data extraction fallback."""
+        try:
+            import google.generativeai as genai
+            if settings.GEMINI_API_KEY and settings.GEMINI_API_KEY != "your-api-key-here":
+                genai.configure(api_key=settings.GEMINI_API_KEY)
+                model = genai.GenerativeModel('gemini-flash-latest')
+                from app.scraping.taxonomy import TAXONOMY
+                prompt = f"Extract products, services, and prices from:\n{text[:15000]}\nReturn JSON for schema: {ExtractionResponse.model_json_schema()}"
+                response = model.generate_content(prompt)
+                return self._parse_json_response(response.text)
+        except Exception as e:
+            logger.warning(f"Gemini fallback extraction skipped: {e}")
+        return ExtractionResponse()
+
     def _extract_with_llm_fallback(self, text: str, schema_class=None) -> dict:
-        """Deprecated: Use _extract_with_gemini instead."""
-        res = self._extract_with_gemini(text)
+        res = self._extract_with_llm(text)
         return res.model_dump()
 
