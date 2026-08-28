@@ -27,6 +27,8 @@ from app.services.education_service import education_service
 from app.scraping.education_scraper import run_education_scraper
 from app.services.food_service import food_service
 from app.scraping.food_scraper import run_food_scraper
+from app.services.hotels_service import hotels_service
+from app.scraping.hotels_scraper import run_hotels_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -474,3 +476,61 @@ def ingest_food_menu_item(payload: FoodMenuIngestRequest, db: Session = Depends(
 def trigger_food_scraper(db: Session = Depends(get_db)):
     """Executes the automated Food & Drink restaurant menu scraper."""
     return run_food_scraper(db)
+
+
+# ========================================================================
+# 9. HOTELS SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class HotelRoomIngestRequest(BaseModel):
+    hotel_name: str
+    room_name: str
+    price_per_night: float
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+    images: Optional[List[str]] = []
+
+
+@router.get("/hotels/category", summary="Get Hotels category and schema")
+def get_hotels_category(db: Session = Depends(get_db)):
+    """Returns the hotel-stays category with its 5 attribute schema fields."""
+    try:
+        return hotels_service.get_category(db)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
+@router.get("/hotels/listings", summary="Get hotel room rate listings")
+def get_hotels_listings(db: Session = Depends(get_db)):
+    """Returns all hotel room listings with night rates and amenities."""
+    return hotels_service.get_listings(db)
+
+
+@router.post("/hotels/ingest", summary="Ingest a hotel room listing")
+def ingest_hotel_room(payload: HotelRoomIngestRequest, db: Session = Depends(get_db)):
+    """Automated ingestion of a hotel room rate into the catalog."""
+    try:
+        return hotels_service.ingest_room_listing(
+            db,
+            hotel_name=payload.hotel_name,
+            room_name=payload.room_name,
+            price_per_night=payload.price_per_night,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description,
+            images=payload.images
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Hotels ingestion failed: {str(e)}")
+
+
+@router.post("/hotels/run-scraper", summary="Trigger automated Hotels scraper")
+def trigger_hotels_scraper(db: Session = Depends(get_db)):
+    """Executes the automated Zimbabwean hotel room rate scraper."""
+    return run_hotels_scraper(db)
+

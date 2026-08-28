@@ -129,6 +129,7 @@ def upsert_listing(
     attributes: Optional[Dict[str, Any]] = None,
     source_url: Optional[str] = None,
     description: Optional[str] = None,
+    images: Optional[List[str]] = None,
     status: str = ListingStatus.PUBLISHED,
     freshness_status: str = FreshnessStatus.UNVERIFIED,
     last_update_source: str = ListingUpdateSource.SCRAPER,
@@ -153,6 +154,7 @@ def upsert_listing(
             price=float(price),
             currency=currency.upper() if currency else "USD",
             source_url=source_url,
+            images=images or [],
             status=status,
             freshness_status=freshness_status,
             last_update_source=last_update_source,
@@ -198,6 +200,10 @@ def upsert_listing(
 
     if attrs != listing.attributes:
         listing.attributes = attrs
+        action = "updated"
+
+    if images is not None and listing.images != images:
+        listing.images = images
         action = "updated"
 
     listing.last_verified_at = now
