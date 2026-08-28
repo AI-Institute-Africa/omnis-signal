@@ -31,6 +31,8 @@ from app.services.hotels_service import hotels_service
 from app.scraping.hotels_scraper import run_hotels_scraper
 from app.services.retail_service import retail_service
 from app.scraping.retail_scraper import run_retail_scraper
+from app.services.telecom_service import telecom_service
+from app.scraping.telecom_scraper import run_telecom_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -593,5 +595,64 @@ def ingest_retail_product(payload: RetailProductIngestRequest, db: Session = Dep
 def trigger_retail_scraper(db: Session = Depends(get_db)):
     """Executes the automated Retail & Groceries commodity scraper."""
     return run_retail_scraper(db)
+
+
+# ========================================================================
+# 11. TELECOM SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class TelecomBundleIngestRequest(BaseModel):
+    operator_name: str
+    category_slug: str
+    bundle_name: str
+    price: float
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+
+
+@router.get("/telecom/categories", summary="Get all 8 Telecom bundle categories and schemas")
+def get_telecom_categories(db: Session = Depends(get_db)):
+    """Returns all 8 telecom categories with the 6-field attribute schema."""
+    return telecom_service.get_categories(db)
+
+
+@router.get("/telecom/bundles", summary="Get mobile data and bundle listings")
+def get_telecom_bundles(
+    category: Optional[str] = Query(None, description="Filter by category slug"),
+    operator: Optional[str] = Query(None, description="Filter by operator (Econet, NetOne, Telecel)"),
+    db: Session = Depends(get_db)
+):
+    """Returns telecom bundle offers with validity, data allowance, and price per GB."""
+    return telecom_service.get_bundles(db, category_slug=category, operator=operator)
+
+
+@router.post("/telecom/ingest", summary="Ingest a telecom bundle listing")
+def ingest_telecom_bundle(payload: TelecomBundleIngestRequest, db: Session = Depends(get_db)):
+    """Automated ingestion of a telecom bundle with operator normalisation and price_per_gb calculation."""
+    try:
+        return telecom_service.ingest_bundle_listing(
+            db,
+            operator_name=payload.operator_name,
+            category_slug=payload.category_slug,
+            bundle_name=payload.bundle_name,
+            price=payload.price,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Telecom ingestion failed: {str(e)}")
+
+
+@router.post("/telecom/run-scraper", summary="Trigger automated Telecom scraper")
+def trigger_telecom_scraper(db: Session = Depends(get_db)):
+    """Executes the automated Telecom mobile data and bundle scraper."""
+    return run_telecom_scraper(db)
+
 
 
