@@ -33,6 +33,8 @@ from app.services.retail_service import retail_service
 from app.scraping.retail_scraper import run_retail_scraper
 from app.services.telecom_service import telecom_service
 from app.scraping.telecom_scraper import run_telecom_scraper
+from app.services.transport_service import transport_service
+from app.scraping.transport_scraper import run_transport_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -653,6 +655,70 @@ def ingest_telecom_bundle(payload: TelecomBundleIngestRequest, db: Session = Dep
 def trigger_telecom_scraper(db: Session = Depends(get_db)):
     """Executes the automated Telecom mobile data and bundle scraper."""
     return run_telecom_scraper(db)
+
+
+# ========================================================================
+# 12. TRANSPORT SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class TransportServiceIngestRequest(BaseModel):
+    operator_name: str
+    category_slug: str
+    service_name: str
+    fare_gazetted: Optional[float] = None
+    fare_estimate: Optional[float] = None
+    price: Optional[float] = None
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+
+
+@router.get("/transport/categories", summary="Get all 8 Transport categories and schemas")
+def get_transport_categories(db: Session = Depends(get_db)):
+    """Returns all 8 transport categories with the common 16-field attribute schema."""
+    return transport_service.get_categories(db)
+
+
+@router.get("/transport/services", summary="Get transport services and fares")
+def get_transport_services(
+    category: Optional[str] = Query(None, description="Filter by category slug"),
+    province: Optional[str] = Query(None, description="Filter by province/district/route"),
+    ownership: Optional[str] = Query(None, description="Filter by ownership (state, private, cooperative, franchise)"),
+    db: Session = Depends(get_db)
+):
+    """Returns transport operator services with gazetted fares and route coverage."""
+    return transport_service.get_services(db, category_slug=category, province_district=province, ownership_status=ownership)
+
+
+@router.post("/transport/ingest", summary="Ingest a transport route/service listing")
+def ingest_transport_service(payload: TransportServiceIngestRequest, db: Session = Depends(get_db)):
+    """Automated ingestion of a transport operator service with fare mapping."""
+    try:
+        return transport_service.ingest_transport_listing(
+            db,
+            operator_name=payload.operator_name,
+            category_slug=payload.category_slug,
+            service_name=payload.service_name,
+            fare_gazetted=payload.fare_gazetted,
+            fare_estimate=payload.fare_estimate,
+            price=payload.price,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Transport ingestion failed: {str(e)}")
+
+
+@router.post("/transport/run-scraper", summary="Trigger automated Transport scraper")
+def trigger_transport_scraper(db: Session = Depends(get_db)):
+    """Executes the automated Transport transit fare scraper."""
+    return run_transport_scraper(db)
+
 
 
 
