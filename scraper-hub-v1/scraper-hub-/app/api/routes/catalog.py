@@ -21,6 +21,8 @@ from app.services.catalog_service import (
     get_or_create_provider,
     upsert_listing
 )
+from app.services.banking_service import banking_service
+from app.scraping.banking_scraper import run_banking_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -294,3 +296,64 @@ def reject_scraped_item(item_id: str, request: RejectionRequest, db: Session = D
         "item_id": item.id,
         "rejection_reason": item.rejection_reason
     }
+
+
+# ========================================================================
+# 6. BANKING SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class BankingFeeIngestRequest(BaseModel):
+    bank_name: str
+    revenue_line_slug: str
+    listing_name: str
+    price: float
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+
+
+@router.get("/banking/fee-hierarchy", summary="Get 3-level banking fee hierarchy")
+def get_banking_fee_hierarchy(db: Session = Depends(get_db)):
+    """Returns the full 3-level fee tree (fee_category -> subcategory -> revenue_line)."""
+    return banking_service.get_fee_hierarchy(db)
+
+
+@router.get("/banking/flat-categories", summary="Get flat consumer banking categories")
+def get_banking_flat_categories(db: Session = Depends(get_db)):
+    """Returns the 4 flat consumer categories (savings, current, nostro FCA, banks)."""
+    return banking_service.get_flat_categories(db)
+
+
+@router.get("/banking/banks", summary="Get Zimbabwean banks directory and channels")
+def get_banking_banks_directory(db: Session = Depends(get_db)):
+    """Returns all 23 banks with USSD codes, channel capabilities, and directory listing."""
+    return banking_service.get_banks_directory(db)
+
+
+@router.post("/banking/ingest-fee", summary="Ingest fee into revenue line")
+def ingest_banking_fee(payload: BankingFeeIngestRequest, db: Session = Depends(get_db)):
+    """Automated fee ingestion into a specific revenue line."""
+    try:
+        return banking_service.ingest_fee(
+            db,
+            bank_name=payload.bank_name,
+            revenue_line_slug=payload.revenue_line_slug,
+            listing_name=payload.listing_name,
+            price=payload.price,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Fee ingestion failed: {str(e)}")
+
+
+@router.post("/banking/run-scraper", summary="Trigger automated banking scraper")
+def trigger_banking_scraper(db: Session = Depends(get_db)):
+    """Executes the automated Zimbabwean banking charges and fee scraper."""
+    return run_banking_scraper(db)
+
