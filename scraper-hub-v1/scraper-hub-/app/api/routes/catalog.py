@@ -29,6 +29,8 @@ from app.services.food_service import food_service
 from app.scraping.food_scraper import run_food_scraper
 from app.services.hotels_service import hotels_service
 from app.scraping.hotels_scraper import run_hotels_scraper
+from app.services.retail_service import retail_service
+from app.scraping.retail_scraper import run_retail_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -533,4 +535,63 @@ def ingest_hotel_room(payload: HotelRoomIngestRequest, db: Session = Depends(get
 def trigger_hotels_scraper(db: Session = Depends(get_db)):
     """Executes the automated Zimbabwean hotel room rate scraper."""
     return run_hotels_scraper(db)
+
+
+# ========================================================================
+# 10. RETAIL & GROCERIES SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class RetailProductIngestRequest(BaseModel):
+    supplier_name: str
+    category_slug: str
+    product_name: str
+    price: float
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+
+
+@router.get("/retail/categories", summary="Get all 25 Retail categories and schemas")
+def get_retail_categories(db: Session = Depends(get_db)):
+    """Returns all 25 retail categories with the common 12-field attribute schema."""
+    return retail_service.get_categories(db)
+
+
+@router.get("/retail/products", summary="Get retail product listings")
+def get_retail_products(
+    category: Optional[str] = Query(None, description="Filter by category slug"),
+    brand: Optional[str] = Query(None, description="Filter by brand"),
+    db: Session = Depends(get_db)
+):
+    """Returns retail commodity products with unit prices and supplier info."""
+    return retail_service.get_products(db, category_slug=category, brand=brand)
+
+
+@router.post("/retail/ingest", summary="Ingest a retail product listing")
+def ingest_retail_product(payload: RetailProductIngestRequest, db: Session = Depends(get_db)):
+    """Automated ingestion of a retail commodity with unit-price calculation."""
+    try:
+        return retail_service.ingest_product_listing(
+            db,
+            supplier_name=payload.supplier_name,
+            category_slug=payload.category_slug,
+            product_name=payload.product_name,
+            price=payload.price,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Retail ingestion failed: {str(e)}")
+
+
+@router.post("/retail/run-scraper", summary="Trigger automated Retail scraper")
+def trigger_retail_scraper(db: Session = Depends(get_db)):
+    """Executes the automated Retail & Groceries commodity scraper."""
+    return run_retail_scraper(db)
+
 
