@@ -9,10 +9,19 @@ from .service import Service
 from .price_entry import PriceEntry
 from .organization import Organization
 from .org_change_event import OrgChangeEvent
+from .catalog import (
+    SectorConfig, Category, AttributeSchemaField,
+    Provider, Listing, ListingPriceHistory,
+    ScrapeSource, ScrapedItem,
+)
 
 __all__ = [
     "Source", "SourcePage", "RawSnapshot", "ExtractedRecord",
     "WebhookTarget", "WebhookDeliveryAttempt",
     "Product", "Service", "PriceEntry",
     "Organization", "OrgChangeEvent",
-]
+    # Catalog schema
+    "SectorConfig", "Category", "AttributeSchemaField",
+    "Provider", "Listing", "ListingPriceHistory",
+    "ScrapeSource", "ScrapedItem",
+]
