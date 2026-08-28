@@ -23,6 +23,8 @@ from app.services.catalog_service import (
 )
 from app.services.banking_service import banking_service
 from app.scraping.banking_scraper import run_banking_scraper
+from app.services.education_service import education_service
+from app.scraping.education_scraper import run_education_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -356,4 +358,62 @@ def ingest_banking_fee(payload: BankingFeeIngestRequest, db: Session = Depends(g
 def trigger_banking_scraper(db: Session = Depends(get_db)):
     """Executes the automated Zimbabwean banking charges and fee scraper."""
     return run_banking_scraper(db)
+
+
+# ========================================================================
+# 7. EDUCATION SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class EducationListingIngestRequest(BaseModel):
+    institution_name: str
+    category_slug: str
+    listing_name: str
+    price: float
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+
+
+@router.get("/education/categories", summary="Get education categories and schemas")
+def get_education_categories(db: Session = Depends(get_db)):
+    """Returns the 3 education categories (primary, secondary, university) with schemas."""
+    return education_service.get_categories(db)
+
+
+@router.get("/education/institutions", summary="Get education institutions and listings")
+def get_education_institutions(
+    category: Optional[str] = Query(None, description="Filter by category slug"),
+    db: Session = Depends(get_db)
+):
+    """Returns educational institutions and their fee listings."""
+    return education_service.get_institutions(db, category_slug=category)
+
+
+@router.post("/education/ingest", summary="Ingest education fee listing")
+def ingest_education_listing(payload: EducationListingIngestRequest, db: Session = Depends(get_db)):
+    """Automated ingestion of education fee listing with normalisation."""
+    try:
+        return education_service.ingest_listing(
+            db,
+            institution_name=payload.institution_name,
+            category_slug=payload.category_slug,
+            listing_name=payload.listing_name,
+            price=payload.price,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Education ingestion failed: {str(e)}")
+
+
+@router.post("/education/run-scraper", summary="Trigger automated education scraper")
+def trigger_education_scraper(db: Session = Depends(get_db)):
+    """Executes the automated education fees and tuition scraper."""
+    return run_education_scraper(db)
+
 
