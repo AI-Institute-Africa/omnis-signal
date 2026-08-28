@@ -25,6 +25,8 @@ from app.services.banking_service import banking_service
 from app.scraping.banking_scraper import run_banking_scraper
 from app.services.education_service import education_service
 from app.scraping.education_scraper import run_education_scraper
+from app.services.food_service import food_service
+from app.scraping.food_scraper import run_food_scraper
 from app.db.models.catalog import (
     SectorConfig,
     Category,
@@ -417,3 +419,58 @@ def trigger_education_scraper(db: Session = Depends(get_db)):
     return run_education_scraper(db)
 
 
+# ========================================================================
+# 8. FOOD & DRINK SECTOR SPECIALIZED ENDPOINTS
+# ========================================================================
+
+class FoodMenuIngestRequest(BaseModel):
+    restaurant_name: str
+    category_slug: str
+    menu_item_name: str
+    price: float
+    currency: str = "USD"
+    attributes: Dict[str, Any] = {}
+    source_url: Optional[str] = None
+    description: Optional[str] = None
+
+
+@router.get("/food/categories", summary="Get Food & Drink categories and schemas")
+def get_food_categories(db: Session = Depends(get_db)):
+    """Returns the 2 food categories (fast-food, casual-dining) with schemas."""
+    return food_service.get_categories(db)
+
+
+@router.get("/food/restaurants", summary="Get restaurants and menu listings")
+def get_food_restaurants(
+    category: Optional[str] = Query(None, description="Filter by category slug (fast-food, casual-dining)"),
+    db: Session = Depends(get_db)
+):
+    """Returns restaurant chains and their active menu listings."""
+    return food_service.get_restaurants(db, category_slug=category)
+
+
+@router.post("/food/ingest", summary="Ingest a menu item listing")
+def ingest_food_menu_item(payload: FoodMenuIngestRequest, db: Session = Depends(get_db)):
+    """Automated ingestion of a single restaurant menu item into the catalog."""
+    try:
+        return food_service.ingest_menu_item(
+            db,
+            restaurant_name=payload.restaurant_name,
+            category_slug=payload.category_slug,
+            menu_item_name=payload.menu_item_name,
+            price=payload.price,
+            currency=payload.currency,
+            attributes=payload.attributes,
+            source_url=payload.source_url,
+            description=payload.description
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Food ingestion failed: {str(e)}")
+
+
+@router.post("/food/run-scraper", summary="Trigger automated Food & Drink scraper")
+def trigger_food_scraper(db: Session = Depends(get_db)):
+    """Executes the automated Food & Drink restaurant menu scraper."""
+    return run_food_scraper(db)
