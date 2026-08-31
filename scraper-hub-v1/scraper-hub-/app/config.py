@@ -17,12 +17,13 @@ class Settings(BaseSettings):
     DEFAULT_TIMEZONE: str = "Africa/Harare"
     GEMINI_API_KEY: str = "AIzaSyANqI_aWF854Wu-IDlk7dhtb6_7Dd74S_s"
 
-    # Email & 12-Hour Reporting Configuration
+    # Email & 4-Hour Reporting Configuration
     SMTP_SERVER: str = "smtp.gmail.com"
     SMTP_PORT: int = 587
     SMTP_USERNAME: str = ""
     SMTP_PASSWORD: str = ""
     SMTP_FROM_EMAIL: str = "reports@omnis-signal.com"
+    REPORT_INTERVAL_HOURS: int = 4
     REPORT_RECIPIENTS: list = ["dennis@rubiem.com", "takuechakanyuka@gmail.com", "arthur@rubiem.com"]
 
     # Free LLM & Price Extraction Models (DeepSeek, Qwen, OpenRouter, Groq, Gemini, Ollama)

@@ -16,6 +16,15 @@ api_router.include_router(delivery_attempts.router, prefix="/delivery-attempts",
 api_router.include_router(organizations.router)
 api_router.include_router(catalog.router)
 
+@api_router.get("/reports/send-4h-digest", tags=["reports"])
+@api_router.post("/reports/send-4h-digest", tags=["reports"])
+def send_4h_report_endpoint():
+    """Trigger the 4-hour comprehensive product and service price digest email."""
+    return EmailReporterService.send_4h_digest_email()
+
+
 @api_router.get("/reports/send-12h-digest", tags=["reports"])
+@api_router.post("/reports/send-12h-digest", tags=["reports"])
 def send_12h_report_endpoint():
+    """Backward-compatible endpoint for triggering price digest email."""
     return EmailReporterService.send_digest_email()

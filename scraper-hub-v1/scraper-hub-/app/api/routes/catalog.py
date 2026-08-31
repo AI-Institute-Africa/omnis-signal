@@ -449,6 +449,7 @@ def get_food_categories(db: Session = Depends(get_db)):
 
 
 @router.get("/food/restaurants", summary="Get restaurants and menu listings")
+@router.get("/food/items", summary="Get restaurants and menu listings (alias)")
 def get_food_restaurants(
     category: Optional[str] = Query(None, description="Filter by category slug (fast-food, casual-dining)"),
     db: Session = Depends(get_db)
@@ -509,6 +510,7 @@ def get_hotels_category(db: Session = Depends(get_db)):
 
 
 @router.get("/hotels/listings", summary="Get hotel room rate listings")
+@router.get("/hotels/stays", summary="Get hotel room rate listings (alias)")
 def get_hotels_listings(db: Session = Depends(get_db)):
     """Returns all hotel room listings with night rates and amenities."""
     return hotels_service.get_listings(db)

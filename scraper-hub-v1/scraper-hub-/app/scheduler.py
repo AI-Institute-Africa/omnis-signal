@@ -34,12 +34,15 @@ def run_scrape_task(source_id: int):
     from threading import Thread
     Thread(target=scrape_source, args=(source_id,)).start()
 
-def send_12h_report_job():
+def send_4h_report_job():
     try:
         from app.services.email_reporter import EmailReporterService
-        EmailReporterService.send_digest_email()
+        EmailReporterService.send_4h_digest_email()
     except Exception as e:
-        print(f"Error executing 12-hour email report job: {e}")
+        print(f"Error executing 4-hour email report job: {e}")
+
+def send_12h_report_job():
+    send_4h_report_job()
 
 def schedule_recurring_scrapes():
     db = next(get_db_session())
@@ -53,11 +56,11 @@ def schedule_recurring_scrapes():
         )
     db.close()
 
-    # Schedule 12-Hour Email Price & Intelligence Digest Report
+    # Schedule 4-Hour Email Comprehensive Product & Service Price Digest
     scheduler.add_job(
-        func=send_12h_report_job,
-        trigger=CronTrigger(hour="0,12", minute="0"),
-        id="email_12h_digest_report",
+        func=send_4h_report_job,
+        trigger=CronTrigger(hour="0,4,8,12,16,20", minute="0"),
+        id="email_4h_price_digest_report",
         replace_existing=True
     )
 

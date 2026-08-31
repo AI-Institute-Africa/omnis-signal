@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, Depends, HTTPException, Query
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func, or_
 from app.db.session import get_db
 from app.db.models import Source, ExtractedRecord, RawSnapshot, Product, Service, PriceEntry
@@ -17,10 +17,11 @@ import io
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
+@router.get("/export/send-4h-report")
 @router.get("/export/send-12h-report")
-async def trigger_12h_report():
+async def trigger_4h_report():
     from app.services.email_reporter import EmailReporterService
-    res = EmailReporterService.send_digest_email()
+    res = EmailReporterService.send_4h_digest_email()
     return res
 
 @router.get("/")
@@ -130,15 +131,8 @@ async def data_quality(request: Request, db: Session = Depends(get_db)):
 
 @router.get("/records")
 async def records(request: Request, category: str = None, market: str = None, db: Session = Depends(get_db)):
-    # Get all unique categories for navigation
-    categories_query = db.query(ExtractedRecord.category).distinct().all()
-    categories = [c[0] for c in categories_query if c[0]]
-    
-    # Get unique markets (Raw SQL for safety)
-    from sqlalchemy import text
-    market_list_query = text("SELECT DISTINCT market FROM extracted_records WHERE market IS NOT NULL")
-    markets_query = db.execute(market_list_query).all()
-    markets = [m[0] for m in markets_query if m[0]]
+    categories = ["banking", "education", "food", "hotels", "retail", "telecom", "transport", "finance", "groceries", "services", "general"]
+    markets = ["local", "global"]
 
     query = db.query(ExtractedRecord)
     if category:
@@ -146,7 +140,7 @@ async def records(request: Request, category: str = None, market: str = None, db
     if market:
         query = query.filter(ExtractedRecord.market == market)
         
-    all_records = query.order_by(ExtractedRecord.captured_at.desc()).all()
+    all_records = query.order_by(ExtractedRecord.captured_at.desc()).limit(100).all()
     
     seen = set()
     records = []
@@ -155,7 +149,7 @@ async def records(request: Request, category: str = None, market: str = None, db
         if key not in seen:
             seen.add(key)
             records.append(r)
-            if len(records) >= 100:
+            if len(records) >= 60:
                 break
     
     return templates.TemplateResponse(request, "records.html", {
@@ -170,17 +164,11 @@ async def records(request: Request, category: str = None, market: str = None, db
 
 @router.get("/zimbabwe")
 async def zimbabwe_records(request: Request, db: Session = Depends(get_db)):
-    zimbabwe_urls = [
-        "%econet.co.zw/usd-data-bundles%",
-        "%econet.co.zw/zwg-data-bundles%",
-        "%netone.co.zw/zwg-bundles%",
-        "%netone.co.zw/usd-bundles%",
-        "%telecel.co.zw/value-added-services%",
-    ]
-    filters = [ExtractedRecord.source_url.ilike(pattern) for pattern in zimbabwe_urls]
-    query = db.query(ExtractedRecord).filter(or_(*filters)).order_by(ExtractedRecord.captured_at.desc())
+    query = db.query(ExtractedRecord).filter(
+        ExtractedRecord.category == "telecom"
+    ).order_by(ExtractedRecord.id.desc())
 
-    all_records = query.all()
+    all_records = query.limit(60).all()
     seen = set()
     records = []
     for r in all_records:
@@ -188,7 +176,7 @@ async def zimbabwe_records(request: Request, db: Session = Depends(get_db)):
         if key not in seen:
             seen.add(key)
             records.append(r)
-            if len(records) >= 200:
+            if len(records) >= 60:
                 break
 
     return templates.TemplateResponse(request, "records.html", {
@@ -273,14 +261,11 @@ async def org_list(
             )
         )
 
-    orgs = q.order_by(Organization.category, Organization.name).all()
-    total = db.query(func.count(Organization.id)).scalar()
-
-    # Stats by category
-    cat_counts = dict(
-        db.query(Organization.category, func.count(Organization.id))
-          .group_by(Organization.category).all()
-    )
+    orgs = q.order_by(Organization.category, Organization.name).limit(60).all()
+    total = len(orgs)
+    cat_counts = {}
+    for o in orgs:
+        cat_counts[o.category] = cat_counts.get(o.category, 0) + 1
 
     categories = get_categories()
 
@@ -318,39 +303,47 @@ async def org_profile(request: Request, slug: str, db: Session = Depends(get_db)
 # â”€â”€ Market Dashboards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 @router.get("/catalog")
-async def product_catalog(request: Request, category: str = None, db: Session = Depends(get_db)):
-    query = db.query(Product).order_by(Product.category)
+async def product_catalog(request: Request, category: str = None, brand: str = None, db: Session = Depends(get_db)):
+    query = db.query(Product).options(joinedload(Product.price_history)).order_by(Product.category)
     if category:
         query = query.filter(Product.category == category)
-    products = query.all()
+    if brand:
+        query = query.filter(Product.brand == brand)
+    products = query.limit(60).all()
     
-    categories = [c[0] for c in db.query(Product.category).distinct().all()]
+    categories = ["cooking-oil", "mealie-meal", "bread", "sugar", "dairy", "flour", "rice", "whatsapp-data", "general-data", "fast-food", "groceries", "electronics"]
+    brands = ["OK Zimbabwe", "Spar Zimbabwe", "Pick n Pay ZW", "TM Supermarkets", "Econet", "NetOne", "Chicken Inn", "Pizza Inn", "Nando's"]
     
     return templates.TemplateResponse(request, "catalog.html", {
         "products": products,
-        "categories": categories,
-        "active_category": category
+        "categories": sorted(categories),
+        "active_category": category,
+        "brands": brands,
+        "active_brand": brand
     })
 
 @router.get("/services-catalog")
 async def services_catalog(request: Request, category: str = None, db: Session = Depends(get_db)):
-    query = db.query(Service).order_by(Service.category)
+    query = db.query(Service).options(joinedload(Service.price_history)).order_by(Service.category)
     if category:
         query = query.filter(Service.category == category)
-    services = query.all()
+    services = query.limit(60).all()
     
-    categories = [c[0] for c in db.query(Service.category).distinct().all()]
+    categories = ["current-accounts", "savings-accounts", "cash-withdrawals", "transfers", "hotel-stays", "primary-schools", "secondary-schools", "universities", "urban-commuter", "intercity", "last-mile", "air", "contract-staff"]
     
     return templates.TemplateResponse(request, "services_catalog.html", {
         "services": services,
-        "categories": categories,
+        "categories": sorted(categories),
         "active_category": category
     })
 
 @router.get("/intelligence")
 async def intelligence_dashboard(request: Request, db: Session = Depends(get_db)):
     # Get latest price entries across all products/services
-    latest_prices = db.query(PriceEntry).order_by(PriceEntry.captured_at.desc()).limit(100).all()
+    latest_prices = db.query(PriceEntry).options(
+        joinedload(PriceEntry.product),
+        joinedload(PriceEntry.service)
+    ).order_by(PriceEntry.captured_at.desc()).limit(60).all()
     
     # Map to variables expected by intelligence.html
     recent_changes = latest_prices
