@@ -246,15 +246,18 @@ class EmailReporterService:
             # Check if SMTP configuration is active
             if settings.SMTP_USERNAME and settings.SMTP_PASSWORD:
                 try:
-                    server = smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT)
+                    server = smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT, timeout=20)
                     server.starttls()
-                    server.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
+                    smtp_pass = settings.SMTP_PASSWORD.replace(" ", "")
+                    server.login(settings.SMTP_USERNAME, smtp_pass)
+
+                    from_header = f"RIFTS-X Portal <{settings.SMTP_FROM_EMAIL}>"
 
                     for recipient in target_recipients:
                         try:
                             msg = MIMEMultipart("alternative")
                             msg["Subject"] = subject
-                            msg["From"] = settings.SMTP_FROM_EMAIL
+                            msg["From"] = from_header
                             msg["To"] = recipient
                             msg.attach(MIMEText(html_content, "html"))
 

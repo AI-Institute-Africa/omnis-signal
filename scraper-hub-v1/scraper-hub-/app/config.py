@@ -20,9 +20,9 @@ class Settings(BaseSettings):
     # Email & 4-Hour Reporting Configuration
     SMTP_SERVER: str = "smtp.gmail.com"
     SMTP_PORT: int = 587
-    SMTP_USERNAME: str = ""
-    SMTP_PASSWORD: str = ""
-    SMTP_FROM_EMAIL: str = "reports@omnis-signal.com"
+    SMTP_USERNAME: str = "takudzwasamuelc@gmail.com"
+    SMTP_PASSWORD: str = "rhcl ybdr flad zkeh"
+    SMTP_FROM_EMAIL: str = "takudzwasamuelc@gmail.com"
     REPORT_INTERVAL_HOURS: int = 4
     REPORT_RECIPIENTS: list = ["dennis@rubiem.com", "takuechakanyuka@gmail.com", "arthur@rubiem.com"]
 
