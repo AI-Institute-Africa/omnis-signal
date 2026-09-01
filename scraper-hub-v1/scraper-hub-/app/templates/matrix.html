@@ -6,7 +6,7 @@
 <div class="row mb-4 align-items-center">
     <div class="col-md-8">
         <h1 class="display-6 mb-1 text-gradient fw-bold">📊 Standardized Price & Tariff Matrix</h1>
-        <p class="text-muted">Direct side-by-side comparative tariff schedules across All Banking & Financial Institutions, Telecommunications, Transport, Retail, Food, Hotels, and Education.</p>
+        <p class="text-muted">Direct side-by-side comparative tariff schedules across All Banking Institutions, Telecommunications & Internet Service Providers, Transport, Retail, Food, Hotels, and Education.</p>
     </div>
     <div class="col-md-4 text-md-end">
         <a href="/export/send-4h-report" class="btn btn-warning btn-sm me-2 fw-semibold">
@@ -21,13 +21,13 @@
 <!-- Sector Navigation Tabs -->
 <ul class="nav nav-pills mb-4 gap-2 p-2 bg-dark rounded-3 border border-secondary border-opacity-25" id="sectorMatrixTabs" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active fw-bold" id="banking-tab" data-bs-toggle="pill" data-bs-target="#banking-pane" type="button" role="tab">
-            🏦 2.0-7.0 All Banks (13 Institutions)
+        <button class="nav-link active fw-bold" id="telecom-tab" data-bs-toggle="pill" data-bs-target="#telecom-pane" type="button" role="tab">
+            📱 1.0-3.0 Telecom & ISPs (All Providers)
         </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link fw-bold" id="telecom-tab" data-bs-toggle="pill" data-bs-target="#telecom-pane" type="button" role="tab">
-            📱 1.0 Telecom
+        <button class="nav-link fw-bold" id="banking-tab" data-bs-toggle="pill" data-bs-target="#banking-pane" type="button" role="tab">
+            🏦 2.0-7.0 All Banks & Transfers (13 Institutions)
         </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -59,8 +59,169 @@
 
 <div class="tab-content" id="sectorMatrixContent">
 
+    <!-- 1.0-3.0 TELECOM & ALL ISPS TAB -->
+    <div class="tab-pane fade show active" id="telecom-pane" role="tabpanel">
+        
+        <!-- Telecom Providers Legend Banner -->
+        <div class="glass-card p-3 mb-4 d-flex flex-wrap gap-2 align-items-center justify-content-between border border-secondary border-opacity-25 rounded-3 bg-dark">
+            <div class="small text-muted fw-bold">
+                <i class="fas fa-wifi text-warning me-1"></i> COVERED OPERATORS & ISPS:
+            </div>
+            <div class="d-flex flex-wrap gap-1 small">
+                <span class="badge bg-primary">Econet Wireless</span>
+                <span class="badge bg-success">NetOne Cellular</span>
+                <span class="badge bg-danger">Telecel Zimbabwe</span>
+                <span class="badge bg-info text-dark">TelOne (FTTH & Blaze)</span>
+                <span class="badge bg-warning text-dark">Liquid Home (Fibroniks)</span>
+                <span class="badge bg-primary">Utande (Dandemutande)</span>
+                <span class="badge bg-secondary">Powertel (ZESA)</span>
+                <span class="badge bg-dark border border-warning text-warning">Starlink Zimbabwe</span>
+                <span class="badge bg-success">Africom</span>
+            </div>
+        </div>
+
+        <!-- 1.0 VOICE COMPARATIVE MATRIX -->
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg mb-4">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
+                <span>1.0 TELECOMMUNICATIONS VOICE COMPARATIVE MATRIX</span>
+                <span class="badge bg-dark text-warning">All Mobile Operators & Fixed Voice</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead class="text-center align-middle">
+                        <tr class="bg-secondary bg-opacity-25">
+                            <th rowspan="3" class="text-start" style="width: 70px;">Code</th>
+                            <th rowspan="3" class="text-start" style="width: 220px;">Tariff / Service Line</th>
+                            <th colspan="4" class="bg-primary text-white py-2">ECONET WIRELESS</th>
+                            <th colspan="4" class="bg-success text-white py-2">NETONE CELLULAR</th>
+                            <th colspan="2" class="bg-danger text-white py-2">TELECEL</th>
+                            <th colspan="2" class="bg-info text-dark py-2">TELONE & AFRICOM</th>
+                        </tr>
+                        <tr class="small text-muted">
+                            <th colspan="2" class="border-end">On-Net</th>
+                            <th colspan="2" class="border-end border-primary">Off-Net (National)</th>
+                            <th colspan="2" class="border-end">On-Net</th>
+                            <th colspan="2" class="border-end border-success">Off-Net (National)</th>
+                            <th>On-Net</th>
+                            <th class="border-end border-danger">Off-Net</th>
+                            <th>TelOne</th>
+                            <th>Africom</th>
+                        </tr>
+                        <tr class="smaller text-secondary">
+                            <th>Per Min</th>
+                            <th class="border-end">Per Sec</th>
+                            <th>Per Min</th>
+                            <th class="border-end border-primary">Per Sec</th>
+                            <th>Per Min</th>
+                            <th class="border-end">Per Sec</th>
+                            <th>Per Min</th>
+                            <th class="border-end border-success">Per Sec</th>
+                            <th>Per Min</th>
+                            <th class="border-end border-danger">Per Min</th>
+                            <th>Per Min</th>
+                            <th>Per Min</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 1.1 Out of Bundle -->
+                        <tr class="table-warning text-dark fw-bold">
+                            <td colspan="14">1.1 Out of Bundle Voice Tariffs</td>
+                        </tr>
+                        {% for item in telecom_data.voice_out_of_bundle %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.plan }}</td>
+                            <td class="text-center text-info fw-bold">{{ item.econet_on_peak_min }}</td>
+                            <td class="text-center text-muted">{{ item.econet_on_peak_sec }}</td>
+                            <td class="text-center text-info fw-bold">{{ item.econet_off_peak_min }}</td>
+                            <td class="text-center text-muted border-end border-primary">{{ item.econet_off_peak_sec }}</td>
+                            <td class="text-center text-success fw-bold">{{ item.netone_on_peak_min }}</td>
+                            <td class="text-center text-muted">{{ item.netone_on_peak_sec }}</td>
+                            <td class="text-center text-success fw-bold">{{ item.netone_off_peak_min }}</td>
+                            <td class="text-center text-muted border-end border-success">{{ item.netone_off_peak_sec }}</td>
+                            <td class="text-center text-danger fw-bold">{{ item.telecel_on_peak_min }}</td>
+                            <td class="text-center text-muted border-end border-danger">{{ item.telecel_off_peak_min }}</td>
+                            <td class="text-center text-info fw-bold">{{ item.telone_on_peak_min }}</td>
+                            <td class="text-center text-success fw-bold">{{ item.africom_on_peak_min }}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <!-- 1.2 Voice Bundles -->
+                        <tr class="table-warning text-dark fw-bold">
+                            <td colspan="14">1.2 Voice Bundles (Hourly, Daily, Weekly BOJ, Bi-weekly, Monthly)</td>
+                        </tr>
+                        {% for item in telecom_data.voice_bundles %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.name }}</td>
+                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
+                            <td colspan="4" class="text-success fw-bold border-end border-success">{{ item.netone }}</td>
+                            <td colspan="2" class="text-danger fw-bold border-end border-danger">{{ item.telecel }}</td>
+                            <td colspan="2" class="text-info fw-bold">{{ item.telone }} <span class="text-muted small">({{ item.africom }})</span></td>
+                        </tr>
+                        {% endfor %}
+
+                        <!-- 2.0 Data Bundles -->
+                        <tr class="table-warning text-dark fw-bold">
+                            <td colspan="14">2.0 Mobile Data, WhatsApp & Private WiFi Matrix</td>
+                        </tr>
+                        {% for item in telecom_data.data_bundles %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.tier }}</td>
+                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
+                            <td colspan="4" class="text-success fw-bold border-end border-success">{{ item.netone }}</td>
+                            <td colspan="2" class="text-danger fw-bold border-end border-danger">{{ item.telecel }}</td>
+                            <td colspan="2" class="text-info fw-bold">{{ item.telone }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3.0 FIXED FIBRE & BROADBAND ISPS -->
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
+                <span>3.0 FIXED FIBRE, HIGH-SPEED BROADBAND & SATELLITE ISPS</span>
+                <span class="badge bg-dark text-warning">Liquid vs TelOne vs Utande vs Powertel vs Starlink vs Africom</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width: 1200px;">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small text-center">
+                            <th class="text-start sticky-col-1" style="width: 70px; background: #182234; z-index: 2;">Code</th>
+                            <th class="text-start sticky-col-2" style="width: 250px; background: #182234; z-index: 2;">Plan Tier / Package Spec</th>
+                            <th style="background: #D97706; color: #FFFFFF; width: 160px;">Liquid Home (Fibroniks)</th>
+                            <th style="background: #0284C7; color: #FFFFFF; width: 160px;">TelOne FTTH / Blaze</th>
+                            <th style="background: #2563EB; color: #FFFFFF; width: 160px;">Utande (Dandemutande)</th>
+                            <th style="background: #475569; color: #FFFFFF; width: 150px;">Powertel (ZESA)</th>
+                            <th style="background: #0F172A; border: 1px solid #F59E0B; color: #F59E0B; width: 180px;">Starlink Zimbabwe</th>
+                            <th style="background: #059669; color: #FFFFFF; width: 150px;">Africom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in telecom_data.fixed_broadband_isps %}
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background: #0B1120;">{{ item.code }}</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background: #0B1120;">{{ item.tier }}</td>
+                            <td class="text-warning fw-bold text-center">{{ item.liquid }}</td>
+                            <td class="text-info fw-bold text-center">{{ item.telone }}</td>
+                            <td class="text-primary fw-bold text-center">{{ item.utande }}</td>
+                            <td class="text-light fw-bold text-center">{{ item.powertel }}</td>
+                            <td class="text-warning fw-bold text-center" style="background: rgba(245, 158, 11, 0.1);">{{ item.starlink }}</td>
+                            <td class="text-success fw-bold text-center">{{ item.africom }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
     <!-- 2.0-7.0 ALL BANKS & FINANCIAL INSTITUTIONS TAB -->
-    <div class="tab-pane fade show active" id="banking-pane" role="tabpanel">
+    <div class="tab-pane fade" id="banking-pane" role="tabpanel">
         
         <!-- Institution Legend Banner -->
         <div class="glass-card p-3 mb-4 d-flex flex-wrap gap-2 align-items-center justify-content-between border border-secondary border-opacity-25 rounded-3 bg-dark">
@@ -136,90 +297,6 @@
             </div>
         </div>
         {% endfor %}
-    </div>
-    
-    <!-- 1.0 TELECOM TAB -->
-    <div class="tab-pane fade" id="telecom-pane" role="tabpanel">
-        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
-                <span>1.0 TELECOMMUNICATIONS COMPARATIVE TARIFF MATRIX</span>
-                <span class="badge bg-dark text-warning">Econet vs NetOne vs Telecel</span>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead class="text-center align-middle">
-                        <tr class="bg-secondary bg-opacity-25">
-                            <th rowspan="3" class="text-start" style="width: 70px;">Code</th>
-                            <th rowspan="3" class="text-start" style="width: 220px;">Tariff / Service Line</th>
-                            <th colspan="4" class="bg-primary text-white py-2">ECONET WIRELESS</th>
-                            <th colspan="4" class="bg-success text-white py-2">NETONE CELLULAR</th>
-                        </tr>
-                        <tr class="small text-muted">
-                            <th colspan="2" class="border-end">On-Net</th>
-                            <th colspan="2" class="border-end border-primary">Off-Net (National)</th>
-                            <th colspan="2" class="border-end">On-Net</th>
-                            <th colspan="2">Off-Net (National)</th>
-                        </tr>
-                        <tr class="smaller text-secondary">
-                            <th>Per Min</th>
-                            <th class="border-end">Per Sec</th>
-                            <th>Per Min</th>
-                            <th class="border-end border-primary">Per Sec</th>
-                            <th>Per Min</th>
-                            <th class="border-end">Per Sec</th>
-                            <th>Per Min</th>
-                            <th>Per Sec</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 1.1 Out of Bundle -->
-                        <tr class="table-warning text-dark fw-bold">
-                            <td colspan="10">1.1 Out of Bundle Voice Tariffs</td>
-                        </tr>
-                        {% for item in telecom_data.voice_out_of_bundle %}
-                        <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.plan }}</td>
-                            <td class="text-center text-info fw-bold">{{ item.econet_on_peak_min }}</td>
-                            <td class="text-center text-muted">{{ item.econet_on_peak_sec }}</td>
-                            <td class="text-center text-info fw-bold">{{ item.econet_off_peak_min }}</td>
-                            <td class="text-center text-muted border-end border-primary">{{ item.econet_off_peak_sec }}</td>
-                            <td class="text-center text-success fw-bold">{{ item.netone_on_peak_min }}</td>
-                            <td class="text-center text-muted">{{ item.netone_on_peak_sec }}</td>
-                            <td class="text-center text-success fw-bold">{{ item.netone_off_peak_min }}</td>
-                            <td class="text-center text-muted">{{ item.netone_off_peak_sec }}</td>
-                        </tr>
-                        {% endfor %}
-
-                        <!-- 1.2 Voice Bundles -->
-                        <tr class="table-warning text-dark fw-bold">
-                            <td colspan="10">1.2 Voice Bundles (Hourly, Daily, Weekly BOJ, Bi-weekly, Monthly)</td>
-                        </tr>
-                        {% for item in telecom_data.voice_bundles %}
-                        <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.name }}</td>
-                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
-                            <td colspan="4" class="text-success fw-bold">{{ item.netone }} <span class="text-muted small ms-2">(Telecel: {{ item.telecel }})</span></td>
-                        </tr>
-                        {% endfor %}
-
-                        <!-- 2.0 Data Bundles -->
-                        <tr class="table-warning text-dark fw-bold">
-                            <td colspan="10">2.0 Mobile Data, WhatsApp & Private WiFi Matrix</td>
-                        </tr>
-                        {% for item in telecom_data.data_bundles %}
-                        <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.tier }}</td>
-                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
-                            <td colspan="4" class="text-success fw-bold">{{ item.netone }} <span class="text-warning small ms-2">| {{ item.telecel }}</span></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 
     <!-- TRANSPORT TAB -->
