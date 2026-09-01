@@ -344,9 +344,37 @@ class EmailReporterService:
         return html
 
     @classmethod
+    def get_active_recipients(cls) -> List[str]:
+        """Fetch all active email subscribers from the database, combined with configured defaults."""
+        collected = set()
+        
+        # 1. Query database subscribers
+        try:
+            from app.db.session import get_db_session
+            from app.db.models.subscriber import ReportSubscriber
+            db = next(get_db_session())
+            try:
+                db_subs = db.query(ReportSubscriber).filter(ReportSubscriber.is_active == True).all()
+                for s in db_subs:
+                    if s.email and "@" in s.email:
+                        collected.add(s.email.strip().lower())
+            finally:
+                db.close()
+        except Exception as err:
+            logger.warning(f"Could not query dynamic subscribers from DB: {err}")
+
+        # 2. Add configured default recipients from settings
+        config_recipients = getattr(settings, "REPORT_RECIPIENTS", None) or cls.RECIPIENTS
+        for r in config_recipients:
+            if r and "@" in r:
+                collected.add(r.strip().lower())
+
+        return list(collected) if collected else cls.RECIPIENTS
+
+    @classmethod
     def send_4h_digest_email(cls, recipients: Optional[List[str]] = None) -> Dict[str, Any]:
         """Send the structured 4-hour comprehensive tariff report adhering strictly to user template."""
-        target_recipients = recipients or getattr(settings, "REPORT_RECIPIENTS", None) or cls.RECIPIENTS
+        target_recipients = recipients or cls.get_active_recipients()
         timestamp_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
         try:

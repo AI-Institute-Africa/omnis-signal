@@ -24,4 +24,8 @@ __all__ = [
     "SectorConfig", "Category", "AttributeSchemaField",
     "Provider", "Listing", "ListingPriceHistory",
     "ScrapeSource", "ScrapedItem",
-]
+    # Subscribers
+    "ReportSubscriber",
+]
+
+from .subscriber import ReportSubscriber
