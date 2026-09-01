@@ -6,7 +6,7 @@
 <div class="row mb-4 align-items-center">
     <div class="col-md-8">
         <h1 class="display-6 mb-1 text-gradient fw-bold">📊 Standardized Price & Tariff Matrix</h1>
-        <p class="text-muted">Direct side-by-side comparative tariff schedules across Telecommunications, Banking, Transport, Retail, Food, Hotels, and Education.</p>
+        <p class="text-muted">Direct side-by-side comparative tariff schedules across All Banking & Financial Institutions, Telecommunications, Transport, Retail, Food, Hotels, and Education.</p>
     </div>
     <div class="col-md-4 text-md-end">
         <a href="/export/send-4h-report" class="btn btn-warning btn-sm me-2 fw-semibold">
@@ -21,13 +21,13 @@
 <!-- Sector Navigation Tabs -->
 <ul class="nav nav-pills mb-4 gap-2 p-2 bg-dark rounded-3 border border-secondary border-opacity-25" id="sectorMatrixTabs" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active fw-bold" id="telecom-tab" data-bs-toggle="pill" data-bs-target="#telecom-pane" type="button" role="tab">
-            📱 1.0 Telecom
+        <button class="nav-link active fw-bold" id="banking-tab" data-bs-toggle="pill" data-bs-target="#banking-pane" type="button" role="tab">
+            🏦 2.0-7.0 All Banks (13 Institutions)
         </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link fw-bold" id="banking-tab" data-bs-toggle="pill" data-bs-target="#banking-pane" type="button" role="tab">
-            🏦 2.0-7.0 Banking
+        <button class="nav-link fw-bold" id="telecom-tab" data-bs-toggle="pill" data-bs-target="#telecom-pane" type="button" role="tab">
+            📱 1.0 Telecom
         </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -58,9 +58,88 @@
 </ul>
 
 <div class="tab-content" id="sectorMatrixContent">
+
+    <!-- 2.0-7.0 ALL BANKS & FINANCIAL INSTITUTIONS TAB -->
+    <div class="tab-pane fade show active" id="banking-pane" role="tabpanel">
+        
+        <!-- Institution Legend Banner -->
+        <div class="glass-card p-3 mb-4 d-flex flex-wrap gap-2 align-items-center justify-content-between border border-secondary border-opacity-25 rounded-3 bg-dark">
+            <div class="small text-muted fw-bold">
+                <i class="fas fa-university text-warning me-1"></i> COVERED INSTITUTIONS (13):
+            </div>
+            <div class="d-flex flex-wrap gap-1 small">
+                <span class="badge bg-primary">CBZ Bank</span>
+                <span class="badge bg-success">Stanbic Bank</span>
+                <span class="badge bg-warning text-dark">CABS</span>
+                <span class="badge bg-danger">Steward Bank</span>
+                <span class="badge bg-info text-dark">FBC Bank</span>
+                <span class="badge bg-secondary">BancABC</span>
+                <span class="badge bg-primary">First Capital</span>
+                <span class="badge bg-success">NMB Bank</span>
+                <span class="badge bg-warning text-dark">POSB</span>
+                <span class="badge bg-danger">ZB Bank</span>
+                <span class="badge bg-info text-dark">NBS</span>
+                <span class="badge bg-success">Nedbank</span>
+                <span class="badge bg-primary">Ecobank</span>
+            </div>
+        </div>
+
+        {% for sec in banking_data %}
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
+                <span>{{ sec.section }}</span>
+                <span class="badge bg-dark text-warning small">All 13 Financial Institutions Comparison</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width: 1350px;">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small text-center">
+                            <th class="text-start sticky-col-1" style="width: 70px; background: #182234; z-index: 2;">Code</th>
+                            <th class="text-start sticky-col-2" style="width: 240px; background: #182234; z-index: 2;">Service / Charge Line</th>
+                            <th style="background: #0284C7; color: #FFFFFF; width: 110px;">CBZ</th>
+                            <th style="background: #059669; color: #FFFFFF; width: 110px;">Stanbic</th>
+                            <th style="background: #D97706; color: #FFFFFF; width: 110px;">CABS</th>
+                            <th style="background: #DC2626; color: #FFFFFF; width: 110px;">Steward</th>
+                            <th style="background: #0891B2; color: #FFFFFF; width: 110px;">FBC</th>
+                            <th style="background: #475569; color: #FFFFFF; width: 110px;">BancABC</th>
+                            <th style="background: #2563EB; color: #FFFFFF; width: 110px;">First Capital</th>
+                            <th style="background: #16A34A; color: #FFFFFF; width: 110px;">NMB</th>
+                            <th style="background: #CA8A04; color: #FFFFFF; width: 110px;">POSB</th>
+                            <th style="background: #B91C1C; color: #FFFFFF; width: 110px;">ZB</th>
+                            <th style="background: #0284C7; color: #FFFFFF; width: 110px;">NBS</th>
+                            <th style="background: #15803D; color: #FFFFFF; width: 110px;">Nedbank</th>
+                            <th style="background: #1D4ED8; color: #FFFFFF; width: 110px;">Ecobank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in sec.rows %}
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background: #0B1120;">{{ item.code }}</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background: #0B1120;">{{ item.name }}</td>
+                            <td class="text-info fw-bold text-center">{{ item.cbz or '-' }}</td>
+                            <td class="text-success fw-bold text-center">{{ item.stanbic or '-' }}</td>
+                            <td class="text-warning fw-bold text-center">{{ item.cabs or '-' }}</td>
+                            <td class="text-danger fw-bold text-center">{{ item.steward or '-' }}</td>
+                            <td class="text-info fw-bold text-center">{{ item.fbc or '-' }}</td>
+                            <td class="text-light fw-bold text-center">{{ item.bancabc or '-' }}</td>
+                            <td class="text-primary fw-bold text-center">{{ item.firstcapital or '-' }}</td>
+                            <td class="text-success fw-bold text-center">{{ item.nmb or '-' }}</td>
+                            <td class="text-warning fw-bold text-center">{{ item.posb or '-' }}</td>
+                            <td class="text-danger fw-bold text-center">{{ item.zb or '-' }}</td>
+                            <td class="text-info fw-bold text-center">{{ item.nbs or '-' }}</td>
+                            <td class="text-success fw-bold text-center">{{ item.nedbank or '-' }}</td>
+                            <td class="text-primary fw-bold text-center">{{ item.ecobank or '-' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     
     <!-- 1.0 TELECOM TAB -->
-    <div class="tab-pane fade show active" id="telecom-pane" role="tabpanel">
+    <div class="tab-pane fade" id="telecom-pane" role="tabpanel">
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
             <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
                 <span>1.0 TELECOMMUNICATIONS COMPARATIVE TARIFF MATRIX</span>
@@ -141,43 +220,6 @@
                 </table>
             </div>
         </div>
-    </div>
-
-    <!-- 2.0-7.0 BANKING TAB -->
-    <div class="tab-pane fade" id="banking-pane" role="tabpanel">
-        {% for sec in banking_data %}
-        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-4">
-            <div class="card-header bg-warning text-dark fw-bold py-2">
-                {{ sec.section }}
-            </div>
-            <div class="table-responsive">
-                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small">
-                            <th style="width: 70px;">Code</th>
-                            <th>Service / Charge Line</th>
-                            <th class="text-info" style="width: 18%;">CBZ Bank</th>
-                            <th class="text-success" style="width: 18%;">Stanbic Bank</th>
-                            <th class="text-warning" style="width: 18%;">CABS</th>
-                            <th class="text-danger" style="width: 18%;">Steward Bank</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in sec.rows %}
-                        <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.name }}</td>
-                            <td class="text-info fw-bold">{{ item.cbz }}</td>
-                            <td class="text-success fw-bold">{{ item.stanbic }}</td>
-                            <td class="text-warning fw-bold">{{ item.cabs }}</td>
-                            <td class="text-danger fw-bold">{{ item.steward }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {% endfor %}
     </div>
 
     <!-- TRANSPORT TAB -->
@@ -456,6 +498,22 @@
     }
     .smaller {
         font-size: 0.75rem;
+    }
+    .matrix-table th, .matrix-table td {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.82rem;
+    }
+    .sticky-col-1 {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    }
+    .sticky-col-2 {
+        position: sticky;
+        left: 70px;
+        z-index: 1;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
     }
 </style>
 {% endblock %}

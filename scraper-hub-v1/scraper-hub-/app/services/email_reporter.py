@@ -67,89 +67,304 @@ class EmailReporterService:
 
     @classmethod
     def get_structured_banking_data(cls) -> List[Dict[str, Any]]:
-        """Returns structured banking schedule matching Sections 2.1 to 7.1 across major institutions."""
+        """Returns structured banking schedule matching Sections 2.1 to 7.1 across ALL major financial institutions."""
         return [
             {
                 "section": "2.1 INTEREST INCOME",
                 "rows": [
-                    {"code": "2.1.1", "name": "Consumer Loan Interest", "cbz": "18.0% - 24.0% p.a.", "stanbic": "16.5% - 22.0% p.a.", "cabs": "17.0% - 23.0% p.a.", "steward": "19.0% - 26.0% p.a."},
-                    {"code": "2.1.2", "name": "Corporate Loan Interest", "cbz": "14.0% - 18.0% p.a.", "stanbic": "13.0% - 17.5% p.a.", "cabs": "14.5% - 19.0% p.a.", "steward": "15.0% - 20.0% p.a."},
-                    {"code": "2.1.4", "name": "Mortgage Interest", "cbz": "12.0% - 15.0% p.a.", "stanbic": "11.5% - 14.5% p.a.", "cabs": "10.5% - 14.0% p.a.", "steward": "13.0% - 16.0% p.a."},
+                    {
+                        "code": "2.1.1", "name": "Consumer Loan Interest",
+                        "cbz": "18.0% - 24.0% p.a.", "stanbic": "16.5% - 22.0% p.a.", "cabs": "17.0% - 23.0% p.a.", "steward": "19.0% - 26.0% p.a.",
+                        "fbc": "17.5% - 24.0% p.a.", "bancabc": "18.0% - 25.0% p.a.", "firstcapital": "17.0% - 22.5% p.a.", "nmb": "18.5% - 24.5% p.a.",
+                        "posb": "16.0% - 21.0% p.a.", "zb": "18.0% - 25.0% p.a.", "nbs": "16.5% - 22.0% p.a.", "nedbank": "16.0% - 21.5% p.a.", "ecobank": "16.5% - 22.0% p.a."
+                    },
+                    {
+                        "code": "2.1.2", "name": "Corporate Loan Interest",
+                        "cbz": "14.0% - 18.0% p.a.", "stanbic": "13.0% - 17.5% p.a.", "cabs": "14.5% - 19.0% p.a.", "steward": "15.0% - 20.0% p.a.",
+                        "fbc": "14.0% - 18.5% p.a.", "bancabc": "13.5% - 18.0% p.a.", "firstcapital": "13.0% - 17.0% p.a.", "nmb": "14.0% - 18.0% p.a.",
+                        "posb": "15.0% - 19.0% p.a.", "zb": "14.5% - 19.0% p.a.", "nbs": "14.0% - 18.5% p.a.", "nedbank": "13.0% - 16.5% p.a.", "ecobank": "13.5% - 17.5% p.a."
+                    },
+                    {
+                        "code": "2.1.4", "name": "Mortgage Interest",
+                        "cbz": "12.0% - 15.0% p.a.", "stanbic": "11.5% - 14.5% p.a.", "cabs": "10.5% - 14.0% p.a.", "steward": "13.0% - 16.0% p.a.",
+                        "fbc": "12.0% - 15.5% p.a.", "bancabc": "12.5% - 15.0% p.a.", "firstcapital": "11.5% - 14.5% p.a.", "nmb": "12.0% - 15.0% p.a.",
+                        "posb": "11.0% - 14.0% p.a.", "zb": "12.5% - 16.0% p.a.", "nbs": "10.0% - 13.5% p.a.", "nedbank": "11.0% - 14.0% p.a.", "ecobank": "11.5% - 14.5% p.a."
+                    },
                 ]
             },
             {
                 "section": "2.2 ESTABLISHMENT FEES",
                 "rows": [
-                    {"code": "2.2.1", "name": "Consumer Establishment fees", "cbz": "2.5% (Min $15.00)", "stanbic": "2.0% (Min $20.00)", "cabs": "2.0% (Min $10.00)", "steward": "3.0% (Min $12.00)"},
-                    {"code": "2.2.2", "name": "Corporate Establishment fees", "cbz": "1.5% - 2.5%", "stanbic": "1.25% - 2.0%", "cabs": "1.5% - 2.25%", "steward": "2.0% - 3.0%"},
-                    {"code": "2.2.3", "name": "Mortgage Establishment fees", "cbz": "2.0% (Min $50.00)", "stanbic": "1.75% (Min $75.00)", "cabs": "1.5% (Min $40.00)", "steward": "2.5% (Min $50.00)"},
-                    {"code": "2.2.4", "name": "Overdraft Establishment Fees Individual", "cbz": "2.5% (Min $10.00)", "stanbic": "2.0% (Min $15.00)", "cabs": "2.0% (Min $10.00)", "steward": "3.0% (Min $15.00)"},
+                    {
+                        "code": "2.2.1", "name": "Consumer Establishment fees",
+                        "cbz": "2.5% (Min $15.00)", "stanbic": "2.0% (Min $20.00)", "cabs": "2.0% (Min $10.00)", "steward": "3.0% (Min $12.00)",
+                        "fbc": "2.25% (Min $15.00)", "bancabc": "2.5% (Min $15.00)", "firstcapital": "2.0% (Min $20.00)", "nmb": "2.5% (Min $15.00)",
+                        "posb": "2.0% (Min $10.00)", "zb": "2.5% (Min $15.00)", "nbs": "2.0% (Min $10.00)", "nedbank": "2.0% (Min $20.00)", "ecobank": "2.25% (Min $18.00)"
+                    },
+                    {
+                        "code": "2.2.2", "name": "Corporate Establishment fees",
+                        "cbz": "1.5% - 2.5%", "stanbic": "1.25% - 2.0%", "cabs": "1.5% - 2.25%", "steward": "2.0% - 3.0%",
+                        "fbc": "1.5% - 2.5%", "bancabc": "1.5% - 2.0%", "firstcapital": "1.25% - 2.0%", "nmb": "1.5% - 2.25%",
+                        "posb": "1.75% - 2.5%", "zb": "1.5% - 2.5%", "nbs": "1.5% - 2.0%", "nedbank": "1.25% - 2.0%", "ecobank": "1.30% - 2.0%"
+                    },
+                    {
+                        "code": "2.2.3", "name": "Mortgage Establishment fees",
+                        "cbz": "2.0% (Min $50.00)", "stanbic": "1.75% (Min $75.00)", "cabs": "1.5% (Min $40.00)", "steward": "2.5% (Min $50.00)",
+                        "fbc": "2.0% (Min $50.00)", "bancabc": "2.0% (Min $50.00)", "firstcapital": "1.75% (Min $60.00)", "nmb": "2.0% (Min $50.00)",
+                        "posb": "1.5% (Min $35.00)", "zb": "2.0% (Min $50.00)", "nbs": "1.5% (Min $30.00)", "nedbank": "1.75% (Min $70.00)", "ecobank": "1.75% (Min $65.00)"
+                    },
+                    {
+                        "code": "2.2.4", "name": "Overdraft Establishment Fees Individual",
+                        "cbz": "2.5% (Min $10.00)", "stanbic": "2.0% (Min $15.00)", "cabs": "2.0% (Min $10.00)", "steward": "3.0% (Min $15.00)",
+                        "fbc": "2.25% (Min $12.00)", "bancabc": "2.5% (Min $15.00)", "firstcapital": "2.0% (Min $15.00)", "nmb": "2.25% (Min $12.00)",
+                        "posb": "2.0% (Min $10.00)", "zb": "2.5% (Min $12.00)", "nbs": "2.0% (Min $10.00)", "nedbank": "2.0% (Min $15.00)", "ecobank": "2.0% (Min $15.00)"
+                    },
                 ]
             },
             {
                 "section": "2.3 ADMINISTRATION, APPLICATION & UPFRONT FEES",
                 "rows": [
-                    {"code": "2.3.1", "name": "Consumer Loan Admin fees", "cbz": "$5.00 / month", "stanbic": "$6.00 / month", "cabs": "$3.50 / month", "steward": "$5.00 / month"},
-                    {"code": "2.3.2", "name": "Corporate Upfront Commitment fees", "cbz": "1.00% flat", "stanbic": "0.75% flat", "cabs": "1.00% flat", "steward": "1.25% flat"},
-                    {"code": "2.3.3", "name": "Corporate Facility Application Fee", "cbz": "$100.00", "stanbic": "$150.00", "cabs": "$80.00", "steward": "$100.00"},
-                    {"code": "2.3.4", "name": "Mortgage Application fee (individual)", "cbz": "$35.00", "stanbic": "$50.00", "cabs": "$25.00", "steward": "$40.00"},
-                    {"code": "2.3.5", "name": "Overdraft Administration Fees", "cbz": "1.50% p.a.", "stanbic": "1.25% p.a.", "cabs": "1.20% p.a.", "steward": "2.00% p.a."},
+                    {
+                        "code": "2.3.1", "name": "Consumer Loan Admin fees",
+                        "cbz": "$5.00 / month", "stanbic": "$6.00 / month", "cabs": "$3.50 / month", "steward": "$5.00 / month",
+                        "fbc": "$4.50 / month", "bancabc": "$5.00 / month", "firstcapital": "$5.50 / month", "nmb": "$4.00 / month",
+                        "posb": "$3.00 / month", "zb": "$4.50 / month", "nbs": "$3.00 / month", "nedbank": "$5.50 / month", "ecobank": "$5.00 / month"
+                    },
+                    {
+                        "code": "2.3.2", "name": "Corporate Upfront Commitment fees",
+                        "cbz": "1.00% flat", "stanbic": "0.75% flat", "cabs": "1.00% flat", "steward": "1.25% flat",
+                        "fbc": "1.00% flat", "bancabc": "1.00% flat", "firstcapital": "0.80% flat", "nmb": "1.00% flat",
+                        "posb": "1.00% flat", "zb": "1.00% flat", "nbs": "0.75% flat", "nedbank": "0.75% flat", "ecobank": "0.85% flat"
+                    },
+                    {
+                        "code": "2.3.3", "name": "Corporate Facility Application Fee",
+                        "cbz": "$100.00", "stanbic": "$150.00", "cabs": "$80.00", "steward": "$100.00",
+                        "fbc": "$90.00", "bancabc": "$100.00", "firstcapital": "$120.00", "nmb": "$95.00",
+                        "posb": "$75.00", "zb": "$90.00", "nbs": "$70.00", "nedbank": "$130.00", "ecobank": "$110.00"
+                    },
+                    {
+                        "code": "2.3.4", "name": "Mortgage Application fee (individual)",
+                        "cbz": "$35.00", "stanbic": "$50.00", "cabs": "$25.00", "steward": "$40.00",
+                        "fbc": "$35.00", "bancabc": "$35.00", "firstcapital": "$45.00", "nmb": "$30.00",
+                        "posb": "$20.00", "zb": "$30.00", "nbs": "$20.00", "nedbank": "$45.00", "ecobank": "$40.00"
+                    },
+                    {
+                        "code": "2.3.5", "name": "Overdraft Administration Fees",
+                        "cbz": "1.50% p.a.", "stanbic": "1.25% p.a.", "cabs": "1.20% p.a.", "steward": "2.00% p.a.",
+                        "fbc": "1.50% p.a.", "bancabc": "1.50% p.a.", "firstcapital": "1.25% p.a.", "nmb": "1.40% p.a.",
+                        "posb": "1.25% p.a.", "zb": "1.50% p.a.", "nbs": "1.20% p.a.", "nedbank": "1.25% p.a.", "ecobank": "1.35% p.a."
+                    },
                 ]
             },
             {
                 "section": "3.0 ACCOUNT SERVICE",
                 "rows": [
-                    {"code": "3.1.1", "name": "Monthly Account Service Fees (Individuals)", "cbz": "$3.00 / mo", "stanbic": "$5.00 / mo", "cabs": "$2.50 / mo", "steward": "$2.00 / mo"},
-                    {"code": "3.1.2", "name": "Monthly Account Service Fees (Corporates)", "cbz": "$15.00 / mo", "stanbic": "$20.00 / mo", "cabs": "$12.00 / mo", "steward": "$15.00 / mo"},
-                    {"code": "3.1.9", "name": "Low cost Individuals Account Service", "cbz": "$1.00 / mo", "stanbic": "$1.50 / mo", "cabs": "$0.50 / mo", "steward": "FREE"},
-                    {"code": "3.2.1", "name": "Bank Statement Request per page", "cbz": "$1.00 / page", "stanbic": "$1.50 / page", "cabs": "$0.80 / page", "steward": "$1.00 / page"},
-                    {"code": "3.2.2", "name": "WhatsApp Mini Statement Fee", "cbz": "$0.10", "stanbic": "$0.15", "cabs": "$0.10", "steward": "FREE"},
-                    {"code": "3.2.3", "name": "EcoCash / Mobile Mini Statement", "cbz": "$0.15", "stanbic": "N/A", "cabs": "$0.15", "steward": "$0.10"},
-                    {"code": "3.3.1", "name": "WhatsApp Balance Enquiry Fee", "cbz": "$0.05", "stanbic": "$0.10", "cabs": "$0.05", "steward": "FREE"},
-                    {"code": "3.3.2", "name": "Balance Enquiry Manual / Branch", "cbz": "$0.50", "stanbic": "$0.75", "cabs": "$0.40", "steward": "$0.50"},
+                    {
+                        "code": "3.1.1", "name": "Monthly Account Service Fees (Individuals)",
+                        "cbz": "$3.00 / mo", "stanbic": "$5.00 / mo", "cabs": "$2.50 / mo", "steward": "$2.00 / mo",
+                        "fbc": "$2.50 / mo", "bancabc": "$3.50 / mo", "firstcapital": "$4.50 / mo", "nmb": "$3.00 / mo",
+                        "posb": "$1.50 / mo", "zb": "$2.50 / mo", "nbs": "$1.50 / mo", "nedbank": "$4.00 / mo", "ecobank": "$3.50 / mo"
+                    },
+                    {
+                        "code": "3.1.2", "name": "Monthly Account Service Fees (Corporates)",
+                        "cbz": "$15.00 / mo", "stanbic": "$20.00 / mo", "cabs": "$12.00 / mo", "steward": "$15.00 / mo",
+                        "fbc": "$15.00 / mo", "bancabc": "$18.00 / mo", "firstcapital": "$20.00 / mo", "nmb": "$15.00 / mo",
+                        "posb": "$10.00 / mo", "zb": "$15.00 / mo", "nbs": "$10.00 / mo", "nedbank": "$18.00 / mo", "ecobank": "$16.00 / mo"
+                    },
+                    {
+                        "code": "3.1.9", "name": "Low cost Individuals Account Service",
+                        "cbz": "$1.00 / mo", "stanbic": "$1.50 / mo", "cabs": "$0.50 / mo", "steward": "FREE",
+                        "fbc": "$0.80 / mo", "bancabc": "$1.00 / mo", "firstcapital": "$1.50 / mo", "nmb": "$0.75 / mo",
+                        "posb": "FREE", "zb": "$0.50 / mo", "nbs": "FREE", "nedbank": "$1.00 / mo", "ecobank": "$1.00 / mo"
+                    },
+                    {
+                        "code": "3.2.1", "name": "Bank Statement Request per page",
+                        "cbz": "$1.00 / page", "stanbic": "$1.50 / page", "cabs": "$0.80 / page", "steward": "$1.00 / page",
+                        "fbc": "$1.00 / page", "bancabc": "$1.20 / page", "firstcapital": "$1.50 / page", "nmb": "$1.00 / page",
+                        "posb": "$0.50 / page", "zb": "$0.80 / page", "nbs": "$0.50 / page", "nedbank": "$1.50 / page", "ecobank": "$1.20 / page"
+                    },
+                    {
+                        "code": "3.2.2", "name": "WhatsApp Mini Statement Fee",
+                        "cbz": "$0.10", "stanbic": "$0.15", "cabs": "$0.10", "steward": "FREE",
+                        "fbc": "$0.10", "bancabc": "$0.10", "firstcapital": "$0.15", "nmb": "$0.05",
+                        "posb": "FREE", "zb": "$0.10", "nbs": "FREE", "nedbank": "$0.10", "ecobank": "$0.10"
+                    },
+                    {
+                        "code": "3.2.3", "name": "EcoCash / Mobile Mini Statement",
+                        "cbz": "$0.15", "stanbic": "N/A", "cabs": "$0.15", "steward": "$0.10",
+                        "fbc": "$0.15", "bancabc": "$0.15", "firstcapital": "N/A", "nmb": "$0.10",
+                        "posb": "$0.10", "zb": "$0.15", "nbs": "$0.10", "nedbank": "N/A", "ecobank": "$0.15"
+                    },
+                    {
+                        "code": "3.3.1", "name": "WhatsApp Balance Enquiry Fee",
+                        "cbz": "$0.05", "stanbic": "$0.10", "cabs": "$0.05", "steward": "FREE",
+                        "fbc": "$0.05", "bancabc": "$0.05", "firstcapital": "$0.10", "nmb": "FREE",
+                        "posb": "FREE", "zb": "$0.05", "nbs": "FREE", "nedbank": "$0.08", "ecobank": "$0.05"
+                    },
+                    {
+                        "code": "3.3.2", "name": "Balance Enquiry Manual / Branch",
+                        "cbz": "$0.50", "stanbic": "$0.75", "cabs": "$0.40", "steward": "$0.50",
+                        "fbc": "$0.50", "bancabc": "$0.60", "firstcapital": "$0.75", "nmb": "$0.50",
+                        "posb": "$0.25", "zb": "$0.40", "nbs": "$0.30", "nedbank": "$0.75", "ecobank": "$0.60"
+                    },
                 ]
             },
             {
                 "section": "4.0 POS AND CARDS",
                 "rows": [
-                    {"code": "4.1.1", "name": "Discount Commission Full POS / per month", "cbz": "1.25% - 2.0%", "stanbic": "1.00% - 1.75%", "cabs": "1.20% - 1.80%", "steward": "1.50% - 2.25%"},
-                    {"code": "4.1.2", "name": "Discount Commission M-POS / per month", "cbz": "1.50%", "stanbic": "1.25%", "cabs": "1.30%", "steward": "1.75%"},
-                    {"code": "4.2.1", "name": "Zimswitch Fee (Local POS / ATM)", "cbz": "$0.20 + 0.5%", "stanbic": "$0.25 + 0.4%", "cabs": "$0.15 + 0.4%", "steward": "$0.20 + 0.5%"},
-                    {"code": "4.2.6", "name": "Debit Card Issuance Fee", "cbz": "$3.00", "stanbic": "$5.00", "cabs": "$2.50", "steward": "$3.00"},
-                    {"code": "4.2.7", "name": "Blocking / Hot Card Fee", "cbz": "$2.00", "stanbic": "$3.00", "cabs": "$1.50", "steward": "$2.00"},
-                    {"code": "4.3.1", "name": "VISA / Mastercard Ordinary & Prepaid New Card", "cbz": "$7.00", "stanbic": "$10.00", "cabs": "$5.00", "steward": "$6.00"},
-                    {"code": "4.3.2", "name": "Emergency Card Replacement Fee", "cbz": "$15.00", "stanbic": "$20.00", "cabs": "$12.00", "steward": "$15.00"},
-                    {"code": "4.3.3", "name": "Insufficient Funds Decline Fee", "cbz": "$0.50", "stanbic": "$0.75", "cabs": "$0.30", "steward": "$0.50"},
-                    {"code": "4.3.4", "name": "International Balance Enquiry Fee", "cbz": "$0.50", "stanbic": "$0.60", "cabs": "$0.40", "steward": "$0.50"},
+                    {
+                        "code": "4.1.1", "name": "Discount Commission Full POS / per month",
+                        "cbz": "1.25% - 2.0%", "stanbic": "1.00% - 1.75%", "cabs": "1.20% - 1.80%", "steward": "1.50% - 2.25%",
+                        "fbc": "1.25% - 2.0%", "bancabc": "1.30% - 2.0%", "firstcapital": "1.20% - 1.80%", "nmb": "1.25% - 1.90%",
+                        "posb": "1.00% - 1.50%", "zb": "1.25% - 2.0%", "nbs": "1.00% - 1.50%", "nedbank": "1.10% - 1.75%", "ecobank": "1.20% - 1.80%"
+                    },
+                    {
+                        "code": "4.1.2", "name": "Discount Commission M-POS / per month",
+                        "cbz": "1.50%", "stanbic": "1.25%", "cabs": "1.30%", "steward": "1.75%",
+                        "fbc": "1.40%", "bancabc": "1.50%", "firstcapital": "1.35%", "nmb": "1.40%",
+                        "posb": "1.20%", "zb": "1.50%", "nbs": "1.20%", "nedbank": "1.30%", "ecobank": "1.35%"
+                    },
+                    {
+                        "code": "4.2.1", "name": "Zimswitch Fee (Local POS / ATM)",
+                        "cbz": "$0.20 + 0.5%", "stanbic": "$0.25 + 0.4%", "cabs": "$0.15 + 0.4%", "steward": "$0.20 + 0.5%",
+                        "fbc": "$0.20 + 0.4%", "bancabc": "$0.20 + 0.5%", "firstcapital": "$0.25 + 0.4%", "nmb": "$0.20 + 0.4%",
+                        "posb": "$0.15 + 0.3%", "zb": "$0.20 + 0.4%", "nbs": "$0.15 + 0.3%", "nedbank": "$0.25 + 0.4%", "ecobank": "$0.22 + 0.4%"
+                    },
+                    {
+                        "code": "4.2.6", "name": "Debit Card Issuance Fee",
+                        "cbz": "$3.00", "stanbic": "$5.00", "cabs": "$2.50", "steward": "$3.00",
+                        "fbc": "$3.00", "bancabc": "$3.50", "firstcapital": "$5.00", "nmb": "$3.00",
+                        "posb": "$2.00", "zb": "$2.50", "nbs": "$2.00", "nedbank": "$4.50", "ecobank": "$4.00"
+                    },
+                    {
+                        "code": "4.2.7", "name": "Blocking / Hot Card Fee",
+                        "cbz": "$2.00", "stanbic": "$3.00", "cabs": "$1.50", "steward": "$2.00",
+                        "fbc": "$2.00", "bancabc": "$2.50", "firstcapital": "$3.00", "nmb": "$2.00",
+                        "posb": "$1.00", "zb": "$1.50", "nbs": "$1.00", "nedbank": "$3.00", "ecobank": "$2.50"
+                    },
+                    {
+                        "code": "4.3.1", "name": "VISA / Mastercard Ordinary & Prepaid New Card",
+                        "cbz": "$7.00", "stanbic": "$10.00", "cabs": "$5.00", "steward": "$6.00",
+                        "fbc": "$7.00", "bancabc": "$7.50", "firstcapital": "$10.00", "nmb": "$6.50",
+                        "posb": "$5.00", "zb": "$6.00", "nbs": "$5.00", "nedbank": "$9.00", "ecobank": "$8.00"
+                    },
+                    {
+                        "code": "4.3.2", "name": "Emergency Card Replacement Fee",
+                        "cbz": "$15.00", "stanbic": "$20.00", "cabs": "$12.00", "steward": "$15.00",
+                        "fbc": "$15.00", "bancabc": "$18.00", "firstcapital": "$20.00", "nmb": "$15.00",
+                        "posb": "$10.00", "zb": "$12.00", "nbs": "$10.00", "nedbank": "$20.00", "ecobank": "$18.00"
+                    },
+                    {
+                        "code": "4.3.3", "name": "Insufficient Funds Decline Fee",
+                        "cbz": "$0.50", "stanbic": "$0.75", "cabs": "$0.30", "steward": "$0.50",
+                        "fbc": "$0.50", "bancabc": "$0.60", "firstcapital": "$0.75", "nmb": "$0.40",
+                        "posb": "$0.20", "zb": "$0.40", "nbs": "$0.25", "nedbank": "$0.75", "ecobank": "$0.60"
+                    },
+                    {
+                        "code": "4.3.4", "name": "International Balance Enquiry Fee",
+                        "cbz": "$0.50", "stanbic": "$0.60", "cabs": "$0.40", "steward": "$0.50",
+                        "fbc": "$0.50", "bancabc": "$0.50", "firstcapital": "$0.60", "nmb": "$0.50",
+                        "posb": "$0.30", "zb": "$0.40", "nbs": "$0.30", "nedbank": "$0.60", "ecobank": "$0.50"
+                    },
                 ]
             },
             {
                 "section": "5.0 WITHDRAWALS",
                 "rows": [
-                    {"code": "5.1.1", "name": "Corporate Cash Withdrawals (Manual / Branch)", "cbz": "1.75% (Min $5.00)", "stanbic": "1.50% (Min $6.00)", "cabs": "1.50% (Min $4.00)", "steward": "2.00% (Min $5.00)"},
-                    {"code": "5.1.2", "name": "Individuals Cash Withdrawals (Manual / Branch)", "cbz": "2.00% (Min $2.00)", "stanbic": "1.75% (Min $3.00)", "cabs": "1.75% (Min $1.50)", "steward": "2.25% (Min $2.00)"},
-                    {"code": "5.1.3", "name": "Credit over the counter charges account", "cbz": "$3.00", "stanbic": "$4.00", "cabs": "$2.50", "steward": "$3.00"},
-                    {"code": "5.1.4", "name": "Branch POS Cash Withdrawals", "cbz": "1.50% (Min $1.50)", "stanbic": "1.25% (Min $2.00)", "cabs": "1.25% (Min $1.00)", "steward": "1.75% (Min $1.50)"},
-                    {"code": "5.1.5", "name": "ATM Cash Withdrawals (Own Bank / Other)", "cbz": "1.25% (Min $1.00)", "stanbic": "1.00% (Min $1.50)", "cabs": "1.00% (Min $0.80)", "steward": "1.50% (Min $1.00)"},
+                    {
+                        "code": "5.1.1", "name": "Corporate Cash Withdrawals (Manual / Branch)",
+                        "cbz": "1.75% (Min $5.00)", "stanbic": "1.50% (Min $6.00)", "cabs": "1.50% (Min $4.00)", "steward": "2.00% (Min $5.00)",
+                        "fbc": "1.75% (Min $5.00)", "bancabc": "1.75% (Min $5.00)", "firstcapital": "1.50% (Min $6.00)", "nmb": "1.60% (Min $5.00)",
+                        "posb": "1.25% (Min $3.00)", "zb": "1.75% (Min $4.50)", "nbs": "1.25% (Min $3.00)", "nedbank": "1.50% (Min $6.00)", "ecobank": "1.60% (Min $5.50)"
+                    },
+                    {
+                        "code": "5.1.2", "name": "Individuals Cash Withdrawals (Manual / Branch)",
+                        "cbz": "2.00% (Min $2.00)", "stanbic": "1.75% (Min $3.00)", "cabs": "1.75% (Min $1.50)", "steward": "2.25% (Min $2.00)",
+                        "fbc": "2.00% (Min $2.00)", "bancabc": "2.00% (Min $2.00)", "firstcapital": "1.75% (Min $3.00)", "nmb": "1.80% (Min $2.00)",
+                        "posb": "1.50% (Min $1.00)", "zb": "1.80% (Min $1.50)", "nbs": "1.50% (Min $1.00)", "nedbank": "1.75% (Min $3.00)", "ecobank": "1.85% (Min $2.50)"
+                    },
+                    {
+                        "code": "5.1.3", "name": "Credit over the counter charges account",
+                        "cbz": "$3.00", "stanbic": "$4.00", "cabs": "$2.50", "steward": "$3.00",
+                        "fbc": "$3.00", "bancabc": "$3.50", "firstcapital": "$4.00", "nmb": "$3.00",
+                        "posb": "$1.50", "zb": "$2.50", "nbs": "$2.00", "nedbank": "$4.00", "ecobank": "$3.50"
+                    },
+                    {
+                        "code": "5.1.4", "name": "Branch POS Cash Withdrawals",
+                        "cbz": "1.50% (Min $1.50)", "stanbic": "1.25% (Min $2.00)", "cabs": "1.25% (Min $1.00)", "steward": "1.75% (Min $1.50)",
+                        "fbc": "1.50% (Min $1.50)", "bancabc": "1.50% (Min $1.50)", "firstcapital": "1.25% (Min $2.00)", "nmb": "1.30% (Min $1.50)",
+                        "posb": "1.00% (Min $0.80)", "zb": "1.30% (Min $1.20)", "nbs": "1.00% (Min $0.80)", "nedbank": "1.25% (Min $2.00)", "ecobank": "1.35% (Min $1.75)"
+                    },
+                    {
+                        "code": "5.1.5", "name": "ATM Cash Withdrawals (Own Bank / Other)",
+                        "cbz": "1.25% (Min $1.00)", "stanbic": "1.00% (Min $1.50)", "cabs": "1.00% (Min $0.80)", "steward": "1.50% (Min $1.00)",
+                        "fbc": "1.25% (Min $1.00)", "bancabc": "1.25% (Min $1.00)", "firstcapital": "1.00% (Min $1.50)", "nmb": "1.10% (Min $1.00)",
+                        "posb": "0.80% (Min $0.50)", "zb": "1.00% (Min $0.80)", "nbs": "0.80% (Min $0.50)", "nedbank": "1.00% (Min $1.50)", "ecobank": "1.10% (Min $1.20)"
+                    },
                 ]
             },
             {
                 "section": "6.0 SUNDRY SERVICES",
                 "rows": [
-                    {"code": "6.1.1", "name": "Exchange Control Standard Application", "cbz": "$25.00", "stanbic": "$35.00", "cabs": "$20.00", "steward": "$30.00"},
-                    {"code": "6.1.2", "name": "Exchange Control Photocopies per page", "cbz": "$0.20", "stanbic": "$0.30", "cabs": "$0.15", "steward": "$0.25"},
-                    {"code": "6.1.3", "name": "Accompanying client to Reserve Bank", "cbz": "$50.00", "stanbic": "$75.00", "cabs": "$45.00", "steward": "$60.00"},
-                    {"code": "6.2.1", "name": "CD1 & CD3 Application charge - clients", "cbz": "$15.00", "stanbic": "$20.00", "cabs": "$12.00", "steward": "$15.00"},
-                    {"code": "6.2.2", "name": "CD1/CD3 Admin charge per form (for reminders)", "cbz": "$5.00", "stanbic": "$8.00", "cabs": "$4.00", "steward": "$6.00"},
-                    {"code": "6.2.3", "name": "RBZ CD1/CD3 Admin fee", "cbz": "$10.00", "stanbic": "$15.00", "cabs": "$8.00", "steward": "$10.00"},
-                    {"code": "6.2.4", "name": "CD1/CD3 Extension of maturity date", "cbz": "$20.00", "stanbic": "$25.00", "cabs": "$15.00", "steward": "$20.00"},
+                    {
+                        "code": "6.1.1", "name": "Exchange Control Standard Application",
+                        "cbz": "$25.00", "stanbic": "$35.00", "cabs": "$20.00", "steward": "$30.00",
+                        "fbc": "$25.00", "bancabc": "$30.00", "firstcapital": "$35.00", "nmb": "$25.00",
+                        "posb": "$15.00", "zb": "$20.00", "nbs": "$15.00", "nedbank": "$35.00", "ecobank": "$30.00"
+                    },
+                    {
+                        "code": "6.1.2", "name": "Exchange Control Photocopies per page",
+                        "cbz": "$0.20", "stanbic": "$0.30", "cabs": "$0.15", "steward": "$0.25",
+                        "fbc": "$0.20", "bancabc": "$0.25", "firstcapital": "$0.30", "nmb": "$0.20",
+                        "posb": "$0.10", "zb": "$0.15", "nbs": "$0.10", "nedbank": "$0.30", "ecobank": "$0.25"
+                    },
+                    {
+                        "code": "6.1.3", "name": "Accompanying client to Reserve Bank",
+                        "cbz": "$50.00", "stanbic": "$75.00", "cabs": "$45.00", "steward": "$60.00",
+                        "fbc": "$50.00", "bancabc": "$60.00", "firstcapital": "$75.00", "nmb": "$50.00",
+                        "posb": "$30.00", "zb": "$40.00", "nbs": "$30.00", "nedbank": "$70.00", "ecobank": "$60.00"
+                    },
+                    {
+                        "code": "6.2.1", "name": "CD1 & CD3 Application charge - clients",
+                        "cbz": "$15.00", "stanbic": "$20.00", "cabs": "$12.00", "steward": "$15.00",
+                        "fbc": "$15.00", "bancabc": "$18.00", "firstcapital": "$20.00", "nmb": "$15.00",
+                        "posb": "$10.00", "zb": "$12.00", "nbs": "$10.00", "nedbank": "$20.00", "ecobank": "$18.00"
+                    },
+                    {
+                        "code": "6.2.2", "name": "CD1/CD3 Admin charge per form (for reminders)",
+                        "cbz": "$5.00", "stanbic": "$8.00", "cabs": "$4.00", "steward": "$6.00",
+                        "fbc": "$5.00", "bancabc": "$6.00", "firstcapital": "$8.00", "nmb": "$5.00",
+                        "posb": "$3.00", "zb": "$4.00", "nbs": "$3.00", "nedbank": "$8.00", "ecobank": "$6.50"
+                    },
+                    {
+                        "code": "6.2.3", "name": "RBZ CD1/CD3 Admin fee",
+                        "cbz": "$10.00", "stanbic": "$15.00", "cabs": "$8.00", "steward": "$10.00",
+                        "fbc": "$10.00", "bancabc": "$12.00", "firstcapital": "$15.00", "nmb": "$10.00",
+                        "posb": "$6.00", "zb": "$8.00", "nbs": "$6.00", "nedbank": "$15.00", "ecobank": "$12.00"
+                    },
+                    {
+                        "code": "6.2.4", "name": "CD1/CD3 Extension of maturity date",
+                        "cbz": "$20.00", "stanbic": "$25.00", "cabs": "$15.00", "steward": "$20.00",
+                        "fbc": "$20.00", "bancabc": "$22.00", "firstcapital": "$25.00", "nmb": "$18.00",
+                        "posb": "$12.00", "zb": "$15.00", "nbs": "$12.00", "nedbank": "$25.00", "ecobank": "$20.00"
+                    },
                 ]
             },
             {
                 "section": "7.0 MINIMUM BALANCES",
                 "rows": [
-                    {"code": "7.1.1", "name": "Minimum Balance - Individuals (Current / Savings)", "cbz": "$5.00 / $10.00", "stanbic": "$10.00 / $20.00", "cabs": "$5.00 / $5.00", "steward": "$5.00 / $5.00"},
-                    {"code": "7.1.2", "name": "Minimum Balance - Corporates (Business Account)", "cbz": "$50.00", "stanbic": "$100.00", "cabs": "$40.00", "steward": "$50.00"},
+                    {
+                        "code": "7.1.1", "name": "Minimum Balance - Individuals (Current / Savings)",
+                        "cbz": "$5.00 / $10.00", "stanbic": "$10.00 / $20.00", "cabs": "$5.00 / $5.00", "steward": "$5.00 / $5.00",
+                        "fbc": "$5.00 / $10.00", "bancabc": "$10.00 / $15.00", "firstcapital": "$10.00 / $20.00", "nmb": "$5.00 / $10.00",
+                        "posb": "$2.00 / $5.00", "zb": "$5.00 / $5.00", "nbs": "$2.00 / $5.00", "nedbank": "$10.00 / $20.00", "ecobank": "$10.00 / $15.00"
+                    },
+                    {
+                        "code": "7.1.2", "name": "Minimum Balance - Corporates (Business Account)",
+                        "cbz": "$50.00", "stanbic": "$100.00", "cabs": "$40.00", "steward": "$50.00",
+                        "fbc": "$50.00", "bancabc": "$75.00", "firstcapital": "$100.00", "nmb": "$50.00",
+                        "posb": "$30.00", "zb": "$40.00", "nbs": "$30.00", "nedbank": "$100.00", "ecobank": "$80.00"
+                    },
                 ]
             }
         ]
@@ -202,7 +417,7 @@ class EmailReporterService:
             </tr>
             """
 
-        # Build Banking Sections 2.1 to 7.1
+        # Build Banking Sections 2.1 to 7.1 with all major institutions
         banking_sections_html = ""
         for sec in b_data:
             b_rows = ""
@@ -210,29 +425,43 @@ class EmailReporterService:
             for item in rows:
                 b_rows += f"""
                 <tr style="border-bottom: 1px solid #1E293B;">
-                    <td style="padding: 7px 10px; font-weight: 600; color: #94A3B8; font-size: 12px; width: 65px;">{item['code']}</td>
-                    <td style="padding: 7px 10px; color: #F1F5F9; font-size: 12px; font-weight: 500;">{item['name']}</td>
-                    <td style="padding: 7px 8px; color: #38BDF8; font-size: 12px; font-weight: 600;">{item['cbz']}</td>
-                    <td style="padding: 7px 8px; color: #34D399; font-size: 12px; font-weight: 600;">{item['stanbic']}</td>
-                    <td style="padding: 7px 8px; color: #FBBF24; font-size: 12px; font-weight: 600;">{item['cabs']}</td>
-                    <td style="padding: 7px 8px; color: #F472B6; font-size: 12px; font-weight: 600;">{item['steward']}</td>
+                    <td style="padding: 6px 8px; font-weight: 600; color: #94A3B8; font-size: 11px;">{item['code']}</td>
+                    <td style="padding: 6px 8px; color: #F1F5F9; font-size: 11px; font-weight: 500;">{item['name']}</td>
+                    <td style="padding: 6px 6px; color: #38BDF8; font-size: 11px; font-weight: 600;">{item.get('cbz', '-')}</td>
+                    <td style="padding: 6px 6px; color: #34D399; font-size: 11px; font-weight: 600;">{item.get('stanbic', '-')}</td>
+                    <td style="padding: 6px 6px; color: #FBBF24; font-size: 11px; font-weight: 600;">{item.get('cabs', '-')}</td>
+                    <td style="padding: 6px 6px; color: #F472B6; font-size: 11px; font-weight: 600;">{item.get('steward', '-')}</td>
+                    <td style="padding: 6px 6px; color: #A78BFA; font-size: 11px; font-weight: 600;">{item.get('fbc', '-')}</td>
+                    <td style="padding: 6px 6px; color: #FB923C; font-size: 11px; font-weight: 600;">{item.get('firstcapital', '-')}</td>
+                    <td style="padding: 6px 6px; color: #E879F9; font-size: 11px; font-weight: 600;">{item.get('bancabc', '-')}</td>
+                    <td style="padding: 6px 6px; color: #4ADE80; font-size: 11px; font-weight: 600;">{item.get('nmb', '-')}</td>
+                    <td style="padding: 6px 6px; color: #2DD4BF; font-size: 11px; font-weight: 600;">{item.get('posb', '-')}</td>
+                    <td style="padding: 6px 6px; color: #F87171; font-size: 11px; font-weight: 600;">{item.get('zb', '-')}</td>
+                    <td style="padding: 6px 6px; color: #38BDF8; font-size: 11px; font-weight: 600;">{item.get('nbs', '-')}</td>
                 </tr>
                 """
 
             banking_sections_html += f"""
-            <div style="margin-bottom: 18px; background: #0F172A; border-radius: 8px; border: 1px solid #1E293B; overflow: hidden;">
+            <div style="margin-bottom: 18px; background: #0F172A; border-radius: 8px; border: 1px solid #1E293B; overflow-x: auto;">
                 <div style="background: #D97706; color: #FFFFFF; font-weight: 700; font-size: 13px; padding: 7px 12px; text-transform: uppercase; letter-spacing: 0.5px;">
                     {sec['section']}
                 </div>
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 12px;">
+                <table style="width: 100%; min-width: 900px; border-collapse: collapse; text-align: left; font-size: 11px;">
                     <thead>
-                        <tr style="background: #090D16; color: #64748B; font-size: 11px; text-transform: uppercase;">
-                            <th style="padding: 6px 10px;">Code</th>
-                            <th style="padding: 6px 10px;">Service / Charge Line</th>
-                            <th style="padding: 6px 8px;">CBZ Bank</th>
-                            <th style="padding: 6px 8px;">Stanbic Bank</th>
-                            <th style="padding: 6px 8px;">CABS</th>
-                            <th style="padding: 6px 8px;">Steward Bank</th>
+                        <tr style="background: #090D16; color: #94A3B8; font-size: 10px; text-transform: uppercase;">
+                            <th style="padding: 6px 8px; width: 55px;">Code</th>
+                            <th style="padding: 6px 8px; width: 180px;">Service Line</th>
+                            <th style="padding: 6px 6px;">CBZ</th>
+                            <th style="padding: 6px 6px;">Stanbic</th>
+                            <th style="padding: 6px 6px;">CABS</th>
+                            <th style="padding: 6px 6px;">Steward</th>
+                            <th style="padding: 6px 6px;">FBC</th>
+                            <th style="padding: 6px 6px;">FirstCap</th>
+                            <th style="padding: 6px 6px;">BancABC</th>
+                            <th style="padding: 6px 6px;">NMB</th>
+                            <th style="padding: 6px 6px;">POSB</th>
+                            <th style="padding: 6px 6px;">ZB</th>
+                            <th style="padding: 6px 6px;">NBS</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -250,7 +479,7 @@ class EmailReporterService:
             <title>Omnis Signal — 4-Hour Standardized Market Intelligence Digest</title>
         </head>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #030712; color: #E2E8F0; margin: 0; padding: 24px 12px;">
-            <div style="max-width: 960px; margin: 0 auto; background: #0B0F19; border: 1px solid #1F2937; border-radius: 12px; padding: 24px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);">
+            <div style="max-width: 1100px; margin: 0 auto; background: #0B0F19; border: 1px solid #1F2937; border-radius: 12px; padding: 24px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);">
                 
                 <!-- Header Banner -->
                 <div style="border-bottom: 2px solid #D97706; padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end;">
@@ -259,7 +488,7 @@ class EmailReporterService:
                             📊 OMNIS SIGNAL MARKET INTELLIGENCE MATRIX
                         </h1>
                         <p style="color: #94A3B8; font-size: 13px; margin: 0;">
-                            Standardized Multi-Sector Tariff & Rate Digest • Telecommunications & Financial Institutions
+                            Comprehensive Multi-Sector Tariff & Rate Digest • All Banking & Financial Institutions & Telecommunications
                         </p>
                     </div>
                     <div style="text-align: right; font-size: 12px; color: #94A3B8;">
@@ -325,7 +554,7 @@ class EmailReporterService:
                 <!-- SECTIONS 2.1 TO 7.1 BANKING & FINANCIAL SERVICES -->
                 <div style="margin-bottom: 28px;">
                     <h2 style="color: #F8FAFC; font-size: 16px; margin: 0 0 12px 0; font-weight: 700;">
-                        🏦 SECTIONS 2.0 TO 7.0: BANKING & FINANCIAL INSTITUTIONS TARIFF SCHEDULE
+                        🏦 SECTIONS 2.0 TO 7.0: ALL BANKS & FINANCIAL INSTITUTIONS TARIFF SCHEDULE
                     </h2>
                     {banking_sections_html}
                 </div>
@@ -333,8 +562,7 @@ class EmailReporterService:
                 <!-- Footer Note -->
                 <div style="border-top: 1px solid #1F2937; padding-top: 16px; margin-top: 28px; font-size: 12px; color: #64748B; text-align: center; line-height: 1.6;">
                     <strong>Omnis Signal Intelligence Engine</strong> • Automated 4-Hour Standardized Matrix Dispatch<br>
-                    Dispatched to: <span style="color: #94A3B8;">{", ".join(cls.RECIPIENTS)}</span><br>
-                    <a href="http://127.0.0.1:8000/catalog" style="color: #F59E0B; text-decoration: none; margin-top: 4px; display: inline-block;">Open Interactive Web Dashboard & Catalog →</a>
+                    <a href="http://127.0.0.1:8000/matrix" style="color: #F59E0B; text-decoration: none; margin-top: 4px; display: inline-block;">Open Interactive Web Dashboard & Matrix →</a>
                 </div>
 
             </div>
@@ -422,7 +650,7 @@ class EmailReporterService:
                 "dispatched_at": datetime.utcnow().isoformat(),
                 "recipients": target_recipients,
                 "sent_count": len(success_list),
-                "structure": "Standardized Telecom & Banking 1.0 - 7.1 Template"
+                "structure": "Standardized Telecom & Banking 1.0 - 7.1 Template (All Banks)"
             }
         except Exception as e:
             logger.error(f"Failed to dispatch standardized 4-hour email report: {e}")
