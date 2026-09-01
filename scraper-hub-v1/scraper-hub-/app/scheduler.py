@@ -37,24 +37,32 @@ def run_scrape_task(source_id: int):
 def send_4h_report_job():
     try:
         from app.services.email_reporter import EmailReporterService
-        EmailReporterService.send_4h_digest_email()
+        import logging
+        s_logger = logging.getLogger("app.scheduler")
+        s_logger.info("Executing scheduled 4-hour market tariff digest email dispatch...")
+        res = EmailReporterService.send_4h_digest_email()
+        s_logger.info(f"4-hour digest dispatch completed: status={res.get('status')}, sent={res.get('sent_count', 0)}")
     except Exception as e:
-        print(f"Error executing 4-hour email report job: {e}")
+        import logging
+        s_logger = logging.getLogger("app.scheduler")
+        s_logger.error(f"Error executing 4-hour email report job: {e}")
 
 def send_12h_report_job():
     send_4h_report_job()
 
 def schedule_recurring_scrapes():
     db = next(get_db_session())
-    sources = db.query(Source).filter(Source.schedule.isnot(None)).all()
-    for source in sources:
-        scheduler.add_job(
-            func=lambda sid=source.id: run_scrape_task(sid),
-            trigger=CronTrigger.from_crontab(source.schedule),
-            id=f"scrape_{source.id}",
-            replace_existing=True
-        )
-    db.close()
+    try:
+        sources = db.query(Source).filter(Source.schedule.isnot(None)).all()
+        for source in sources:
+            scheduler.add_job(
+                func=lambda sid=source.id: run_scrape_task(sid),
+                trigger=CronTrigger.from_crontab(source.schedule),
+                id=f"scrape_{source.id}",
+                replace_existing=True
+            )
+    finally:
+        db.close()
 
     # Schedule 4-Hour Email Comprehensive Product & Service Price Digest
     scheduler.add_job(
@@ -67,6 +75,9 @@ def schedule_recurring_scrapes():
 def start_scheduler():
     schedule_recurring_scrapes()
     scheduler.start()
+    import logging
+    s_logger = logging.getLogger("app.scheduler")
+    s_logger.info("APScheduler successfully initialized and started with 4-hour email digest trigger.")
 
 def stop_scheduler():
     scheduler.shutdown()

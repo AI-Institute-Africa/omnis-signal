@@ -346,7 +346,7 @@ class EmailReporterService:
     @classmethod
     def send_4h_digest_email(cls, recipients: Optional[List[str]] = None) -> Dict[str, Any]:
         """Send the structured 4-hour comprehensive tariff report adhering strictly to user template."""
-        target_recipients = recipients or cls.RECIPIENTS
+        target_recipients = recipients or getattr(settings, "REPORT_RECIPIENTS", None) or cls.RECIPIENTS
         timestamp_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
         try:
