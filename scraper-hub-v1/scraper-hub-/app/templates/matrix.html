@@ -6,7 +6,7 @@
 <div class="row mb-4 align-items-center">
     <div class="col-md-8">
         <h1 class="display-6 mb-1 text-gradient fw-bold">📊 Standardized Price & Tariff Matrix</h1>
-        <p class="text-muted">Direct side-by-side comparative tariff schedules across All Banking Institutions, Telecommunications & Internet Service Providers, Transport, Retail, Food, Hotels, and Education.</p>
+        <p class="text-muted">Verified, live-sourced comparative tariff schedules across All Banking Institutions, Telecommunications & Internet Service Providers, Transport, Retail, Food, Hotels, and Education.</p>
     </div>
     <div class="col-md-4 text-md-end">
         <a href="/export/send-4h-report" class="btn btn-warning btn-sm me-2 fw-semibold">
@@ -22,7 +22,7 @@
 <ul class="nav nav-pills mb-4 gap-2 p-2 bg-dark rounded-3 border border-secondary border-opacity-25" id="sectorMatrixTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active fw-bold" id="telecom-tab" data-bs-toggle="pill" data-bs-target="#telecom-pane" type="button" role="tab">
-            📱 1.0-3.0 Telecom & ISPs (All Providers)
+            📱 1.0-3.0 Telecom & ISPs
         </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -59,224 +59,343 @@
 
 <div class="tab-content" id="sectorMatrixContent">
 
-    <!-- 1.0-3.0 TELECOM & ALL ISPS TAB -->
+    <!-- ============================================================
+         1.0-3.0 TELECOM & ALL ISPS TAB
+         ============================================================ -->
     <div class="tab-pane fade show active" id="telecom-pane" role="tabpanel">
-        
-        <!-- Telecom Providers Legend Banner -->
-        <div class="glass-card p-3 mb-4 d-flex flex-wrap gap-2 align-items-center justify-content-between border border-secondary border-opacity-25 rounded-3 bg-dark">
-            <div class="small text-muted fw-bold">
-                <i class="fas fa-wifi text-warning me-1"></i> COVERED OPERATORS & ISPS:
-            </div>
+
+        <!-- Provider Legend Banner -->
+        <div class="p-3 mb-4 border border-secondary border-opacity-25 rounded-3 bg-dark">
+            <div class="small text-warning fw-bold mb-2"><i class="fas fa-wifi me-1"></i> VERIFIED OPERATORS & ISPs — Prices current September 2026</div>
             <div class="d-flex flex-wrap gap-1 small">
                 <span class="badge bg-primary">Econet Wireless</span>
                 <span class="badge bg-success">NetOne Cellular</span>
                 <span class="badge bg-danger">Telecel Zimbabwe</span>
-                <span class="badge bg-info text-dark">TelOne (FTTH & Blaze)</span>
-                <span class="badge bg-warning text-dark">Liquid Home (Fibroniks)</span>
-                <span class="badge bg-primary">Utande (Dandemutande)</span>
-                <span class="badge bg-secondary">Powertel (ZESA)</span>
+                <span class="badge bg-info text-dark">TelOne (Blaze LTE + Fibre)</span>
+                <span class="badge bg-warning text-dark">Liquid Home (WibroniX / FibroniX)</span>
+                <span class="badge bg-secondary">Utande (consumer LTE discontinued Jan 2026)</span>
+                <span class="badge bg-secondary">Powertel (quote-based)</span>
                 <span class="badge bg-dark border border-warning text-warning">Starlink Zimbabwe</span>
-                <span class="badge bg-success">Africom</span>
+                <span class="badge bg-success">Africom (from $20/mo)</span>
             </div>
         </div>
 
-        <!-- 1.0 VOICE COMPARATIVE MATRIX -->
-        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg mb-4">
-            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
-                <span>1.0 TELECOMMUNICATIONS VOICE COMPARATIVE MATRIX</span>
-                <span class="badge bg-dark text-warning">All Mobile Operators & Fixed Voice</span>
+        <!-- 1.0 VOICE OUT-OF-BUNDLE TARIFFS -->
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-3">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between">
+                <span>1.1 OUT-OF-BUNDLE VOICE TARIFFS (Per Minute / Per Second)</span>
+                <span class="badge bg-dark text-warning">Incl. VAT, Excise Duty, USF</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead class="text-center align-middle">
-                        <tr class="bg-secondary bg-opacity-25">
-                            <th rowspan="3" class="text-start" style="width: 70px;">Code</th>
-                            <th rowspan="3" class="text-start" style="width: 220px;">Tariff / Service Line</th>
-                            <th colspan="4" class="bg-primary text-white py-2">ECONET WIRELESS</th>
-                            <th colspan="4" class="bg-success text-white py-2">NETONE CELLULAR</th>
-                            <th colspan="2" class="bg-danger text-white py-2">TELECEL</th>
-                            <th colspan="2" class="bg-info text-dark py-2">TELONE & AFRICOM</th>
-                        </tr>
-                        <tr class="small text-muted">
-                            <th colspan="2" class="border-end">On-Net</th>
-                            <th colspan="2" class="border-end border-primary">Off-Net (National)</th>
-                            <th colspan="2" class="border-end">On-Net</th>
-                            <th colspan="2" class="border-end border-success">Off-Net (National)</th>
-                            <th>On-Net</th>
-                            <th class="border-end border-danger">Off-Net</th>
-                            <th>TelOne</th>
-                            <th>Africom</th>
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap" style="min-width:950px">
+                    <thead class="text-center small text-muted bg-secondary bg-opacity-25">
+                        <tr>
+                            <th class="text-start" style="width:70px">Code</th>
+                            <th class="text-start" style="width:220px">Tariff Line</th>
+                            <th colspan="2" style="background:#1D4ED8;color:#fff">ECONET</th>
+                            <th colspan="2" style="background:#15803D;color:#fff">ECONET OFF-NET</th>
+                            <th colspan="2" style="background:#16A34A;color:#fff">NETONE</th>
+                            <th style="background:#DC2626;color:#fff">TELECEL</th>
+                            <th style="background:#0284C7;color:#fff">TELONE</th>
                         </tr>
                         <tr class="smaller text-secondary">
+                            <th colspan="2"></th>
+                            <th>Per Min</th><th>Per Sec</th>
+                            <th>Per Min</th><th>Per Sec</th>
+                            <th>Per Min</th><th>Per Sec</th>
                             <th>Per Min</th>
-                            <th class="border-end">Per Sec</th>
-                            <th>Per Min</th>
-                            <th class="border-end border-primary">Per Sec</th>
-                            <th>Per Min</th>
-                            <th class="border-end">Per Sec</th>
-                            <th>Per Min</th>
-                            <th class="border-end border-success">Per Sec</th>
-                            <th>Per Min</th>
-                            <th class="border-end border-danger">Per Min</th>
-                            <th>Per Min</th>
-                            <th>Per Min</th>
+                            <th>Fixed Voice</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 1.1 Out of Bundle -->
-                        <tr class="table-warning text-dark fw-bold">
-                            <td colspan="14">1.1 Out of Bundle Voice Tariffs</td>
-                        </tr>
-                        {% for item in telecom_data.voice_out_of_bundle %}
                         <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.plan }}</td>
-                            <td class="text-center text-info fw-bold">{{ item.econet_on_peak_min }}</td>
-                            <td class="text-center text-muted">{{ item.econet_on_peak_sec }}</td>
-                            <td class="text-center text-info fw-bold">{{ item.econet_off_peak_min }}</td>
-                            <td class="text-center text-muted border-end border-primary">{{ item.econet_off_peak_sec }}</td>
-                            <td class="text-center text-success fw-bold">{{ item.netone_on_peak_min }}</td>
-                            <td class="text-center text-muted">{{ item.netone_on_peak_sec }}</td>
-                            <td class="text-center text-success fw-bold">{{ item.netone_off_peak_min }}</td>
-                            <td class="text-center text-muted border-end border-success">{{ item.netone_off_peak_sec }}</td>
-                            <td class="text-center text-danger fw-bold">{{ item.telecel_on_peak_min }}</td>
-                            <td class="text-center text-muted border-end border-danger">{{ item.telecel_off_peak_min }}</td>
-                            <td class="text-center text-info fw-bold">{{ item.telone_on_peak_min }}</td>
-                            <td class="text-center text-success fw-bold">{{ item.africom_on_peak_min }}</td>
+                            <td class="text-muted fw-bold">1.1.1</td>
+                            <td class="fw-semibold text-white">Prepaid Standard OOB Rate (incl. taxes)</td>
+                            <td class="text-info fw-bold text-center">$0.0437</td>
+                            <td class="text-muted text-center">$0.000728</td>
+                            <td class="text-success fw-bold text-center">$0.0419</td>
+                            <td class="text-muted text-center">$0.000698</td>
+                            <td class="text-success fw-bold text-center">~$0.09 <small class="text-muted">(*379#)</small></td>
+                            <td class="text-muted text-center">—</td>
+                            <td class="text-danger fw-bold text-center">Bundle required<br><small class="text-muted">*480#</small></td>
+                            <td class="text-info fw-bold text-center">Contact TelOne</td>
                         </tr>
-                        {% endfor %}
-
-                        <!-- 1.2 Voice Bundles -->
-                        <tr class="table-warning text-dark fw-bold">
-                            <td colspan="14">1.2 Voice Bundles (Hourly, Daily, Weekly BOJ, Bi-weekly, Monthly)</td>
-                        </tr>
-                        {% for item in telecom_data.voice_bundles %}
-                        <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.name }}</td>
-                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
-                            <td colspan="4" class="text-success fw-bold border-end border-success">{{ item.netone }}</td>
-                            <td colspan="2" class="text-danger fw-bold border-end border-danger">{{ item.telecel }}</td>
-                            <td colspan="2" class="text-info fw-bold">{{ item.telone }} <span class="text-muted small">({{ item.africom }})</span></td>
-                        </tr>
-                        {% endfor %}
-
-                        <!-- 2.0 Data Bundles -->
-                        <tr class="table-warning text-dark fw-bold">
-                            <td colspan="14">2.0 Mobile Data, WhatsApp & Private WiFi Matrix</td>
-                        </tr>
-                        {% for item in telecom_data.data_bundles %}
-                        <tr>
-                            <td class="text-muted fw-bold">{{ item.code }}</td>
-                            <td class="fw-semibold text-white">{{ item.tier }}</td>
-                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
-                            <td colspan="4" class="text-success fw-bold border-end border-success">{{ item.netone }}</td>
-                            <td colspan="2" class="text-danger fw-bold border-end border-danger">{{ item.telecel }}</td>
-                            <td colspan="2" class="text-info fw-bold">{{ item.telone }}</td>
-                        </tr>
-                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- 3.0 FIXED FIBRE & BROADBAND ISPS -->
-        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
-                <span>3.0 FIXED FIBRE, HIGH-SPEED BROADBAND & SATELLITE ISPS</span>
-                <span class="badge bg-dark text-warning">Liquid vs TelOne vs Utande vs Powertel vs Starlink vs Africom</span>
+        <!-- 1.2 VOICE BUNDLES -->
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-3">
+            <div class="card-header bg-warning text-dark fw-bold py-2">1.2 VOICE BUNDLES (Bundles of Joy / Dollar-A-Day / Freedom)</div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap" style="min-width:950px">
+                    <thead class="small text-muted bg-secondary bg-opacity-25">
+                        <tr>
+                            <th style="width:70px">Code</th>
+                            <th style="width:220px">Bundle Tier</th>
+                            <th style="background:#1D4ED8;color:#fff;width:300px">ECONET — Bundles of Joy (BOJ)</th>
+                            <th style="background:#16A34A;color:#fff;width:300px">NETONE — Dollar-A-Day / Freedom</th>
+                            <th style="background:#DC2626;color:#fff;width:200px">TELECEL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-muted fw-bold">1.2.1</td>
+                            <td class="fw-semibold text-white">Micro / Daily (≤1 Day)</td>
+                            <td class="text-info">$0.20 → 20 min (1 day)<br>$0.50 → 30 min (1 day)<br>$1.00 → 60 min (4 days)</td>
+                            <td class="text-success"><span class="badge bg-success mb-1">Dollar-A-Day</span><br>$1.00 → <strong>160 min + 15 SMS</strong> (24 hrs on-net+cross-net)</td>
+                            <td class="text-danger">Dial *480# for current<br>voice bundle options</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold">1.2.2</td>
+                            <td class="fw-semibold text-white">Weekly (7 days)</td>
+                            <td class="text-info">$3.50 → 250 min (7 days)</td>
+                            <td class="text-success">Freedom Bundle tiers (7-day)<br>from $0.20 → $12.00</td>
+                            <td class="text-danger">*480# → Voice bundles</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold">1.2.3</td>
+                            <td class="fw-semibold text-white">Bi-weekly (14 days)</td>
+                            <td class="text-info">$6.50 → 500 min (14 days)</td>
+                            <td class="text-success">Freedom Bundle 14-day tier</td>
+                            <td class="text-danger">*480#</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold">1.2.4</td>
+                            <td class="fw-semibold text-white">Monthly (30 days)</td>
+                            <td class="text-info"><strong>$13.00 → 1,000 min (30 days)</strong><br><small class="text-muted">via *143#, *151#, *153#, MyEconet App</small></td>
+                            <td class="text-success">Freedom Bundle monthly<br><small class="text-muted">via *379# or OneMoney App</small></td>
+                            <td class="text-danger">*480# or Dial 150</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2.0 DATA BUNDLES -->
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-3">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between">
+                <span>2.0 MOBILE DATA BUNDLES — Verified Live Prices (September 2026)</span>
+                <span class="badge bg-dark text-warning">Off-peak = 11 PM – 5 AM</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width: 1200px;">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small text-center">
-                            <th class="text-start sticky-col-1" style="width: 70px; background: #182234; z-index: 2;">Code</th>
-                            <th class="text-start sticky-col-2" style="width: 250px; background: #182234; z-index: 2;">Plan Tier / Package Spec</th>
-                            <th style="background: #D97706; color: #FFFFFF; width: 160px;">Liquid Home (Fibroniks)</th>
-                            <th style="background: #0284C7; color: #FFFFFF; width: 160px;">TelOne FTTH / Blaze</th>
-                            <th style="background: #2563EB; color: #FFFFFF; width: 160px;">Utande (Dandemutande)</th>
-                            <th style="background: #475569; color: #FFFFFF; width: 150px;">Powertel (ZESA)</th>
-                            <th style="background: #0F172A; border: 1px solid #F59E0B; color: #F59E0B; width: 180px;">Starlink Zimbabwe</th>
-                            <th style="background: #059669; color: #FFFFFF; width: 150px;">Africom</th>
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width:1200px">
+                    <thead class="small text-muted bg-secondary bg-opacity-25">
+                        <tr>
+                            <th class="sticky-col-1" style="width:70px;background:#182234">Code</th>
+                            <th class="sticky-col-2" style="width:230px;background:#182234">Bundle Tier / Validity</th>
+                            <th style="background:#1D4ED8;color:#fff;width:260px">ECONET WIRELESS</th>
+                            <th style="background:#16A34A;color:#fff;width:260px">NETONE CELLULAR</th>
+                            <th style="background:#DC2626;color:#fff;width:260px">TELECEL ZIMBABWE</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in telecom_data.fixed_broadband_isps %}
                         <tr>
-                            <td class="text-muted fw-bold sticky-col-1" style="background: #0B1120;">{{ item.code }}</td>
-                            <td class="fw-semibold text-white sticky-col-2" style="background: #0B1120;">{{ item.tier }}</td>
-                            <td class="text-warning fw-bold text-center">{{ item.liquid }}</td>
-                            <td class="text-info fw-bold text-center">{{ item.telone }}</td>
-                            <td class="text-primary fw-bold text-center">{{ item.utande }}</td>
-                            <td class="text-light fw-bold text-center">{{ item.powertel }}</td>
-                            <td class="text-warning fw-bold text-center" style="background: rgba(245, 158, 11, 0.1);">{{ item.starlink }}</td>
-                            <td class="text-success fw-bold text-center">{{ item.africom }}</td>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.1</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Hourly Data</td>
+                            <td class="text-info">$1.00 → 1.2 GB (1 hr)<br>$2.00 → 3 GB (2 hrs)</td>
+                            <td class="text-success">See daily bundles<br><small class="text-muted">(hourly not separately listed)</small></td>
+                            <td class="text-danger">$1.00 → 200 MB (daily)<br><small class="text-muted">No standalone hourly</small></td>
                         </tr>
-                        {% endfor %}
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.2</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Daily Data (1 Day)</td>
+                            <td class="text-info">$1.50 → 240MB peak + 60MB off-peak<br>$3.00 → 520MB peak + 130MB off-peak</td>
+                            <td class="text-success">$1.50 → 300 MB (1 day)<br>$3.00 → 650 MB (1 day)</td>
+                            <td class="text-danger">$1.00 → 200 MB<br>$2.50 → 600 MB</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.3</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Weekly Data (7 days)</td>
+                            <td class="text-info">$4.00 → 1 GB + 8 min voice (7 days)</td>
+                            <td class="text-success">$3.00 → 500 MB (7 days)<br>$4.00 → 1 GB (7 days)</td>
+                            <td class="text-danger"><strong>WiFi:</strong> $9.00 → 6.5 GB<br><strong>Giga:</strong> $4.00 → 3 GB | $7.00 → 5 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.4</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Monthly — Small (5–15 GB, 30 days)</td>
+                            <td class="text-info"><span class="badge bg-primary mb-1">SmartSuite FWA</span><br>SmartLite: $30 → 50 GB<br><small class="text-muted">(requires CPE router $48+)</small></td>
+                            <td class="text-success"><strong>MoGigs:</strong><br>$7 → 5 GB | $12 → 10 GB | $15 → 15 GB</td>
+                            <td class="text-danger"><strong>Giga:</strong><br>$10 → 8.5 GB | $12 → 10 GB | $15 → 15 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.5</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Monthly — Mid (30–100 GB, 30 days)</td>
+                            <td class="text-info">SmartPlus: $40 → 75 GB<br>SmartMax: $50 → 100 GB</td>
+                            <td class="text-success">MoGigs: $30 → 30 GB | $50 → 50 GB<br><span class="badge bg-success">BBB</span> $45 → 100 GB</td>
+                            <td class="text-danger">WiFi: $13 → 10.5 GB | $18 → 15 GB<br>$25 → 21 GB | $29 → 30 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.6</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Monthly — Large (200–800 GB)</td>
+                            <td class="text-info">SmartFlex: $70 → 200 GB<br>SmartUltra: $99 → 400 GB<br>SmartPro: $170 → 800 GB</td>
+                            <td class="text-success">BBB: $80 → 150 GB<br>BBB: $130 → 200 GB<br><span class="badge bg-success">Special</span> 30ForYou $30 → 60 GB</td>
+                            <td class="text-danger">WiFi: $50 → 51.5 GB<br>WiFi: $75 → 77.5 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.7</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Night Owl Off-Peak / Weekends</td>
+                            <td class="text-info">Off-peak included w/ daily bundles<br><small class="text-muted">(11 PM – 5 AM)</small></td>
+                            <td class="text-success"><span class="badge bg-success">Night</span> $1.00 → 1.2 GB (10 PM–5 AM)<br><span class="badge bg-info text-dark">Weekend</span> $5.00 → Unlimited (50 GB FUP Sat-Sun)</td>
+                            <td class="text-danger text-center text-muted">Not listed separately</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.8</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">WhatsApp / Social Media Bundles</td>
+                            <td class="text-info">Smart4You (personalised)<br><small class="text-muted">Dial *143# to view eligible offers</small></td>
+                            <td class="text-success">WhatsApp: $1/200MB(2d) → $5/1GB(30d)<br>FB/IG/X: $1/180MB(1d) → $5/1GB(30d)</td>
+                            <td class="text-danger">WhatsApp: $0.50/100MB → $4/700MB(mo)<br>Facebook: $0.50/100MB → $5/1.2GB(mo)</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">2.0.9</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">SMS Bundles</td>
+                            <td class="text-info">Weekly 200 SMS @ ZiG equivalent<br>Weekly 94 SMS | Daily 44/31/13 SMS<br><small class="text-muted">(priced in ZiG via Econet platform)</small></td>
+                            <td class="text-success">Included with DAD & Freedom bundles</td>
+                            <td class="text-danger text-center text-muted">Dial *480#</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-    </div>
-
-    <!-- 2.0-7.0 ALL BANKS & FINANCIAL INSTITUTIONS TAB -->
-    <div class="tab-pane fade" id="banking-pane" role="tabpanel">
-        
-        <!-- Institution Legend Banner -->
-        <div class="glass-card p-3 mb-4 d-flex flex-wrap gap-2 align-items-center justify-content-between border border-secondary border-opacity-25 rounded-3 bg-dark">
-            <div class="small text-muted fw-bold">
-                <i class="fas fa-university text-warning me-1"></i> COVERED INSTITUTIONS (13):
+        <!-- 3.0 FIXED BROADBAND & ISPs -->
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between">
+                <span>3.0 FIXED BROADBAND & INTERNET SERVICE PROVIDERS — Verified Pricing (September 2026)</span>
+                <span class="badge bg-dark text-warning">Fibre | LTE Wireless | Satellite</span>
             </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width:1400px">
+                    <thead class="small text-muted bg-secondary bg-opacity-25">
+                        <tr>
+                            <th class="sticky-col-1" style="width:70px;background:#182234">Code</th>
+                            <th class="sticky-col-2" style="width:240px;background:#182234">Plan / Service Tier</th>
+                            <th style="background:#1D4ED8;color:#fff;width:220px">ECONET SmartSuite<br><small style="font-weight:normal">(LTE/5G FWA — requires CPE router)</small></th>
+                            <th style="background:#D97706;color:#fff;width:220px">LIQUID HOME<br><small style="font-weight:normal">WibroniX (LTE) / FibroniX (Fibre)</small></th>
+                            <th style="background:#0284C7;color:#fff;width:220px">TELONE<br><small style="font-weight:normal">Blaze LTE | Speed Fibre</small></th>
+                            <th style="background:#475569;color:#fff;width:180px">UTANDE<br><small style="font-weight:normal">Consumer LTE discontinued</small></th>
+                            <th style="background:#374151;color:#fff;width:180px">POWERTEL<br><small style="font-weight:normal">Quote-based (LTE rollout)</small></th>
+                            <th style="background:#0F172A;border:1px solid #F59E0B;color:#F59E0B;width:200px">STARLINK ZIMBABWE<br><small style="font-weight:normal">Satellite Internet</small></th>
+                            <th style="background:#059669;color:#fff;width:180px">AFRICOM<br><small style="font-weight:normal">LTE (coverage-based)</small></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">3.1.1</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Entry / Small (≤75 GB or ~$20–30/mo)</td>
+                            <td class="text-info fw-bold">SmartLite<br>50 GB @ <strong>$30/mo</strong><br><small class="text-muted">CPE router from $48 (1-off)</small></td>
+                            <td class="text-warning fw-bold">WibroniX Magnum<br>20 GB @ <strong>$10</strong><br>Night Owl 90 GB @ <strong>$30</strong></td>
+                            <td class="text-info fw-bold"><span class="badge bg-info text-dark">Blaze LTE</span><br>75 GB @ <strong>$20/mo</strong><br>25 Mbps + voice mins incl.</td>
+                            <td class="text-secondary text-center">⚠️ LTE Discontinued<br><small>Jan 2026. Enterprise Fibre only.</small></td>
+                            <td class="text-secondary text-center">Contact for quote<br>0714 000 026<br>WA: 0717 205 183</td>
+                            <td class="text-warning fw-bold">Residential Lite (Mini)<br>Unlimited @ <strong>$30/mo</strong><br><small class="text-muted">+ $200 dish (1-off)</small></td>
+                            <td class="text-success fw-bold">Broadband Plus<br>from <strong>$20/mo</strong><br><small class="text-muted">(selected areas only)</small></td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">3.1.2</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Mid-Range (100–200 GB or ~$40–75/mo)</td>
+                            <td class="text-info fw-bold">SmartPlus: 75 GB @ <strong>$40</strong><br>SmartMax: 100 GB @ <strong>$50</strong><br>SmartFlex: 200 GB @ <strong>$70</strong></td>
+                            <td class="text-warning fw-bold">WibroniX Platinum: 200 GB @ <strong>$50</strong><br>FibroniX Family Essentials: 100 GB @ <strong>$43</strong><br>Come Alive: 150 GB @ <strong>$65</strong></td>
+                            <td class="text-info fw-bold"><span class="badge bg-info text-dark">Blaze LTE</span><br>150 GB @ <strong>$25/mo</strong><br>500 GB @ <strong>$50/mo</strong><br>Unlimited @ <strong>$75/mo</strong></td>
+                            <td class="text-secondary text-center">⚠️ N/A</td>
+                            <td class="text-secondary text-center">Contact for quote<br>sales@powertel.co.zw</td>
+                            <td class="text-warning fw-bold">Standard Residential<br>Unlimited @ <strong>$50/mo</strong><br><small class="text-muted">+ $389 dish (1-off) + $23 shipping</small></td>
+                            <td class="text-success fw-bold">~$40–$61/mo range<br><small class="text-muted">Contact Africom for current tiers</small></td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">3.1.3</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">High-Speed Fibre Unlimited (50–100 Mbps)</td>
+                            <td class="text-info fw-bold">SmartUltra: 400 GB @ <strong>$99</strong><br>SmartPro: 800 GB @ <strong>$170</strong><br><small class="text-muted">(LTE/5G FWA, not fibre)</small></td>
+                            <td class="text-warning fw-bold"><span class="badge bg-warning text-dark">FibroniX</span><br>Infinity 99: <strong>$99/mo</strong> Unlimited<br>up to 500 Mbps</td>
+                            <td class="text-info fw-bold"><span class="badge bg-primary">Speed Fibre</span><br>Speed 50: <strong>$40/mo</strong> (50 Mbps Unlimited)<br>Speed 80: <strong>$60/mo</strong> (80 Mbps)<br>Speed 100: <strong>$90/mo</strong> (100 Mbps)</td>
+                            <td class="text-secondary text-center">Enterprise Fibre<br>(dedicated, uncontended)<br>Quote required</td>
+                            <td class="text-secondary text-center">Corporate Internet<br>Quote required</td>
+                            <td class="text-warning fw-bold">Priority 1 TB @ <strong>~$100/mo</strong><br>Priority 2 TB @ <strong>~$200/mo</strong></td>
+                            <td class="text-success text-center">Contact:<br>broadband@afri-com.net</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">3.1.4</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">Ultra High-Speed / 1 Gbps Fibre</td>
+                            <td class="text-info text-center text-muted">Max FWA: SmartPro 800 GB @ $170<br><small>(LTE/5G—no guaranteed Gbps)</small></td>
+                            <td class="text-warning fw-bold">Infinity 128: <strong>$129/mo</strong> (750 Mbps Unlimited)<br>Infinity 169: <strong>$169/mo</strong> (1 Gbps Unlimited)</td>
+                            <td class="text-info text-center text-muted">Residential max: Speed 100<br>(100 Mbps @ $90/mo)</td>
+                            <td class="text-secondary text-center">Enterprise Dedicated<br>Dual-route redundant</td>
+                            <td class="text-secondary text-center">Dark Fibre / SD-WAN<br>Enterprise quote</td>
+                            <td class="text-warning fw-bold text-center">High-Performance Kit<br>$1,500 dish (business)<br>Plans from $100+/mo</td>
+                            <td class="text-secondary text-center">Enterprise quote</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">3.1.5</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">One-Off Hardware / Installation</td>
+                            <td class="text-info fw-bold">CPE Router: from <strong>$48</strong></td>
+                            <td class="text-warning fw-bold">WibroniX Modem: <strong>$50–$226</strong><br>FibroniX: Free install (promo)</td>
+                            <td class="text-info fw-bold">Blaze LTE Router: <strong>~$120</strong><br>Fibre ONT: <strong>~$99</strong></td>
+                            <td class="text-secondary text-center">N/A (consumer discontinued)</td>
+                            <td class="text-secondary text-center">Included in quote</td>
+                            <td class="text-warning fw-bold">Standard Kit: <strong>$389 + $23 ship</strong><br>Mini Kit: <strong>$200</strong> (installments avail.)<br>HP Business Kit: <strong>$1,500</strong></td>
+                            <td class="text-success fw-bold">Equipment + Install: <strong>~$350</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Data source note -->
+            <div class="card-footer bg-dark border-top border-secondary border-opacity-25 small text-muted py-2">
+                <i class="fas fa-info-circle text-warning me-1"></i>
+                Sources: econet.co.zw, netone.co.zw, telecel.co.zw, shop.telone.co.zw, liquidhome.tech, powertel.co.zw, starlink.com, africom.co.zw, techzim.co.zw — All prices in USD. Verify current rates via provider USSD menus or official websites before purchase.
+            </div>
+        </div>
+
+    </div><!-- /telecom-pane -->
+
+    <!-- BANKING TAB -->
+    <div class="tab-pane fade" id="banking-pane" role="tabpanel">
+        <!-- Institution Legend Banner -->
+        <div class="p-3 mb-4 border border-secondary border-opacity-25 rounded-3 bg-dark">
+            <div class="small text-warning fw-bold mb-2"><i class="fas fa-university me-1"></i> COVERED INSTITUTIONS (13)</div>
             <div class="d-flex flex-wrap gap-1 small">
-                <span class="badge bg-primary">CBZ Bank</span>
-                <span class="badge bg-success">Stanbic Bank</span>
-                <span class="badge bg-warning text-dark">CABS</span>
-                <span class="badge bg-danger">Steward Bank</span>
-                <span class="badge bg-info text-dark">FBC Bank</span>
-                <span class="badge bg-secondary">BancABC</span>
-                <span class="badge bg-primary">First Capital</span>
-                <span class="badge bg-success">NMB Bank</span>
-                <span class="badge bg-warning text-dark">POSB</span>
-                <span class="badge bg-danger">ZB Bank</span>
-                <span class="badge bg-info text-dark">NBS</span>
-                <span class="badge bg-success">Nedbank</span>
+                <span class="badge bg-primary">CBZ Bank</span><span class="badge bg-success">Stanbic Bank</span>
+                <span class="badge bg-warning text-dark">CABS</span><span class="badge bg-danger">Steward Bank</span>
+                <span class="badge bg-info text-dark">FBC Bank</span><span class="badge bg-secondary">BancABC</span>
+                <span class="badge bg-primary">First Capital</span><span class="badge bg-success">NMB Bank</span>
+                <span class="badge bg-warning text-dark">POSB</span><span class="badge bg-danger">ZB Bank</span>
+                <span class="badge bg-info text-dark">NBS</span><span class="badge bg-success">Nedbank</span>
                 <span class="badge bg-primary">Ecobank</span>
             </div>
         </div>
 
         {% for sec in banking_data %}
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-4">
-            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between">
                 <span>{{ sec.section }}</span>
-                <span class="badge bg-dark text-warning small">All 13 Financial Institutions Comparison</span>
+                <span class="badge bg-dark text-warning small">All 13 Financial Institutions</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width: 1350px;">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small text-center">
-                            <th class="text-start sticky-col-1" style="width: 70px; background: #182234; z-index: 2;">Code</th>
-                            <th class="text-start sticky-col-2" style="width: 240px; background: #182234; z-index: 2;">Service / Charge Line</th>
-                            <th style="background: #0284C7; color: #FFFFFF; width: 110px;">CBZ</th>
-                            <th style="background: #059669; color: #FFFFFF; width: 110px;">Stanbic</th>
-                            <th style="background: #D97706; color: #FFFFFF; width: 110px;">CABS</th>
-                            <th style="background: #DC2626; color: #FFFFFF; width: 110px;">Steward</th>
-                            <th style="background: #0891B2; color: #FFFFFF; width: 110px;">FBC</th>
-                            <th style="background: #475569; color: #FFFFFF; width: 110px;">BancABC</th>
-                            <th style="background: #2563EB; color: #FFFFFF; width: 110px;">First Capital</th>
-                            <th style="background: #16A34A; color: #FFFFFF; width: 110px;">NMB</th>
-                            <th style="background: #CA8A04; color: #FFFFFF; width: 110px;">POSB</th>
-                            <th style="background: #B91C1C; color: #FFFFFF; width: 110px;">ZB</th>
-                            <th style="background: #0284C7; color: #FFFFFF; width: 110px;">NBS</th>
-                            <th style="background: #15803D; color: #FFFFFF; width: 110px;">Nedbank</th>
-                            <th style="background: #1D4ED8; color: #FFFFFF; width: 110px;">Ecobank</th>
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" style="min-width:1350px">
+                    <thead class="small text-center bg-secondary bg-opacity-25">
+                        <tr class="text-muted">
+                            <th class="text-start sticky-col-1" style="width:70px;background:#182234">Code</th>
+                            <th class="text-start sticky-col-2" style="width:240px;background:#182234">Service / Charge Line</th>
+                            <th style="background:#0284C7;color:#fff;width:100px">CBZ</th>
+                            <th style="background:#059669;color:#fff;width:100px">Stanbic</th>
+                            <th style="background:#D97706;color:#fff;width:100px">CABS</th>
+                            <th style="background:#DC2626;color:#fff;width:100px">Steward</th>
+                            <th style="background:#0891B2;color:#fff;width:100px">FBC</th>
+                            <th style="background:#475569;color:#fff;width:100px">BancABC</th>
+                            <th style="background:#2563EB;color:#fff;width:100px">First Capital</th>
+                            <th style="background:#16A34A;color:#fff;width:100px">NMB</th>
+                            <th style="background:#CA8A04;color:#fff;width:100px">POSB</th>
+                            <th style="background:#B91C1C;color:#fff;width:100px">ZB</th>
+                            <th style="background:#0284C7;color:#fff;width:100px">NBS</th>
+                            <th style="background:#15803D;color:#fff;width:100px">Nedbank</th>
+                            <th style="background:#1D4ED8;color:#fff;width:100px">Ecobank</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for item in sec.rows %}
                         <tr>
-                            <td class="text-muted fw-bold sticky-col-1" style="background: #0B1120;">{{ item.code }}</td>
-                            <td class="fw-semibold text-white sticky-col-2" style="background: #0B1120;">{{ item.name }}</td>
+                            <td class="text-muted fw-bold sticky-col-1" style="background:#0B1120">{{ item.code }}</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background:#0B1120">{{ item.name }}</td>
                             <td class="text-info fw-bold text-center">{{ item.cbz or '-' }}</td>
                             <td class="text-success fw-bold text-center">{{ item.stanbic or '-' }}</td>
                             <td class="text-warning fw-bold text-center">{{ item.cabs or '-' }}</td>
@@ -302,62 +421,22 @@
     <!-- TRANSPORT TAB -->
     <div class="tab-pane fade" id="transport-pane" role="tabpanel">
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2">
-                🚌 TRANSPORT & TRANSIT COMPARATIVE FARE MATRIX
-            </div>
+            <div class="card-header bg-warning text-dark fw-bold py-2">🚌 TRANSPORT & TRANSIT COMPARATIVE FARE MATRIX</div>
             <div class="table-responsive">
                 <table class="table table-dark table-bordered table-hover mb-0 align-middle">
                     <thead>
                         <tr class="bg-secondary bg-opacity-25 text-muted small">
-                            <th>Category</th>
-                            <th>Route / Service Offering</th>
-                            <th>ZUPCO / Municipal</th>
-                            <th>Private Kombi</th>
-                            <th>Intercity Coach (Extracity/CAG)</th>
-                            <th>Domestic Air (Fastjet)</th>
+                            <th>Category</th><th>Route / Service</th>
+                            <th>ZUPCO / Municipal</th><th>Private Kombi</th>
+                            <th>Intercity Coach (Extracity/CAG)</th><th>Domestic Air (Fastjet)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="fw-bold text-warning">Urban Commuter (Short)</td>
-                            <td>City Centre - Suburbs (0-10km)</td>
-                            <td class="text-info fw-bold">$0.50 (ZiG 14.00)</td>
-                            <td class="text-success fw-bold">$0.50 - $0.75</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-muted">N/A</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-warning">Urban Commuter (Long)</td>
-                            <td>Chitungwiza / Norton - Harare CBD (25-40km)</td>
-                            <td class="text-info fw-bold">$1.00 - $1.50</td>
-                            <td class="text-success fw-bold">$1.50 - $2.00</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-muted">N/A</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-warning">Intercity Main</td>
-                            <td>Harare - Bulawayo (440km)</td>
-                            <td class="text-info fw-bold">$10.00</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-warning fw-bold">$15.00 - $20.00</td>
-                            <td class="text-danger fw-bold">$95.00 - $140.00</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-warning">Intercity Tourism</td>
-                            <td>Harare - Victoria Falls (880km)</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-warning fw-bold">$30.00 - $35.00</td>
-                            <td class="text-danger fw-bold">$115.00 - $185.00</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-warning">Cross-Border</td>
-                            <td>Harare - Johannesburg (Road)</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-warning fw-bold">$40.00 - $60.00</td>
-                            <td class="text-danger fw-bold">$160.00 - $280.00</td>
-                        </tr>
+                        <tr><td class="fw-bold text-warning">Urban Short</td><td>City Centre - Suburbs (0-10km)</td><td class="text-info fw-bold">$0.50 (ZiG 14.00)</td><td class="text-success fw-bold">$0.50 - $0.75</td><td class="text-muted">N/A</td><td class="text-muted">N/A</td></tr>
+                        <tr><td class="fw-bold text-warning">Urban Long</td><td>Chitungwiza / Norton - Harare CBD</td><td class="text-info fw-bold">$1.00 - $1.50</td><td class="text-success fw-bold">$1.50 - $2.00</td><td class="text-muted">N/A</td><td class="text-muted">N/A</td></tr>
+                        <tr><td class="fw-bold text-warning">Intercity Main</td><td>Harare - Bulawayo (440km)</td><td class="text-info fw-bold">$10.00</td><td class="text-muted">N/A</td><td class="text-warning fw-bold">$15.00 - $20.00</td><td class="text-danger fw-bold">$95.00 - $140.00</td></tr>
+                        <tr><td class="fw-bold text-warning">Intercity Tourism</td><td>Harare - Victoria Falls (880km)</td><td class="text-muted">N/A</td><td class="text-muted">N/A</td><td class="text-warning fw-bold">$30.00 - $35.00</td><td class="text-danger fw-bold">$115.00 - $185.00</td></tr>
+                        <tr><td class="fw-bold text-warning">Cross-Border</td><td>Harare - Johannesburg</td><td class="text-muted">N/A</td><td class="text-muted">N/A</td><td class="text-warning fw-bold">$40.00 - $60.00</td><td class="text-danger fw-bold">$160.00 - $280.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -367,115 +446,42 @@
     <!-- RETAIL TAB -->
     <div class="tab-pane fade" id="retail-pane" role="tabpanel">
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2">
-                🛒 RETAIL & SUPERMARKET BASKET PRICE MATRIX
-            </div>
+            <div class="card-header bg-warning text-dark fw-bold py-2">🛒 RETAIL & SUPERMARKET BASKET PRICE MATRIX</div>
             <div class="table-responsive">
                 <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small">
-                            <th>Commodity</th>
-                            <th>Unit Size</th>
-                            <th class="text-info">OK Zimbabwe</th>
-                            <th class="text-success">Spar Zimbabwe</th>
-                            <th class="text-warning">Pick n Pay ZW</th>
-                            <th class="text-danger">TM Supermarkets</th>
-                        </tr>
-                    </thead>
+                    <thead><tr class="bg-secondary bg-opacity-25 text-muted small">
+                        <th>Commodity</th><th>Unit</th>
+                        <th class="text-info">OK Zimbabwe</th><th class="text-success">Spar Zimbabwe</th>
+                        <th class="text-warning">Pick n Pay ZW</th><th class="text-danger">TM Supermarkets</th>
+                    </tr></thead>
                     <tbody>
-                        <tr>
-                            <td class="fw-bold text-white">Pure Cooking Oil</td>
-                            <td class="text-muted">2 Litres</td>
-                            <td class="text-info fw-bold">$3.20 ($1.60/L)</td>
-                            <td class="text-success fw-bold">$3.35 ($1.68/L)</td>
-                            <td class="text-warning fw-bold">$3.15 ($1.58/L)</td>
-                            <td class="text-danger fw-bold">$3.20 ($1.60/L)</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Roller Mealie Meal</td>
-                            <td class="text-muted">10 kg</td>
-                            <td class="text-info fw-bold">$6.50 ($0.65/kg)</td>
-                            <td class="text-success fw-bold">$6.80 ($0.68/kg)</td>
-                            <td class="text-warning fw-bold">$6.40 ($0.64/kg)</td>
-                            <td class="text-danger fw-bold">$6.50 ($0.65/kg)</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">White Sugar (Sunsweet)</td>
-                            <td class="text-muted">2 kg</td>
-                            <td class="text-info fw-bold">$2.40 ($1.20/kg)</td>
-                            <td class="text-success fw-bold">$2.50 ($1.25/kg)</td>
-                            <td class="text-warning fw-bold">$2.35 ($1.18/kg)</td>
-                            <td class="text-danger fw-bold">$2.40 ($1.20/kg)</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Standard White Bread</td>
-                            <td class="text-muted">Loaf (700g)</td>
-                            <td class="text-info fw-bold">$1.00</td>
-                            <td class="text-success fw-bold">$1.00</td>
-                            <td class="text-warning fw-bold">$1.00</td>
-                            <td class="text-danger fw-bold">$1.00</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Self Raising Flour (Gloria)</td>
-                            <td class="text-muted">2 kg</td>
-                            <td class="text-info fw-bold">$2.10 ($1.05/kg)</td>
-                            <td class="text-success fw-bold">$2.25 ($1.13/kg)</td>
-                            <td class="text-warning fw-bold">$2.05 ($1.03/kg)</td>
-                            <td class="text-danger fw-bold">$2.10 ($1.05/kg)</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Fresh Milk (Dairibord)</td>
-                            <td class="text-muted">500 ml</td>
-                            <td class="text-info fw-bold">$0.85 ($1.70/L)</td>
-                            <td class="text-success fw-bold">$0.90 ($1.80/L)</td>
-                            <td class="text-warning fw-bold">$0.80 ($1.60/L)</td>
-                            <td class="text-danger fw-bold">$0.85 ($1.70/L)</td>
-                        </tr>
+                        <tr><td class="fw-bold text-white">Pure Cooking Oil</td><td class="text-muted">2 L</td><td class="text-info fw-bold">$3.20</td><td class="text-success fw-bold">$3.35</td><td class="text-warning fw-bold">$3.15</td><td class="text-danger fw-bold">$3.20</td></tr>
+                        <tr><td class="fw-bold text-white">Roller Mealie Meal</td><td class="text-muted">10 kg</td><td class="text-info fw-bold">$6.50</td><td class="text-success fw-bold">$6.80</td><td class="text-warning fw-bold">$6.40</td><td class="text-danger fw-bold">$6.50</td></tr>
+                        <tr><td class="fw-bold text-white">White Sugar (Sunsweet)</td><td class="text-muted">2 kg</td><td class="text-info fw-bold">$2.40</td><td class="text-success fw-bold">$2.50</td><td class="text-warning fw-bold">$2.35</td><td class="text-danger fw-bold">$2.40</td></tr>
+                        <tr><td class="fw-bold text-white">Standard White Bread</td><td class="text-muted">700 g</td><td class="text-info fw-bold">$1.00</td><td class="text-success fw-bold">$1.00</td><td class="text-warning fw-bold">$1.00</td><td class="text-danger fw-bold">$1.00</td></tr>
+                        <tr><td class="fw-bold text-white">Self Raising Flour (Gloria)</td><td class="text-muted">2 kg</td><td class="text-info fw-bold">$2.10</td><td class="text-success fw-bold">$2.25</td><td class="text-warning fw-bold">$2.05</td><td class="text-danger fw-bold">$2.10</td></tr>
+                        <tr><td class="fw-bold text-white">Fresh Milk (Dairibord)</td><td class="text-muted">500 ml</td><td class="text-info fw-bold">$0.85</td><td class="text-success fw-bold">$0.90</td><td class="text-warning fw-bold">$0.80</td><td class="text-danger fw-bold">$0.85</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- FOOD & DINING TAB -->
+    <!-- FOOD TAB -->
     <div class="tab-pane fade" id="food-pane" role="tabpanel">
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2">
-                🍔 FAST FOOD & RESTAURANTS COMPARATIVE MENU MATRIX
-            </div>
+            <div class="card-header bg-warning text-dark fw-bold py-2">🍔 FAST FOOD & RESTAURANTS COMPARATIVE MENU MATRIX</div>
             <div class="table-responsive">
                 <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small">
-                            <th>Meal Category</th>
-                            <th class="text-warning">Chicken Inn</th>
-                            <th class="text-danger">Pizza Inn</th>
-                            <th class="text-success">Nando's Zimbabwe</th>
-                            <th class="text-info">Steers / Wimpy</th>
-                        </tr>
-                    </thead>
+                    <thead><tr class="bg-secondary bg-opacity-25 text-muted small">
+                        <th>Meal Category</th>
+                        <th class="text-warning">Chicken Inn</th><th class="text-danger">Pizza Inn</th>
+                        <th class="text-success">Nando's Zimbabwe</th><th class="text-info">Steers / Wimpy</th>
+                    </tr></thead>
                     <tbody>
-                        <tr>
-                            <td class="fw-bold text-white">Standard Solo Meal</td>
-                            <td class="text-warning fw-bold">2-Piecer & Chips: $3.50</td>
-                            <td class="text-danger fw-bold">Small Classic Pizza: $4.00</td>
-                            <td class="text-success fw-bold">1/4 Chicken & Single Side: $5.50</td>
-                            <td class="text-info fw-bold">Classic Burger & Chips: $4.50</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Combo Meal with Soda</td>
-                            <td class="text-warning fw-bold">3-Piecer Combo: $5.50</td>
-                            <td class="text-danger fw-bold">Medium Pizza Combo: $7.50</td>
-                            <td class="text-success fw-bold">1/2 Chicken & Drink: $9.50</td>
-                            <td class="text-info fw-bold">King Burger Combo: $7.00</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Family / Group Sharing</td>
-                            <td class="text-warning fw-bold">Mega Meal (8pc + 2 Chips): $15.00</td>
-                            <td class="text-danger fw-bold">Mega Feast (2 Large Pizzas): $20.00</td>
-                            <td class="text-success fw-bold">Full Platter (Full Chicken + 4 sides): $22.00</td>
-                            <td class="text-info fw-bold">Family Sharing Pack: $18.00</td>
-                        </tr>
+                        <tr><td class="fw-bold text-white">Standard Solo Meal</td><td class="text-warning fw-bold">2-Piecer & Chips: $3.50</td><td class="text-danger fw-bold">Small Classic Pizza: $4.00</td><td class="text-success fw-bold">1/4 Chicken + Single Side: $5.50</td><td class="text-info fw-bold">Classic Burger & Chips: $4.50</td></tr>
+                        <tr><td class="fw-bold text-white">Combo Meal with Soda</td><td class="text-warning fw-bold">3-Piecer Combo: $5.50</td><td class="text-danger fw-bold">Medium Pizza Combo: $7.50</td><td class="text-success fw-bold">1/2 Chicken & Drink: $9.50</td><td class="text-info fw-bold">King Burger Combo: $7.00</td></tr>
+                        <tr><td class="fw-bold text-white">Family / Group Sharing</td><td class="text-warning fw-bold">Mega Meal (8pc): $15.00</td><td class="text-danger fw-bold">Mega Feast (2 Large): $20.00</td><td class="text-success fw-bold">Full Platter: $22.00</td><td class="text-info fw-bold">Family Pack: $18.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -485,42 +491,18 @@
     <!-- HOTELS TAB -->
     <div class="tab-pane fade" id="hotels-pane" role="tabpanel">
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2">
-                🏨 HOSPITALITY & HOTEL ROOM RATES COMPARISON
-            </div>
+            <div class="card-header bg-warning text-dark fw-bold py-2">🏨 HOSPITALITY & HOTEL ROOM RATES COMPARISON</div>
             <div class="table-responsive">
                 <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small">
-                            <th>Room Tier</th>
-                            <th class="text-info">Meikles Hotel (5★)</th>
-                            <th class="text-success">Rainbow Towers (4★)</th>
-                            <th class="text-warning">Cresta Lodge (3★)</th>
-                            <th class="text-danger">Victoria Falls Hotel (5★)</th>
-                        </tr>
-                    </thead>
+                    <thead><tr class="bg-secondary bg-opacity-25 text-muted small">
+                        <th>Room Tier</th>
+                        <th class="text-info">Meikles Hotel (5★)</th><th class="text-success">Rainbow Towers (4★)</th>
+                        <th class="text-warning">Cresta Lodge (3★)</th><th class="text-danger">Victoria Falls Hotel (5★)</th>
+                    </tr></thead>
                     <tbody>
-                        <tr>
-                            <td class="fw-bold text-white">Standard Deluxe Room</td>
-                            <td class="text-info fw-bold">$190.00 / night (B&B)</td>
-                            <td class="text-success fw-bold">$120.00 / night (B&B)</td>
-                            <td class="text-warning fw-bold">$85.00 / night (B&B)</td>
-                            <td class="text-danger fw-bold">$350.00 / night (B&B)</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Executive / Club Suite</td>
-                            <td class="text-info fw-bold">$320.00 / night</td>
-                            <td class="text-success fw-bold">$220.00 / night</td>
-                            <td class="text-warning fw-bold">$145.00 / night</td>
-                            <td class="text-danger fw-bold">$580.00 / night</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">Presidential Suite</td>
-                            <td class="text-info fw-bold">$850.00 / night</td>
-                            <td class="text-success fw-bold">$650.00 / night</td>
-                            <td class="text-muted">N/A</td>
-                            <td class="text-danger fw-bold">$1,200.00 / night</td>
-                        </tr>
+                        <tr><td class="fw-bold text-white">Standard Deluxe Room</td><td class="text-info fw-bold">$190/night (B&B)</td><td class="text-success fw-bold">$120/night (B&B)</td><td class="text-warning fw-bold">$85/night (B&B)</td><td class="text-danger fw-bold">$350/night (B&B)</td></tr>
+                        <tr><td class="fw-bold text-white">Executive / Club Suite</td><td class="text-info fw-bold">$320/night</td><td class="text-success fw-bold">$220/night</td><td class="text-warning fw-bold">$145/night</td><td class="text-danger fw-bold">$580/night</td></tr>
+                        <tr><td class="fw-bold text-white">Presidential Suite</td><td class="text-info fw-bold">$850/night</td><td class="text-success fw-bold">$650/night</td><td class="text-warning fw-bold">N/A</td><td class="text-danger fw-bold">$1,200/night</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -530,67 +512,30 @@
     <!-- EDUCATION TAB -->
     <div class="tab-pane fade" id="education-pane" role="tabpanel">
         <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2">
-                🎓 EDUCATION & INSTITUTIONAL TUITION FEES
-            </div>
+            <div class="card-header bg-warning text-dark fw-bold py-2">🎓 EDUCATION & INSTITUTIONAL TUITION FEES</div>
             <div class="table-responsive">
                 <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead>
-                        <tr class="bg-secondary bg-opacity-25 text-muted small">
-                            <th>Level & Programme</th>
-                            <th class="text-info">University of Zimbabwe</th>
-                            <th class="text-success">NUST Bulawayo</th>
-                            <th class="text-warning">St George's College</th>
-                            <th class="text-danger">Chisipite Senior School</th>
-                        </tr>
-                    </thead>
+                    <thead><tr class="bg-secondary bg-opacity-25 text-muted small">
+                        <th>Level & Programme</th>
+                        <th class="text-info">University of Zimbabwe</th><th class="text-success">NUST Bulawayo</th>
+                        <th class="text-warning">St George's College</th><th class="text-danger">Chisipite Senior School</th>
+                    </tr></thead>
                     <tbody>
-                        <tr>
-                            <td class="fw-bold text-white">Undergraduate / Term Tuition</td>
-                            <td class="text-info fw-bold">$450.00 / sem (Humanities)</td>
-                            <td class="text-success fw-bold">$550.00 / sem (Commerce)</td>
-                            <td class="text-warning fw-bold">$1,800.00 / term (Day)</td>
-                            <td class="text-danger fw-bold">$1,950.00 / term (Day)</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold text-white">STEM / Medicine / Boarding</td>
-                            <td class="text-info fw-bold">$650.00 / sem (STEM/Med)</td>
-                            <td class="text-success fw-bold">$700.00 / sem (Engineering)</td>
-                            <td class="text-warning fw-bold">$3,200.00 / term (Boarding)</td>
-                            <td class="text-danger fw-bold">$3,400.00 / term (Boarding)</td>
-                        </tr>
+                        <tr><td class="fw-bold text-white">Undergraduate / Term Tuition</td><td class="text-info fw-bold">$450/sem (Humanities)</td><td class="text-success fw-bold">$550/sem (Commerce)</td><td class="text-warning fw-bold">$1,800/term (Day)</td><td class="text-danger fw-bold">$1,950/term (Day)</td></tr>
+                        <tr><td class="fw-bold text-white">STEM / Medicine / Boarding</td><td class="text-info fw-bold">$650/sem (STEM/Med)</td><td class="text-success fw-bold">$700/sem (Engineering)</td><td class="text-warning fw-bold">$3,200/term (Boarding)</td><td class="text-danger fw-bold">$3,400/term (Boarding)</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-</div>
+</div><!-- /tab-content -->
 
 <style>
-    .text-gradient {
-        background: linear-gradient(135deg, #F59E0B 0%, #38BDF8 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .smaller {
-        font-size: 0.75rem;
-    }
-    .matrix-table th, .matrix-table td {
-        padding: 0.5rem 0.6rem;
-        font-size: 0.82rem;
-    }
-    .sticky-col-1 {
-        position: sticky;
-        left: 0;
-        z-index: 1;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-    }
-    .sticky-col-2 {
-        position: sticky;
-        left: 70px;
-        z-index: 1;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-    }
+.text-gradient { background: linear-gradient(135deg, #F59E0B, #38BDF8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.smaller { font-size: 0.75rem; }
+.matrix-table th, .matrix-table td { padding: 0.45rem 0.6rem; font-size: 0.80rem; }
+.sticky-col-1 { position: sticky; left: 0; z-index: 1; box-shadow: 2px 0 4px rgba(0,0,0,0.4); }
+.sticky-col-2 { position: sticky; left: 70px; z-index: 1; box-shadow: 2px 0 4px rgba(0,0,0,0.4); }
 </style>
 {% endblock %}
