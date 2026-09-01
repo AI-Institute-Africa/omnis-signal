@@ -24,6 +24,17 @@ async def trigger_4h_report():
     res = EmailReporterService.send_4h_digest_email()
     return res
 
+@router.get("/matrix")
+@router.get("/prices")
+async def standardized_price_matrix(request: Request):
+    from app.services.email_reporter import EmailReporterService
+    telecom_data = EmailReporterService.get_structured_telecom_data()
+    banking_data = EmailReporterService.get_structured_banking_data()
+    return templates.TemplateResponse(request, "matrix.html", {
+        "telecom_data": telecom_data,
+        "banking_data": banking_data,
+    })
+
 @router.get("/")
 async def dashboard(request: Request, db: Session = Depends(get_db)):
     try:

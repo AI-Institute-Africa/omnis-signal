@@ -1,0 +1,461 @@
+{% extends "base.html" %}
+
+{% block title %}Standardized Price & Tariff Matrix - Omnis Signal{% endblock %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+        <h1 class="display-6 mb-1 text-gradient fw-bold">📊 Standardized Price & Tariff Matrix</h1>
+        <p class="text-muted">Direct side-by-side comparative tariff schedules across Telecommunications, Banking, Transport, Retail, Food, Hotels, and Education.</p>
+    </div>
+    <div class="col-md-4 text-md-end">
+        <a href="/export/send-4h-report" class="btn btn-warning btn-sm me-2 fw-semibold">
+            <i class="fas fa-paper-plane me-1"></i> Send Email Report
+        </a>
+        <a href="/export/matrix.xlsx" class="btn btn-outline-info btn-sm">
+            <i class="fas fa-file-excel me-1"></i> Export Matrix
+        </a>
+    </div>
+</div>
+
+<!-- Sector Navigation Tabs -->
+<ul class="nav nav-pills mb-4 gap-2 p-2 bg-dark rounded-3 border border-secondary border-opacity-25" id="sectorMatrixTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active fw-bold" id="telecom-tab" data-bs-toggle="pill" data-bs-target="#telecom-pane" type="button" role="tab">
+            📱 1.0 Telecom
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="banking-tab" data-bs-toggle="pill" data-bs-target="#banking-pane" type="button" role="tab">
+            🏦 2.0-7.0 Banking
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="transport-tab" data-bs-toggle="pill" data-bs-target="#transport-pane" type="button" role="tab">
+            🚌 Transport
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="retail-tab" data-bs-toggle="pill" data-bs-target="#retail-pane" type="button" role="tab">
+            🛒 Retail & Groceries
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="food-tab" data-bs-toggle="pill" data-bs-target="#food-pane" type="button" role="tab">
+            🍔 Food & Dining
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="hotels-tab" data-bs-toggle="pill" data-bs-target="#hotels-pane" type="button" role="tab">
+            🏨 Hotels
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link fw-bold" id="education-tab" data-bs-toggle="pill" data-bs-target="#education-pane" type="button" role="tab">
+            🎓 Education
+        </button>
+    </li>
+</ul>
+
+<div class="tab-content" id="sectorMatrixContent">
+    
+    <!-- 1.0 TELECOM TAB -->
+    <div class="tab-pane fade show active" id="telecom-pane" role="tabpanel">
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
+                <span>1.0 TELECOMMUNICATIONS COMPARATIVE TARIFF MATRIX</span>
+                <span class="badge bg-dark text-warning">Econet vs NetOne vs Telecel</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead class="text-center align-middle">
+                        <tr class="bg-secondary bg-opacity-25">
+                            <th rowspan="3" class="text-start" style="width: 70px;">Code</th>
+                            <th rowspan="3" class="text-start" style="width: 220px;">Tariff / Service Line</th>
+                            <th colspan="4" class="bg-primary text-white py-2">ECONET WIRELESS</th>
+                            <th colspan="4" class="bg-success text-white py-2">NETONE CELLULAR</th>
+                        </tr>
+                        <tr class="small text-muted">
+                            <th colspan="2" class="border-end">On-Net</th>
+                            <th colspan="2" class="border-end border-primary">Off-Net (National)</th>
+                            <th colspan="2" class="border-end">On-Net</th>
+                            <th colspan="2">Off-Net (National)</th>
+                        </tr>
+                        <tr class="smaller text-secondary">
+                            <th>Per Min</th>
+                            <th class="border-end">Per Sec</th>
+                            <th>Per Min</th>
+                            <th class="border-end border-primary">Per Sec</th>
+                            <th>Per Min</th>
+                            <th class="border-end">Per Sec</th>
+                            <th>Per Min</th>
+                            <th>Per Sec</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 1.1 Out of Bundle -->
+                        <tr class="table-warning text-dark fw-bold">
+                            <td colspan="10">1.1 Out of Bundle Voice Tariffs</td>
+                        </tr>
+                        {% for item in telecom_data.voice_out_of_bundle %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.plan }}</td>
+                            <td class="text-center text-info fw-bold">{{ item.econet_on_peak_min }}</td>
+                            <td class="text-center text-muted">{{ item.econet_on_peak_sec }}</td>
+                            <td class="text-center text-info fw-bold">{{ item.econet_off_peak_min }}</td>
+                            <td class="text-center text-muted border-end border-primary">{{ item.econet_off_peak_sec }}</td>
+                            <td class="text-center text-success fw-bold">{{ item.netone_on_peak_min }}</td>
+                            <td class="text-center text-muted">{{ item.netone_on_peak_sec }}</td>
+                            <td class="text-center text-success fw-bold">{{ item.netone_off_peak_min }}</td>
+                            <td class="text-center text-muted">{{ item.netone_off_peak_sec }}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <!-- 1.2 Voice Bundles -->
+                        <tr class="table-warning text-dark fw-bold">
+                            <td colspan="10">1.2 Voice Bundles (Hourly, Daily, Weekly BOJ, Bi-weekly, Monthly)</td>
+                        </tr>
+                        {% for item in telecom_data.voice_bundles %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.name }}</td>
+                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
+                            <td colspan="4" class="text-success fw-bold">{{ item.netone }} <span class="text-muted small ms-2">(Telecel: {{ item.telecel }})</span></td>
+                        </tr>
+                        {% endfor %}
+
+                        <!-- 2.0 Data Bundles -->
+                        <tr class="table-warning text-dark fw-bold">
+                            <td colspan="10">2.0 Mobile Data, WhatsApp & Private WiFi Matrix</td>
+                        </tr>
+                        {% for item in telecom_data.data_bundles %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.tier }}</td>
+                            <td colspan="4" class="text-info fw-bold border-end border-primary">{{ item.econet }}</td>
+                            <td colspan="4" class="text-success fw-bold">{{ item.netone }} <span class="text-warning small ms-2">| {{ item.telecel }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2.0-7.0 BANKING TAB -->
+    <div class="tab-pane fade" id="banking-pane" role="tabpanel">
+        {% for sec in banking_data %}
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark fw-bold py-2">
+                {{ sec.section }}
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small">
+                            <th style="width: 70px;">Code</th>
+                            <th>Service / Charge Line</th>
+                            <th class="text-info" style="width: 18%;">CBZ Bank</th>
+                            <th class="text-success" style="width: 18%;">Stanbic Bank</th>
+                            <th class="text-warning" style="width: 18%;">CABS</th>
+                            <th class="text-danger" style="width: 18%;">Steward Bank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in sec.rows %}
+                        <tr>
+                            <td class="text-muted fw-bold">{{ item.code }}</td>
+                            <td class="fw-semibold text-white">{{ item.name }}</td>
+                            <td class="text-info fw-bold">{{ item.cbz }}</td>
+                            <td class="text-success fw-bold">{{ item.stanbic }}</td>
+                            <td class="text-warning fw-bold">{{ item.cabs }}</td>
+                            <td class="text-danger fw-bold">{{ item.steward }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- TRANSPORT TAB -->
+    <div class="tab-pane fade" id="transport-pane" role="tabpanel">
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2">
+                🚌 TRANSPORT & TRANSIT COMPARATIVE FARE MATRIX
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small">
+                            <th>Category</th>
+                            <th>Route / Service Offering</th>
+                            <th>ZUPCO / Municipal</th>
+                            <th>Private Kombi</th>
+                            <th>Intercity Coach (Extracity/CAG)</th>
+                            <th>Domestic Air (Fastjet)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-warning">Urban Commuter (Short)</td>
+                            <td>City Centre - Suburbs (0-10km)</td>
+                            <td class="text-info fw-bold">$0.50 (ZiG 14.00)</td>
+                            <td class="text-success fw-bold">$0.50 - $0.75</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-muted">N/A</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-warning">Urban Commuter (Long)</td>
+                            <td>Chitungwiza / Norton - Harare CBD (25-40km)</td>
+                            <td class="text-info fw-bold">$1.00 - $1.50</td>
+                            <td class="text-success fw-bold">$1.50 - $2.00</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-muted">N/A</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-warning">Intercity Main</td>
+                            <td>Harare - Bulawayo (440km)</td>
+                            <td class="text-info fw-bold">$10.00</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-warning fw-bold">$15.00 - $20.00</td>
+                            <td class="text-danger fw-bold">$95.00 - $140.00</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-warning">Intercity Tourism</td>
+                            <td>Harare - Victoria Falls (880km)</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-warning fw-bold">$30.00 - $35.00</td>
+                            <td class="text-danger fw-bold">$115.00 - $185.00</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-warning">Cross-Border</td>
+                            <td>Harare - Johannesburg (Road)</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-warning fw-bold">$40.00 - $60.00</td>
+                            <td class="text-danger fw-bold">$160.00 - $280.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- RETAIL TAB -->
+    <div class="tab-pane fade" id="retail-pane" role="tabpanel">
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2">
+                🛒 RETAIL & SUPERMARKET BASKET PRICE MATRIX
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small">
+                            <th>Commodity</th>
+                            <th>Unit Size</th>
+                            <th class="text-info">OK Zimbabwe</th>
+                            <th class="text-success">Spar Zimbabwe</th>
+                            <th class="text-warning">Pick n Pay ZW</th>
+                            <th class="text-danger">TM Supermarkets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-white">Pure Cooking Oil</td>
+                            <td class="text-muted">2 Litres</td>
+                            <td class="text-info fw-bold">$3.20 ($1.60/L)</td>
+                            <td class="text-success fw-bold">$3.35 ($1.68/L)</td>
+                            <td class="text-warning fw-bold">$3.15 ($1.58/L)</td>
+                            <td class="text-danger fw-bold">$3.20 ($1.60/L)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Roller Mealie Meal</td>
+                            <td class="text-muted">10 kg</td>
+                            <td class="text-info fw-bold">$6.50 ($0.65/kg)</td>
+                            <td class="text-success fw-bold">$6.80 ($0.68/kg)</td>
+                            <td class="text-warning fw-bold">$6.40 ($0.64/kg)</td>
+                            <td class="text-danger fw-bold">$6.50 ($0.65/kg)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">White Sugar (Sunsweet)</td>
+                            <td class="text-muted">2 kg</td>
+                            <td class="text-info fw-bold">$2.40 ($1.20/kg)</td>
+                            <td class="text-success fw-bold">$2.50 ($1.25/kg)</td>
+                            <td class="text-warning fw-bold">$2.35 ($1.18/kg)</td>
+                            <td class="text-danger fw-bold">$2.40 ($1.20/kg)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Standard White Bread</td>
+                            <td class="text-muted">Loaf (700g)</td>
+                            <td class="text-info fw-bold">$1.00</td>
+                            <td class="text-success fw-bold">$1.00</td>
+                            <td class="text-warning fw-bold">$1.00</td>
+                            <td class="text-danger fw-bold">$1.00</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Self Raising Flour (Gloria)</td>
+                            <td class="text-muted">2 kg</td>
+                            <td class="text-info fw-bold">$2.10 ($1.05/kg)</td>
+                            <td class="text-success fw-bold">$2.25 ($1.13/kg)</td>
+                            <td class="text-warning fw-bold">$2.05 ($1.03/kg)</td>
+                            <td class="text-danger fw-bold">$2.10 ($1.05/kg)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Fresh Milk (Dairibord)</td>
+                            <td class="text-muted">500 ml</td>
+                            <td class="text-info fw-bold">$0.85 ($1.70/L)</td>
+                            <td class="text-success fw-bold">$0.90 ($1.80/L)</td>
+                            <td class="text-warning fw-bold">$0.80 ($1.60/L)</td>
+                            <td class="text-danger fw-bold">$0.85 ($1.70/L)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOD & DINING TAB -->
+    <div class="tab-pane fade" id="food-pane" role="tabpanel">
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2">
+                🍔 FAST FOOD & RESTAURANTS COMPARATIVE MENU MATRIX
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small">
+                            <th>Meal Category</th>
+                            <th class="text-warning">Chicken Inn</th>
+                            <th class="text-danger">Pizza Inn</th>
+                            <th class="text-success">Nando's Zimbabwe</th>
+                            <th class="text-info">Steers / Wimpy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-white">Standard Solo Meal</td>
+                            <td class="text-warning fw-bold">2-Piecer & Chips: $3.50</td>
+                            <td class="text-danger fw-bold">Small Classic Pizza: $4.00</td>
+                            <td class="text-success fw-bold">1/4 Chicken & Single Side: $5.50</td>
+                            <td class="text-info fw-bold">Classic Burger & Chips: $4.50</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Combo Meal with Soda</td>
+                            <td class="text-warning fw-bold">3-Piecer Combo: $5.50</td>
+                            <td class="text-danger fw-bold">Medium Pizza Combo: $7.50</td>
+                            <td class="text-success fw-bold">1/2 Chicken & Drink: $9.50</td>
+                            <td class="text-info fw-bold">King Burger Combo: $7.00</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Family / Group Sharing</td>
+                            <td class="text-warning fw-bold">Mega Meal (8pc + 2 Chips): $15.00</td>
+                            <td class="text-danger fw-bold">Mega Feast (2 Large Pizzas): $20.00</td>
+                            <td class="text-success fw-bold">Full Platter (Full Chicken + 4 sides): $22.00</td>
+                            <td class="text-info fw-bold">Family Sharing Pack: $18.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOTELS TAB -->
+    <div class="tab-pane fade" id="hotels-pane" role="tabpanel">
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2">
+                🏨 HOSPITALITY & HOTEL ROOM RATES COMPARISON
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small">
+                            <th>Room Tier</th>
+                            <th class="text-info">Meikles Hotel (5★)</th>
+                            <th class="text-success">Rainbow Towers (4★)</th>
+                            <th class="text-warning">Cresta Lodge (3★)</th>
+                            <th class="text-danger">Victoria Falls Hotel (5★)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-white">Standard Deluxe Room</td>
+                            <td class="text-info fw-bold">$190.00 / night (B&B)</td>
+                            <td class="text-success fw-bold">$120.00 / night (B&B)</td>
+                            <td class="text-warning fw-bold">$85.00 / night (B&B)</td>
+                            <td class="text-danger fw-bold">$350.00 / night (B&B)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Executive / Club Suite</td>
+                            <td class="text-info fw-bold">$320.00 / night</td>
+                            <td class="text-success fw-bold">$220.00 / night</td>
+                            <td class="text-warning fw-bold">$145.00 / night</td>
+                            <td class="text-danger fw-bold">$580.00 / night</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">Presidential Suite</td>
+                            <td class="text-info fw-bold">$850.00 / night</td>
+                            <td class="text-success fw-bold">$650.00 / night</td>
+                            <td class="text-muted">N/A</td>
+                            <td class="text-danger fw-bold">$1,200.00 / night</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDUCATION TAB -->
+    <div class="tab-pane fade" id="education-pane" role="tabpanel">
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
+            <div class="card-header bg-warning text-dark fw-bold py-2">
+                🎓 EDUCATION & INSTITUTIONAL TUITION FEES
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small">
+                            <th>Level & Programme</th>
+                            <th class="text-info">University of Zimbabwe</th>
+                            <th class="text-success">NUST Bulawayo</th>
+                            <th class="text-warning">St George's College</th>
+                            <th class="text-danger">Chisipite Senior School</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-white">Undergraduate / Term Tuition</td>
+                            <td class="text-info fw-bold">$450.00 / sem (Humanities)</td>
+                            <td class="text-success fw-bold">$550.00 / sem (Commerce)</td>
+                            <td class="text-warning fw-bold">$1,800.00 / term (Day)</td>
+                            <td class="text-danger fw-bold">$1,950.00 / term (Day)</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-white">STEM / Medicine / Boarding</td>
+                            <td class="text-info fw-bold">$650.00 / sem (STEM/Med)</td>
+                            <td class="text-success fw-bold">$700.00 / sem (Engineering)</td>
+                            <td class="text-warning fw-bold">$3,200.00 / term (Boarding)</td>
+                            <td class="text-danger fw-bold">$3,400.00 / term (Boarding)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, #F59E0B 0%, #38BDF8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .smaller {
+        font-size: 0.75rem;
+    }
+</style>
+{% endblock %}

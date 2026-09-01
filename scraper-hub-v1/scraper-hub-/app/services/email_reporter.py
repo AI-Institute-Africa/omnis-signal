@@ -71,7 +71,7 @@ class EmailReporterService:
         return [
             {
                 "section": "2.1 INTEREST INCOME",
-                "items": [
+                "rows": [
                     {"code": "2.1.1", "name": "Consumer Loan Interest", "cbz": "18.0% - 24.0% p.a.", "stanbic": "16.5% - 22.0% p.a.", "cabs": "17.0% - 23.0% p.a.", "steward": "19.0% - 26.0% p.a."},
                     {"code": "2.1.2", "name": "Corporate Loan Interest", "cbz": "14.0% - 18.0% p.a.", "stanbic": "13.0% - 17.5% p.a.", "cabs": "14.5% - 19.0% p.a.", "steward": "15.0% - 20.0% p.a."},
                     {"code": "2.1.4", "name": "Mortgage Interest", "cbz": "12.0% - 15.0% p.a.", "stanbic": "11.5% - 14.5% p.a.", "cabs": "10.5% - 14.0% p.a.", "steward": "13.0% - 16.0% p.a."},
@@ -79,7 +79,7 @@ class EmailReporterService:
             },
             {
                 "section": "2.2 ESTABLISHMENT FEES",
-                "items": [
+                "rows": [
                     {"code": "2.2.1", "name": "Consumer Establishment fees", "cbz": "2.5% (Min $15.00)", "stanbic": "2.0% (Min $20.00)", "cabs": "2.0% (Min $10.00)", "steward": "3.0% (Min $12.00)"},
                     {"code": "2.2.2", "name": "Corporate Establishment fees", "cbz": "1.5% - 2.5%", "stanbic": "1.25% - 2.0%", "cabs": "1.5% - 2.25%", "steward": "2.0% - 3.0%"},
                     {"code": "2.2.3", "name": "Mortgage Establishment fees", "cbz": "2.0% (Min $50.00)", "stanbic": "1.75% (Min $75.00)", "cabs": "1.5% (Min $40.00)", "steward": "2.5% (Min $50.00)"},
@@ -88,7 +88,7 @@ class EmailReporterService:
             },
             {
                 "section": "2.3 ADMINISTRATION, APPLICATION & UPFRONT FEES",
-                "items": [
+                "rows": [
                     {"code": "2.3.1", "name": "Consumer Loan Admin fees", "cbz": "$5.00 / month", "stanbic": "$6.00 / month", "cabs": "$3.50 / month", "steward": "$5.00 / month"},
                     {"code": "2.3.2", "name": "Corporate Upfront Commitment fees", "cbz": "1.00% flat", "stanbic": "0.75% flat", "cabs": "1.00% flat", "steward": "1.25% flat"},
                     {"code": "2.3.3", "name": "Corporate Facility Application Fee", "cbz": "$100.00", "stanbic": "$150.00", "cabs": "$80.00", "steward": "$100.00"},
@@ -98,7 +98,7 @@ class EmailReporterService:
             },
             {
                 "section": "3.0 ACCOUNT SERVICE",
-                "items": [
+                "rows": [
                     {"code": "3.1.1", "name": "Monthly Account Service Fees (Individuals)", "cbz": "$3.00 / mo", "stanbic": "$5.00 / mo", "cabs": "$2.50 / mo", "steward": "$2.00 / mo"},
                     {"code": "3.1.2", "name": "Monthly Account Service Fees (Corporates)", "cbz": "$15.00 / mo", "stanbic": "$20.00 / mo", "cabs": "$12.00 / mo", "steward": "$15.00 / mo"},
                     {"code": "3.1.9", "name": "Low cost Individuals Account Service", "cbz": "$1.00 / mo", "stanbic": "$1.50 / mo", "cabs": "$0.50 / mo", "steward": "FREE"},
@@ -111,7 +111,7 @@ class EmailReporterService:
             },
             {
                 "section": "4.0 POS AND CARDS",
-                "items": [
+                "rows": [
                     {"code": "4.1.1", "name": "Discount Commission Full POS / per month", "cbz": "1.25% - 2.0%", "stanbic": "1.00% - 1.75%", "cabs": "1.20% - 1.80%", "steward": "1.50% - 2.25%"},
                     {"code": "4.1.2", "name": "Discount Commission M-POS / per month", "cbz": "1.50%", "stanbic": "1.25%", "cabs": "1.30%", "steward": "1.75%"},
                     {"code": "4.2.1", "name": "Zimswitch Fee (Local POS / ATM)", "cbz": "$0.20 + 0.5%", "stanbic": "$0.25 + 0.4%", "cabs": "$0.15 + 0.4%", "steward": "$0.20 + 0.5%"},
@@ -125,7 +125,7 @@ class EmailReporterService:
             },
             {
                 "section": "5.0 WITHDRAWALS",
-                "items": [
+                "rows": [
                     {"code": "5.1.1", "name": "Corporate Cash Withdrawals (Manual / Branch)", "cbz": "1.75% (Min $5.00)", "stanbic": "1.50% (Min $6.00)", "cabs": "1.50% (Min $4.00)", "steward": "2.00% (Min $5.00)"},
                     {"code": "5.1.2", "name": "Individuals Cash Withdrawals (Manual / Branch)", "cbz": "2.00% (Min $2.00)", "stanbic": "1.75% (Min $3.00)", "cabs": "1.75% (Min $1.50)", "steward": "2.25% (Min $2.00)"},
                     {"code": "5.1.3", "name": "Credit over the counter charges account", "cbz": "$3.00", "stanbic": "$4.00", "cabs": "$2.50", "steward": "$3.00"},
@@ -135,7 +135,7 @@ class EmailReporterService:
             },
             {
                 "section": "6.0 SUNDRY SERVICES",
-                "items": [
+                "rows": [
                     {"code": "6.1.1", "name": "Exchange Control Standard Application", "cbz": "$25.00", "stanbic": "$35.00", "cabs": "$20.00", "steward": "$30.00"},
                     {"code": "6.1.2", "name": "Exchange Control Photocopies per page", "cbz": "$0.20", "stanbic": "$0.30", "cabs": "$0.15", "steward": "$0.25"},
                     {"code": "6.1.3", "name": "Accompanying client to Reserve Bank", "cbz": "$50.00", "stanbic": "$75.00", "cabs": "$45.00", "steward": "$60.00"},
@@ -147,7 +147,7 @@ class EmailReporterService:
             },
             {
                 "section": "7.0 MINIMUM BALANCES",
-                "items": [
+                "rows": [
                     {"code": "7.1.1", "name": "Minimum Balance - Individuals (Current / Savings)", "cbz": "$5.00 / $10.00", "stanbic": "$10.00 / $20.00", "cabs": "$5.00 / $5.00", "steward": "$5.00 / $5.00"},
                     {"code": "7.1.2", "name": "Minimum Balance - Corporates (Business Account)", "cbz": "$50.00", "stanbic": "$100.00", "cabs": "$40.00", "steward": "$50.00"},
                 ]
