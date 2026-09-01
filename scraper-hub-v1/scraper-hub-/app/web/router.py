@@ -41,11 +41,14 @@ async def trigger_4h_report():
 @router.get("/prices")
 async def standardized_price_matrix(request: Request):
     from app.services.email_reporter import EmailReporterService
+    from app.data.retail_commodities import RETAIL_COMMODITIES_DATA
     telecom_data = EmailReporterService.get_structured_telecom_data()
     banking_data = EmailReporterService.get_structured_banking_data()
+    retail_data = RETAIL_COMMODITIES_DATA
     return templates.TemplateResponse(request, "matrix.html", {
         "telecom_data": telecom_data,
         "banking_data": banking_data,
+        "retail_data": retail_data,
     })
 
 @router.get("/")

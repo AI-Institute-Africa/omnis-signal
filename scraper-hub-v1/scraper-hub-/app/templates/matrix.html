@@ -443,29 +443,74 @@
         </div>
     </div>
 
-    <!-- RETAIL TAB -->
+    <!-- RETAIL TAB (78 Extensive Commodities across 10 Departments) -->
     <div class="tab-pane fade" id="retail-pane" role="tabpanel">
-        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg">
-            <div class="card-header bg-warning text-dark fw-bold py-2">🛒 RETAIL & SUPERMARKET BASKET PRICE MATRIX</div>
+        
+        <!-- Retail Search & Stats Banner -->
+        <div class="glass-card p-3 mb-4 d-flex flex-wrap gap-3 align-items-center justify-content-between border border-secondary border-opacity-25 rounded-3 bg-dark">
+            <div>
+                <div class="small text-warning fw-bold"><i class="fas fa-shopping-basket me-1"></i> RETAIL & COMMODITIES INTELLIGENCE (78 PRODUCTS)</div>
+                <div class="text-muted small">Comparing real shelf prices across OK Zimbabwe, Spar Zimbabwe, TM Pick n Pay, and Gain Cash & Carry / Wholesalers.</div>
+            </div>
+            <div class="d-flex gap-2">
+                <input type="text" id="retailSearchInput" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Search product (e.g. Sugar, Oil, Chicken)..." style="width: 280px;" onkeyup="filterRetailTable()">
+            </div>
+        </div>
+
+        <div class="card bg-dark border border-secondary border-opacity-50 overflow-hidden shadow-lg mb-4">
+            <div class="card-header bg-warning text-dark fw-bold py-2 d-flex justify-content-between align-items-center">
+                <span>🛒 COMPREHENSIVE RETAIL COMMODITY PRICE MATRIX (78 PRODUCTS)</span>
+                <span class="badge bg-dark text-warning small">10 Supermarket Departments</span>
+            </div>
             <div class="table-responsive">
-                <table class="table table-dark table-bordered table-hover mb-0 align-middle">
-                    <thead><tr class="bg-secondary bg-opacity-25 text-muted small">
-                        <th>Commodity</th><th>Unit</th>
-                        <th class="text-info">OK Zimbabwe</th><th class="text-success">Spar Zimbabwe</th>
-                        <th class="text-warning">Pick n Pay ZW</th><th class="text-danger">TM Supermarkets</th>
-                    </tr></thead>
+                <table class="table table-dark table-bordered table-hover mb-0 align-middle text-nowrap matrix-table" id="retailMatrixTable" style="min-width: 1100px;">
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25 text-muted small text-center">
+                            <th class="text-start sticky-col-1" style="width: 80px; background: #182234; z-index: 2;">Code</th>
+                            <th class="text-start sticky-col-2" style="width: 280px; background: #182234; z-index: 2;">Commodity / Product Name</th>
+                            <th style="width: 110px;">Unit Size</th>
+                            <th style="background: #0284C7; color: #FFFFFF; width: 140px;">OK Zimbabwe</th>
+                            <th style="background: #059669; color: #FFFFFF; width: 140px;">Spar Zimbabwe</th>
+                            <th style="background: #D97706; color: #FFFFFF; width: 140px;">TM Pick n Pay</th>
+                            <th style="background: #475569; color: #FFFFFF; width: 160px;">Gain / Choppies</th>
+                            <th style="width: 140px;">Department</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td class="fw-bold text-white">Pure Cooking Oil</td><td class="text-muted">2 L</td><td class="text-info fw-bold">$3.20</td><td class="text-success fw-bold">$3.35</td><td class="text-warning fw-bold">$3.15</td><td class="text-danger fw-bold">$3.20</td></tr>
-                        <tr><td class="fw-bold text-white">Roller Mealie Meal</td><td class="text-muted">10 kg</td><td class="text-info fw-bold">$6.50</td><td class="text-success fw-bold">$6.80</td><td class="text-warning fw-bold">$6.40</td><td class="text-danger fw-bold">$6.50</td></tr>
-                        <tr><td class="fw-bold text-white">White Sugar (Sunsweet)</td><td class="text-muted">2 kg</td><td class="text-info fw-bold">$2.40</td><td class="text-success fw-bold">$2.50</td><td class="text-warning fw-bold">$2.35</td><td class="text-danger fw-bold">$2.40</td></tr>
-                        <tr><td class="fw-bold text-white">Standard White Bread</td><td class="text-muted">700 g</td><td class="text-info fw-bold">$1.00</td><td class="text-success fw-bold">$1.00</td><td class="text-warning fw-bold">$1.00</td><td class="text-danger fw-bold">$1.00</td></tr>
-                        <tr><td class="fw-bold text-white">Self Raising Flour (Gloria)</td><td class="text-muted">2 kg</td><td class="text-info fw-bold">$2.10</td><td class="text-success fw-bold">$2.25</td><td class="text-warning fw-bold">$2.05</td><td class="text-danger fw-bold">$2.10</td></tr>
-                        <tr><td class="fw-bold text-white">Fresh Milk (Dairibord)</td><td class="text-muted">500 ml</td><td class="text-info fw-bold">$0.85</td><td class="text-success fw-bold">$0.90</td><td class="text-warning fw-bold">$0.80</td><td class="text-danger fw-bold">$0.85</td></tr>
+                        {% for item in retail_data %}
+                        <tr class="retail-row">
+                            <td class="text-muted fw-bold sticky-col-1" style="background: #0B1120;">{{ item.code }}</td>
+                            <td class="fw-semibold text-white sticky-col-2" style="background: #0B1120;">{{ item.product }}</td>
+                            <td class="text-center text-muted small">{{ item.unit }}</td>
+                            <td class="text-info fw-bold text-center">{{ item.ok }}</td>
+                            <td class="text-success fw-bold text-center">{{ item.spar }}</td>
+                            <td class="text-warning fw-bold text-center">{{ item.tm_pnp }}</td>
+                            <td class="text-light fw-bold text-center">{{ item.gain_choppies }}</td>
+                            <td class="text-center small"><span class="badge bg-secondary bg-opacity-50 text-light">{{ item.dept }}</span></td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+<script>
+function filterRetailTable() {
+    var input = document.getElementById("retailSearchInput");
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("retailMatrixTable");
+    var tr = table.getElementsByClassName("retail-row");
+    for (var i = 0; i < tr.length; i++) {
+        var text = tr[i].textContent || tr[i].innerText;
+        if (text.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
 
     <!-- FOOD TAB -->
     <div class="tab-pane fade" id="food-pane" role="tabpanel">

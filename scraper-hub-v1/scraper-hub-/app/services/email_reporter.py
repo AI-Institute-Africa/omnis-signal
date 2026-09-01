@@ -17,6 +17,12 @@ class EmailReporterService:
     RECIPIENTS = ["dennis@rubiem.com", "takuechakanyuka@gmail.com", "arthur@rubiem.com"]
 
     @classmethod
+    def get_structured_retail_data(cls):
+        """Returns comprehensive 78-item retail commodity price matrix across OK, Spar, TM Pick n Pay, and Gain/Choppies."""
+        from app.data.retail_commodities import RETAIL_COMMODITIES_DATA
+        return RETAIL_COMMODITIES_DATA
+
+    @classmethod
     def get_structured_telecom_data(cls) -> Dict[str, Any]:
         """Returns verified, live-sourced comparative matrix for ALL Zimbabwe MNOs
         (Econet Wireless, NetOne Cellular, Telecel) and Fixed Broadband ISPs
