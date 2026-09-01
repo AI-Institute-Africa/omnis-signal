@@ -206,7 +206,8 @@ class EmailReporterService:
         banking_sections_html = ""
         for sec in b_data:
             b_rows = ""
-            for item in sec["items"]:
+            rows = sec.get("rows", sec.get("items", []))
+            for item in rows:
                 b_rows += f"""
                 <tr style="border-bottom: 1px solid #1E293B;">
                     <td style="padding: 7px 10px; font-weight: 600; color: #94A3B8; font-size: 12px; width: 65px;">{item['code']}</td>
