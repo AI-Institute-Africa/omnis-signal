@@ -21,46 +21,9 @@ templates = Jinja2Templates(directory="app/templates")
 @router.get("/export/matrix.xlsx")
 @router.get("/export/matrix")
 async def export_matrix_excel():
-    """Generates an Excel workbook containing comparative matrices for Telecom, Banking, Transport, Retail, etc."""
-    from app.services.email_reporter import EmailReporterService
-    telecom_data = EmailReporterService.get_structured_telecom_data()
-    banking_data = EmailReporterService.get_structured_banking_data()
-    
-    output = io.BytesIO()
-    with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        # Sheet 1: Telecom Voice Out of Bundle
-        if "voice_out_of_bundle" in telecom_data:
-            df_v = pd.DataFrame(telecom_data["voice_out_of_bundle"])
-            df_v.to_excel(writer, index=False, sheet_name="Telecom Voice OOB")
-            
-        # Sheet 2: Telecom Voice Bundles
-        if "voice_bundles" in telecom_data:
-            df_vb = pd.DataFrame(telecom_data["voice_bundles"])
-            df_vb.to_excel(writer, index=False, sheet_name="Telecom Voice Bundles")
-            
-        # Sheet 3: Telecom Data Bundles
-        if "data_bundles" in telecom_data:
-            df_d = pd.DataFrame(telecom_data["data_bundles"])
-            df_d.to_excel(writer, index=False, sheet_name="Telecom Data Bundles")
-            
-        # Sheet 4: Fixed Broadband & ISPs
-        if "fixed_broadband_isps" in telecom_data:
-            df_isp = pd.DataFrame(telecom_data["fixed_broadband_isps"])
-            df_isp.to_excel(writer, index=False, sheet_name="Broadband & ISPs")
-            
-        # Sheet 5: All Banking & Financial Institutions
-        banking_rows = []
-        for sec in banking_data:
-            sec_name = sec.get("section", "")
-            for r in sec.get("rows", []):
-                row_dict = {"Section": sec_name}
-                row_dict.update(r)
-                banking_rows.append(row_dict)
-        if banking_rows:
-            df_b = pd.DataFrame(banking_rows)
-            df_b.to_excel(writer, index=False, sheet_name="All Bank Charges")
-            
-    output.seek(0)
+    """Generates an all-inclusive multi-sector Excel workbook with Master Sheet (95+ rows) and 8 dedicated sector tabs."""
+    from app.services.matrix_excel import generate_comprehensive_matrix_excel
+    output = generate_comprehensive_matrix_excel()
     return StreamingResponse(
         output,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
